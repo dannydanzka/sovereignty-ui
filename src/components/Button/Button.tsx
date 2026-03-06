@@ -13,8 +13,6 @@
  * - CloseButton     → <Button variant="ghost" iconOnly icon={<X />} size="sm">
  */
 
-'use client';
-
 import type { ButtonProps } from './Button.interfaces';
 
 import { ButtonIcon, ButtonLoader, StyledButton } from './Button.styled';
@@ -37,8 +35,6 @@ export const Button = ({
   type = 'button',
   variant = 'primary',
 }: ButtonProps) => {
-  const hasIcon = Boolean(icon) || loading;
-
   const renderIcon = () => {
     if (!icon) return null;
     return <ButtonIcon>{icon}</ButtonIcon>;
@@ -77,8 +73,6 @@ export const Button = ({
       </>
     );
   };
-
-  void hasIcon;
 
   return (
     <StyledButton
