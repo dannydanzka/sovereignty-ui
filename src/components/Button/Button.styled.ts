@@ -7,8 +7,6 @@
  * - Modes: iconOnly, fullWidth
  */
 
-'use client';
-
 import styled, { css, keyframes } from 'styled-components';
 
 import { brandColor, color, shape, spacing, typography } from '../../tokens';
