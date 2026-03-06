@@ -1,8 +1,10 @@
-# CLAUDE.md - sovereignty-ui Development Guide
+# CLAUDE.md - sovereignty-ui (Web) Development Guide
 
-> **TYPE**: Agnostic React component library
+> **TYPE**: Agnostic React component library — **WEB PLATFORM**
 > **STACK**: React 19 + TypeScript 5.9 + styled-components 6 + Storybook 8 + tsup
-> **PURPOSE**: Reusable, framework-agnostic UI components consumed by DearAdry and future projects
+> **PURPOSE**: Reusable, framework-agnostic UI components consumed by DearAdry and all future web projects
+> **PLATFORM SCOPE**: Web only. Mobile = separate repo (`sovereignty-ui-native`, React Native — not created yet)
+> **GLOBAL ALIGNMENT**: See `.claude/GLOBAL-ALIGNMENT.md`
 
 ---
 
