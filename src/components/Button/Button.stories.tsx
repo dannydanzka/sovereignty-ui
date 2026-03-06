@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
 import { Download, Plus, Trash2 } from 'lucide-react';
+
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { Button } from './Button';
 
@@ -13,7 +14,16 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'danger', 'success', 'warning', 'ghost', 'outline', 'brand-outline'],
+      options: [
+        'primary',
+        'secondary',
+        'danger',
+        'success',
+        'warning',
+        'ghost',
+        'outline',
+        'brand-outline',
+      ],
     },
     size: {
       control: 'select',
@@ -137,10 +147,18 @@ export const AllVariants: Story = {
 export const AllSizes: Story = {
   render: () => (
     <div style={{ alignItems: 'center', display: 'flex', gap: '12px' }}>
-      <Button size='sm' variant='primary'>Small</Button>
-      <Button size='md' variant='primary'>Medium</Button>
-      <Button size='lg' variant='primary'>Large</Button>
-      <Button size='large' variant='primary'>Large</Button>
+      <Button size='sm' variant='primary'>
+        Small
+      </Button>
+      <Button size='md' variant='primary'>
+        Medium
+      </Button>
+      <Button size='lg' variant='primary'>
+        Large
+      </Button>
+      <Button size='large' variant='primary'>
+        Large
+      </Button>
     </div>
   ),
 };

@@ -12,7 +12,6 @@
 import styled, { css, keyframes } from 'styled-components';
 
 import { brandColor, color, shape, spacing, typography } from '../../tokens';
-
 import type {
   ButtonShape,
   ButtonSize,
