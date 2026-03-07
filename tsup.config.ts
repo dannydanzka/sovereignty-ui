@@ -3,7 +3,9 @@ import { defineConfig } from 'tsup';
 export default defineConfig({
   entry: {
     index: 'src/index.ts',
+    'hooks/index': 'src/hooks/index.ts',
     'tokens/index': 'src/tokens/index.ts',
+    'utils/index': 'src/utils/index.ts',
   },
   format: ['esm', 'cjs'],
   dts: true,

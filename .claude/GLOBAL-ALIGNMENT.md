@@ -1,7 +1,7 @@
 # Global Alignment - sovereignty-ui (Web)
 
 > **Purpose**: Track alignment between this project and global `~/.claude/sovereignty/` framework
-> **Last Sync**: 2026-03-06
+> **Last Sync**: 2026-03-07
 > **Sovereignty Structure**: v4.0.0
 > **Project Type**: React Component Library (Web)
 > **Platform**: Web only — future mobile version will be a separate repository (`sovereignty-ui-native`)
@@ -121,8 +121,20 @@
 
 | Import | Source | Contents |
 |--------|--------|----------|
-| `sovereignty-ui` | `dist/index.js` | All components |
-| `sovereignty-ui/tokens` | `dist/tokens/index.js` | Design tokens (flat maps) |
+| `@dannydanzka/sovereignty-ui` | `dist/index.js` | 28 components + 4 patterns |
+| `@dannydanzka/sovereignty-ui/tokens` | `dist/tokens/index.js` | Design tokens + createTokens() |
+| `@dannydanzka/sovereignty-ui/hooks` | `dist/hooks/index.js` | 7 React hooks |
+| `@dannydanzka/sovereignty-ui/utils` | `dist/utils/index.js` | ~30 utility functions |
+
+## Library Inventory
+
+| Category | Count | Details |
+|----------|-------|---------|
+| **Components** | 28 | Alert, Avatar, Badge, Button, Card, Checkbox, Container, Divider, ErrorFallback, GlobalLoading, Image, Input, LazyFallback, Modal, NotificationToast, PopButton, ProgressBar, Select, Skeleton, Spinner, StatsCard, StepCard, Tabs, TapHint, Textarea, Toggle, ToggleActiveButton, Tooltip |
+| **Patterns** | 4 | DataTable, FileUploader, FormField, Pagination |
+| **Hooks** | 7 | useModal, usePagination, useTableSort, useLoading, useMediaQuery, useClickOutside, useDebounce |
+| **Utils** | ~30 | array (5), string (6), date (5), format (6), object (4) |
+| **Tokens** | 6 | color, typography, spacing, shape, motion, elevation, layout |
 
 ---
 
@@ -163,6 +175,6 @@ npm run test         # Vitest — all passing required
 
 ---
 
-**Version**: 1.0 | **Created**: 2026-03-06
+**Version**: 2.0 | **Created**: 2026-03-06 | **Updated**: 2026-03-07
 **Maintainer**: Danny Ramirez
 **Source of Truth**: `~/.claude/sovereignty/frontend/framework/`

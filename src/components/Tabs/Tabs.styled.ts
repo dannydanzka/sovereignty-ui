@@ -6,7 +6,7 @@
 
 import styled from 'styled-components';
 
-import { brandColor, color, layout, shape, spacing, typography } from '../../tokens';
+import { color, layout, shape, spacing, typography } from '../../tokens';
 
 export const TabsContainer = styled.div`
   display: flex;
@@ -34,11 +34,10 @@ export const TabButton = styled.button<{ $isActive: boolean; $isDisabled: boolea
   align-items: center;
   background: transparent;
   border: none;
-  border-bottom: 3px solid
-    ${({ $isActive }) => ($isActive ? brandColor.landingPinkVibrant : 'transparent')};
+  border-bottom: 3px solid ${({ $isActive }) => ($isActive ? color.accent500 : 'transparent')};
   color: ${({ $isActive, $isDisabled }) => {
     if ($isDisabled) return color.neutral400;
-    return $isActive ? brandColor.landingPinkVibrant : brandColor.landingTextGray;
+    return $isActive ? color.accent500 : color.textSecondary;
   }};
   cursor: ${({ $isDisabled }) => ($isDisabled ? 'not-allowed' : 'pointer')};
   display: flex;
@@ -61,8 +60,7 @@ export const TabButton = styled.button<{ $isActive: boolean; $isDisabled: boolea
 
   &:hover:not(:disabled) {
     background: ${color.neutral50};
-    color: ${({ $isActive }) =>
-      $isActive ? brandColor.landingPinkVibrant : brandColor.landingBlueDark};
+    color: ${({ $isActive }) => ($isActive ? color.accent500 : color.textPrimary)};
   }
 
   svg {
@@ -72,7 +70,7 @@ export const TabButton = styled.button<{ $isActive: boolean; $isDisabled: boolea
 `;
 
 export const TabBadge = styled.span`
-  background: ${brandColor.landingPinkVibrant};
+  background: ${color.accent500};
   border-radius: ${shape.full};
   color: ${color.white};
   font-size: ${typography.size.xs};
