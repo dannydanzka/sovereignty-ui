@@ -6,7 +6,7 @@
 
 import styled from 'styled-components';
 
-import { brandColor, color, elevation, shape, spacing, typography } from '../../tokens';
+import { color, elevation, shape, spacing, typography } from '../../tokens';
 
 export const CardContainer = styled.div<{
   $variant: 'default' | 'primary' | 'success' | 'warning';
@@ -14,7 +14,7 @@ export const CardContainer = styled.div<{
   background: ${({ $variant }) => {
     switch ($variant) {
       case 'primary':
-        return `linear-gradient(135deg, ${brandColor.landingPinkVibrant}, ${color.tertiary300})`;
+        return `linear-gradient(135deg, ${color.accent500}, ${color.tertiary300})`;
       case 'success':
         return color.successLight;
       case 'warning':
@@ -36,10 +36,9 @@ export const CardIcon = styled.div<{
 }>`
   align-items: center;
   background: ${({ $variant }) =>
-    $variant === 'primary' ? 'rgba(255, 255, 255, 0.2)' : brandColor.landingBgYellow};
+    $variant === 'primary' ? 'rgba(255, 255, 255, 0.2)' : color.primary200};
   border-radius: ${shape.full};
-  color: ${({ $variant }) =>
-    $variant === 'primary' ? color.white : brandColor.landingPinkVibrant};
+  color: ${({ $variant }) => ($variant === 'primary' ? color.white : color.accent500)};
   display: flex;
   height: ${spacing.xl};
   justify-content: center;
@@ -54,7 +53,7 @@ export const CardIcon = styled.div<{
 export const CardValue = styled.span<{
   $variant: 'default' | 'primary' | 'success' | 'warning';
 }>`
-  color: ${({ $variant }) => ($variant === 'primary' ? color.white : brandColor.landingBlueDark)};
+  color: ${({ $variant }) => ($variant === 'primary' ? color.white : color.textPrimary)};
   font-family: ${typography.family.display};
   font-size: ${typography.size['3xl']};
   font-weight: ${typography.weight.bold};
@@ -64,7 +63,7 @@ export const CardLabel = styled.span<{
   $variant: 'default' | 'primary' | 'success' | 'warning';
 }>`
   color: ${({ $variant }) =>
-    $variant === 'primary' ? 'rgba(255, 255, 255, 0.9)' : brandColor.landingTextGray};
+    $variant === 'primary' ? 'rgba(255, 255, 255, 0.9)' : color.textSecondary};
   font-family: ${typography.family.body};
   font-size: ${typography.size.sm};
 `;

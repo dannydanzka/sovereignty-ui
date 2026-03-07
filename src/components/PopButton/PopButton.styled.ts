@@ -7,21 +7,21 @@
 
 import styled, { css } from 'styled-components';
 
-import { brandColor, color, elevation, shape, spacing, typography } from '../../tokens';
+import { color, elevation, shape, spacing, typography } from '../../tokens';
 import type { PopButtonVariant, StyledPopButtonProps } from './PopButton.interfaces';
 
 const getBackgroundColor = (variant: PopButtonVariant) => {
   switch (variant) {
     case 'blue':
     case 'secondary':
-      return brandColor.landingBlueLight;
+      return color.secondary300;
     case 'pill':
     case 'accent':
-      return brandColor.landingPinkVibrant;
+      return color.accent500;
     case 'primary':
       return color.primary400;
     case 'yellow':
-      return brandColor.landingBgYellow;
+      return color.primary200;
   }
 };
 

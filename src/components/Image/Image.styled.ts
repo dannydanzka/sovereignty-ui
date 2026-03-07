@@ -6,7 +6,7 @@
 
 import styled from 'styled-components';
 
-import { brandColor, spacing, typography } from '../../tokens';
+import { color, spacing, typography } from '../../tokens';
 
 export const ImageContainer = styled.div`
   height: 100%;
@@ -23,7 +23,7 @@ export const StyledImage = styled.img<{ $objectFit?: string }>`
 
 export const FallbackContainer = styled.div`
   align-items: center;
-  background: ${brandColor.landingBgYellow};
+  background: ${color.neutral50};
   display: flex;
   flex-direction: column;
   gap: ${spacing.xs};
@@ -33,7 +33,7 @@ export const FallbackContainer = styled.div`
 `;
 
 export const FallbackIcon = styled.span`
-  color: ${brandColor.landingPinkVibrant};
+  color: ${color.accent500};
   opacity: 0.6;
 
   svg {
@@ -43,7 +43,7 @@ export const FallbackIcon = styled.span`
 `;
 
 export const FallbackText = styled.span`
-  color: ${brandColor.landingTextGray};
+  color: ${color.textSecondary};
   font-family: ${typography.family.body};
   font-size: ${typography.size.xs};
   opacity: 0.8;

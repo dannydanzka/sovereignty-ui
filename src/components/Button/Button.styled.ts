@@ -4,18 +4,19 @@
  * Unified styles for all button variants:
  * - Semantic: primary, secondary, success, warning, danger
  * - Structural: outline, ghost
+ * - Accent: accent, brand, brand-outline, brand-ghost
  * - Modes: iconOnly, fullWidth
  */
 
 import styled, { css, keyframes } from 'styled-components';
 
-import { brandColor, color, shape, spacing, typography } from '../../tokens';
 import type {
   ButtonShape,
   ButtonSize,
   ButtonVariant,
   StyledButtonProps,
 } from './Button.interfaces';
+import { color, shape, spacing, typography } from '../../tokens';
 
 const spin = keyframes`
   to {
@@ -39,7 +40,7 @@ const getVariantStyles = (variant: ButtonVariant) => {
       }
     `,
     brand: css`
-      background: ${brandColor.landingPinkVibrant};
+      background: ${color.accent500};
       border: none;
       color: ${color.white};
 
@@ -55,7 +56,7 @@ const getVariantStyles = (variant: ButtonVariant) => {
     'brand-ghost': css`
       background: transparent;
       border: none;
-      color: ${brandColor.landingPinkVibrant};
+      color: ${color.accent500};
 
       &:hover:not(:disabled) {
         color: ${color.accent700};
@@ -68,11 +69,11 @@ const getVariantStyles = (variant: ButtonVariant) => {
     `,
     'brand-outline': css`
       background: ${color.white};
-      border: 2px solid ${brandColor.landingPinkVibrant};
-      color: ${brandColor.landingPinkVibrant};
+      border: 2px solid ${color.accent500};
+      color: ${color.accent500};
 
       &:hover:not(:disabled) {
-        background: ${brandColor.landingPinkVibrant};
+        background: ${color.accent500};
         color: ${color.white};
       }
 

@@ -1,7 +1,7 @@
 /**
  * Design System Tokens
  *
- * Unified design token system following:
+ * Agnostic design token system following:
  * - Material Design 3 (Google)
  * - Apple Human Interface Guidelines
  * - 8-Point Grid System
@@ -9,8 +9,9 @@
  *
  * SSR-safe: All exports are flat objects (no theme context required)
  *
- * @see ~/.claude/standards/DESIGN-SYSTEM-STANDARDS.md
- * @see ~/.claude/patterns/design-system-patterns.md
+ * AGNOSTIC TOKENS: spacing, shape, motion, elevation, layout are universal.
+ * OVERRIDEABLE TOKENS: color (primary/secondary/accent palettes), typography.family.
+ * Projects override via createTokens() — see create-tokens.ts.
  */
 
 export const spacing = {
@@ -29,10 +30,12 @@ export const spacing = {
 } as const;
 
 /**
- * Agnostic Color Tokens
+ * Color Tokens
  *
- * Framework-level colors that can be reused across any project.
- * Includes: palettes, status colors, semantic colors, neutrals.
+ * Organized alphabetically within semantic groups.
+ * Neutrals, status, and semantic colors are agnostic.
+ * Primary, secondary, tertiary/accent palettes are overrideable via createTokens().
+ * Default palette uses yellow/blue/pink. Projects override as needed.
  */
 export const color = {
   accent100: '#F8BBD9',
@@ -60,12 +63,14 @@ export const color = {
   errorBackground: '#FFEBEE',
   errorBorder: '#FFCDD2',
   errorDark: '#D32F2F',
+  errorFocusShadow: 'rgba(244, 67, 54, 0.1)',
   errorLight: '#E57373',
   info: '#2196F3',
   infoDark: '#1976D2',
   infoLight: '#64B5F6',
   magenta400: '#F472B6',
   magenta500: '#EC4899',
+  modalOverlay: 'rgba(30, 58, 95, 0.6)',
   neutral0: '#FFFFFF',
   neutral100: '#E4E9F0',
   neutral200: '#C5D0DE',
@@ -77,12 +82,9 @@ export const color = {
   neutral700: '#4D7190',
   neutral800: '#3B5F80',
   neutral900: '#1E3A5F',
-  errorFocusShadow: 'rgba(244, 67, 54, 0.1)',
-  modalOverlay: 'rgba(30, 58, 95, 0.6)',
   overlay: 'rgba(26, 35, 126, 0.5)',
   overlayDark: 'rgba(26, 35, 126, 0.7)',
   overlayLight: 'rgba(26, 35, 126, 0.3)',
-  primaryFocusShadow: 'rgba(255, 193, 7, 0.1)',
   primary100: '#FFF9C4',
   primary200: '#FFF176',
   primary300: '#FFEE58',
@@ -93,6 +95,7 @@ export const color = {
   primary700: '#FFA000',
   primary800: '#FF8F00',
   primary900: '#FF6F00',
+  primaryFocusShadow: 'rgba(255, 193, 7, 0.1)',
   purple400: '#A78BFA',
   purple500: '#8B5CF6',
   purple600: '#7C3AED',
@@ -138,56 +141,10 @@ export const color = {
   whiteRgb: '255, 255, 255',
 } as const;
 
-/**
- * Brand Color Tokens
- *
- * Business-specific colors for DearAdry project.
- * Includes: landing page, categories, FAQ, alerts, pricing, etc.
- */
-export const brandColor = {
-  alertBg: '#FFF5CC',
-  alertIconBg: '#FFB300',
-  alertIconFg: '#FFFFFF',
-  bgButtonsCta: '#FDFFD8',
-  bgCauseYellow: '#FFEE91',
-  bgFooterCTA: '#FDFFD8',
-  bgHeader: '#FFEBB5',
-  bgMissionBlue: '#3B8DFF',
-  bgPricingBody: '#FFF6BA',
-  bgPricingHeader: '#645CFF',
-  bgStepsPink: '#FCE4EC',
-  categoryComunidad: '#FFC107',
-  categoryComunidadBg: '#FFF8E1',
-  categoryEquipo: '#4CAF50',
-  categoryEquipoBg: '#E8F5E9',
-  categoryEventos: '#1565C0',
-  categoryEventosBg: '#E3F2FD',
-  categoryKits: '#E91E63',
-  categoryKitsBg: '#FCE4EC',
-  faqEventos: '#1565C0',
-  faqEventosBg: '#E3F2FD',
-  faqGeneral: '#6366F1',
-  faqGeneralBg: '#EEF2FF',
-  faqKits: '#E91E63',
-  faqKitsBg: '#FCE4EC',
-  faqPagos: '#4CAF50',
-  faqPagosBg: '#E8F5E9',
-  landingBgCream: '#FFF3E0',
-  landingBgSkyBlue: '#4FC3F7',
-  landingBgYellow: '#FFEB8B',
-  landingBlueDark: '#1A237E',
-  landingBlueLight: '#81D4FA',
-  landingPinkLight: '#FFB8E8',
-  landingPinkVibrant: '#FF00B2',
-  landingTextGray: '#4A5568',
-  landingYellowIntense: '#FFF176',
-  signupSuccessBg: '#E8F5E9',
-} as const;
-
 export const typography = {
   family: {
-    body: "'Inter', sans-serif",
-    display: "'Lato', sans-serif",
+    body: "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif",
+    display: "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif",
     mono: "'Courier New', monospace",
   },
   leading: {

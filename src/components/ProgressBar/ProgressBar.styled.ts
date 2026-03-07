@@ -6,7 +6,7 @@
 
 import styled, { keyframes } from 'styled-components';
 
-import { brandColor, color, shape, spacing, typography } from '../../tokens';
+import { color, shape, spacing, typography } from '../../tokens';
 
 const fillAnimation = keyframes`
   from {
@@ -28,13 +28,13 @@ export const ProgressHeader = styled.div`
 `;
 
 export const ProgressLabel = styled.span`
-  color: ${brandColor.landingTextGray};
+  color: ${color.textSecondary};
   font-family: ${typography.family.body};
   font-size: ${typography.size.sm};
 `;
 
 export const ProgressPercentage = styled.span`
-  color: ${brandColor.landingPinkVibrant};
+  color: ${color.accent500};
   font-family: ${typography.family.display};
   font-size: ${typography.size.sm};
   font-weight: ${typography.weight.bold};
@@ -69,7 +69,7 @@ export const ProgressFill = styled.div<{
       case 'warning':
         return color.warning;
       case 'default':
-        return `linear-gradient(90deg, ${brandColor.landingPinkVibrant}, ${color.tertiary300})`;
+        return `linear-gradient(90deg, ${color.accent500}, ${color.tertiary300})`;
     }
   }};
   border-radius: ${shape.full};

@@ -1,11 +1,14 @@
 {
   "type": "module",
-  "name": "sovereignty-ui",
+  "name": "@dannydanzka/sovereignty-ui",
   "version": "0.1.0",
   "description": "Agnostic React component library — Code Sovereignty UI System",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "exports": {
     ".": {
       "import": "./dist/index.js",
@@ -16,6 +19,16 @@
       "import": "./dist/tokens/index.js",
       "require": "./dist/tokens/index.cjs",
       "types": "./dist/tokens/index.d.ts"
+    },
+    "./hooks": {
+      "import": "./dist/hooks/index.js",
+      "require": "./dist/hooks/index.cjs",
+      "types": "./dist/hooks/index.d.ts"
+    },
+    "./utils": {
+      "import": "./dist/utils/index.js",
+      "require": "./dist/utils/index.cjs",
+      "types": "./dist/utils/index.d.ts"
     }
   },
   "files": [
