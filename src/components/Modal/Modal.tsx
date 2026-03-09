@@ -19,7 +19,7 @@ import {
   ModalConfirmChildren,
   ModalContainer,
   ModalContent,
-  ModalFooter,
+  ModalFooterBar,
   ModalHeader,
   ModalIcon,
   ModalMessage,
@@ -153,7 +153,7 @@ export const Modal = ({
         </ModalHeader>
       )}
       <ModalContent $noPadding={noPadding}>{children}</ModalContent>
-      {footer && <ModalFooter>{footer}</ModalFooter>}
+      {footer && <ModalFooterBar>{footer}</ModalFooterBar>}
     </>
   );
 
