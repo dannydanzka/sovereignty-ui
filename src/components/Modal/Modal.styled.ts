@@ -120,7 +120,7 @@ export const ModalContent = styled.div<{ $noPadding?: boolean }>`
   padding: ${({ $noPadding }) => ($noPadding ? '0' : spacing.sm)};
 `;
 
-export const ModalFooter = styled.div`
+export const ModalFooterBar = styled.div`
   display: flex;
   gap: ${spacing.sm};
   justify-content: flex-end;
