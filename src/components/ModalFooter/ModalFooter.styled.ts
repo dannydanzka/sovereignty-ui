@@ -4,7 +4,7 @@
 
 import styled from 'styled-components';
 
-import { spacing } from '../../tokens';
+import { s } from '../../tokens/css-variables';
 import type { StyledModalFooterProps } from './ModalFooter.interfaces';
 
 const alignMap = {
@@ -15,7 +15,7 @@ const alignMap = {
 
 export const StyledModalFooter = styled.div<StyledModalFooterProps>`
   display: flex;
-  gap: ${spacing.sm};
+  gap: ${s('sm')};
   justify-content: ${({ $align }) => alignMap[$align]};
-  margin-top: ${spacing.md};
+  margin-top: ${s('md')};
 `;

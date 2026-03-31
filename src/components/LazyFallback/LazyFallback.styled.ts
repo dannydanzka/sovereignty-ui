@@ -6,11 +6,12 @@
 
 import styled from 'styled-components';
 
-import { color, layout } from '../../tokens';
+import { c } from '../../tokens/css-variables';
+import { layout } from '../../tokens';
 
 export const FallbackContainer = styled.div`
   align-items: center;
-  background: ${color.background};
+  background: ${c('background')};
   display: flex;
   inset: 0;
   justify-content: center;

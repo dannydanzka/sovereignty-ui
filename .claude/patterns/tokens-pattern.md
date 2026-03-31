@@ -1,67 +1,78 @@
 # Tokens Pattern
 
 > **PURPOSE**: How to use and extend the design token system in sovereignty-ui
-> **SOURCE OF TRUTH**: `src/tokens/tokens.ts`
+> **SOURCE OF TRUTH**: `src/tokens/tokens.ts` (raw values), `src/tokens/css-variables.ts` (helpers)
+> **THEMING**: CSS custom properties via `injectSuiTokens()` — no ThemeProvider
 
 ---
 
 ## Token Categories
 
-| Token | Usage | Example |
-|-------|-------|---------|
-| `color` | All colors | `${color.primary}`, `${color.text.secondary}` |
-| `spacing` | All spacing values | `${spacing.md}`, `${spacing.xl}` |
-| `typography` | Font sizes, weights, families | `${typography.size.lg}`, `${typography.weight.bold}` |
-| `shape` | Border radius, borders | `${shape.borderRadius.md}`, `${shape.border.default}` |
-| `elevation` | Box shadows | `${elevation.sm}`, `${elevation.md}` |
-| `motion` | Transitions, animations | `${motion.duration.fast}`, `${motion.easing.standard}` |
-| `layout` | Max widths, z-index | `${layout.maxWidth.container}` |
+| Token | Helper | Example |
+|-------|--------|---------|
+| `color` | `c()` | `${c('primary')}`, `${c('textSecondary')}` |
+| `spacing` | `s()` | `${s('md')}`, `${s('xl')}` |
+| `shape` | `sh()` | `${sh('md')}`, `${sh('lg')}` |
+| `typography.size` | `ts()` | `${ts('lg')}`, `${ts('sm')}` |
+| `typography.weight` | `tw()` | `${tw('bold')}`, `${tw('semibold')}` |
+| `typography.family` | `tf()` | `${tf('body')}`, `${tf('display')}` |
+| `typography.leading` | `tl()` | `${tl('normal')}`, `${tl('relaxed')}` |
+| `typography.tracking` | `tt()` | `${tt('normal')}`, `${tt('wide')}` |
+| `elevation` | `el()` | `${el('sm')}`, `${el('md')}` |
+| `motion` | `mo()` | `${mo('fast')}`, `${mo('normal')}` |
+| `layout` | _(direct)_ | `${layout.maxWidth.container}` (structural, non-themeable) |
+
+Each helper produces: `var(--sui-token-name, static-fallback)`
 
 ---
 
 ## Usage in Styled Components
 
 ```typescript
-import { color, elevation, motion, shape, spacing, typography } from '../../tokens';
-
-// For components in src/components/*/
-// All imports are relative to tokens directory
+import { c, el, mo, s, sh, tf, ts, tw } from '../../tokens';
 
 const Card = styled.div`
-  background: ${color.surface.default};
-  border: ${shape.border.default};
-  border-radius: ${shape.borderRadius.lg};
-  box-shadow: ${elevation.sm};
-  padding: ${spacing.lg};
-  transition: box-shadow ${motion.duration.fast} ${motion.easing.standard};
+  background: ${c('surfaceDefault')};
+  border-radius: ${sh('lg')};
+  box-shadow: ${el('sm')};
+  padding: ${s('lg')};
+  transition: box-shadow ${mo('fast')};
 
   &:hover {
-    box-shadow: ${elevation.md};
+    box-shadow: ${el('md')};
   }
 `;
 
 const Title = styled.h2`
-  color: ${color.text.primary};
-  font-family: ${typography.family.primary};
-  font-size: ${typography.size.xl};
-  font-weight: ${typography.weight.semibold};
-  margin-bottom: ${spacing.sm};
+  color: ${c('textPrimary')};
+  font-family: ${tf('body')};
+  font-size: ${ts('xl')};
+  font-weight: ${tw('semibold')};
+  margin-bottom: ${s('sm')};
 `;
 ```
 
 ---
 
-## Consuming in DearAdry (installed library)
+## Runtime Theming (Consumer Side)
+
+Consumers override tokens at runtime via CSS custom properties:
 
 ```typescript
-// Import tokens from the package
-import { color, spacing } from 'sovereignty-ui/tokens';
+// Option A: injectSuiTokens() — programmatic
+import { injectSuiTokens } from '@dannydanzka/sovereignty-ui/tokens';
 
-// Use in styled-components
-const MyComponent = styled.div`
-  background: ${color.primary};
-  padding: ${spacing.md};
-`;
+injectSuiTokens({
+  color: { primary: '#FFC107', textPrimary: '#1A237E' },
+  typography: { size: { lg: '1.25rem' } },
+});
+
+// Option B: CSS — declarative
+:root {
+  --sui-primary: #FFC107;
+  --sui-text-primary: #1A237E;
+  --sui-font-size-lg: 1.25rem;
+}
 ```
 
 ---
@@ -70,18 +81,15 @@ const MyComponent = styled.div`
 
 When adding tokens, ALWAYS:
 1. Add the value to `src/tokens/tokens.ts`
-2. Add the TypeScript type to `src/tokens/tokens.types.ts` if needed
+2. Add the TypeScript type to `src/tokens/tokens.types.ts`
 3. Export from `src/tokens/index.ts`
-4. Document in `src/tokens/tokens.ts` with a comment
+4. Use the appropriate CSS var helper in styled files — never direct values
 
 ```typescript
 // src/tokens/tokens.ts
 export const color = {
   // ... existing
-  newCategory: {
-    default: '#HEXVAL',
-    hover: '#HEXVAL',
-  },
+  newCategory: '#HEXVAL',
 } as const;
 ```
 
@@ -95,18 +103,36 @@ const Button = styled.button`
   background: #5B4FCF;
   border-radius: 8px;
   font-size: 14px;
-  padding: 12px 24px;
 `;
 
-// ✅ CORRECT - token values
+// ❌ WRONG - direct token access (no theming support)
 const Button = styled.button`
   background: ${color.primary};
   border-radius: ${shape.borderRadius.md};
-  font-size: ${typography.size.md};
-  padding: ${spacing.sm} ${spacing.lg};
+`;
+
+// ✅ CORRECT - CSS var helpers (runtime-themeable)
+const Button = styled.button`
+  background: ${c('primary')};
+  border-radius: ${sh('md')};
+  font-size: ${ts('md')};
+  padding: ${s('sm')} ${s('lg')};
 `;
 ```
 
 ---
 
-**Version**: 1.0 | **Created**: 2026-03-06
+## Token Files
+
+| File | Purpose |
+|------|---------|
+| `tokens.ts` | Raw token values (source of truth) |
+| `tokens.types.ts` | TypeScript types for all token keys |
+| `css-variables.ts` | CSS var helper functions (`c`, `s`, `sh`, `ts`, `tw`, `tf`, `tl`, `tt`, `el`, `mo`) |
+| `inject.ts` | `injectSuiTokens()` — consumer API for runtime overrides |
+| `presets.ts` | Token presets (shorthand helpers) |
+| `create-tokens.ts` | `createTokens()` — legacy factory (pre-CSS vars) |
+
+---
+
+**Version**: 2.0 | **Created**: 2026-03-06 | **Updated**: 2026-03-30

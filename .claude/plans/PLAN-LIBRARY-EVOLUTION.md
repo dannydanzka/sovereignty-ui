@@ -1,10 +1,10 @@
 # Plan: sovereignty-ui Library Evolution
 
 > **Created**: 2026-03-07
-> **Updated**: 2026-03-07
+> **Updated**: 2026-03-30
 > **Goal**: Transform sovereignty-ui from a DearAdry component dump into a truly agnostic, publishable React component library
 > **Phases**: 4 | **Deliverables**: ~50 items
-> **Status**: PHASES 1-4 COMPLETE (code). Consumer integration pending first publish.
+> **Status**: PHASES 1-4 COMPLETE. Post-evolution: CSS variable theming (v0.3.0), 184 unit tests, 48 components, doc sync with soberania-del-codigo.
 
 ---
 

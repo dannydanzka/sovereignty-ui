@@ -4,45 +4,45 @@
 
 import styled, { css } from 'styled-components';
 
-import { color, shape, spacing, typography } from '../../tokens';
+import { c, s, sh, tf, tl, ts } from '../../tokens/css-variables';
 import type { StyledInfoMessageProps } from './InfoMessage.interfaces';
 
 const getVariantStyles = (variant: StyledInfoMessageProps['$variant']) => {
   switch (variant) {
     case 'success':
       return css`
-        background: ${color.successBackground};
-        border-left-color: ${color.success};
-        color: ${color.successDark};
+        background: ${c('successBackground')};
+        border-left-color: ${c('success')};
+        color: ${c('successDark')};
       `;
     case 'error':
       return css`
-        background: ${color.errorBackground};
-        border-left-color: ${color.error};
-        color: ${color.errorDark};
+        background: ${c('errorBackground')};
+        border-left-color: ${c('error')};
+        color: ${c('errorDark')};
       `;
     case 'warning':
       return css`
-        background: ${color.warningBackground};
-        border-left-color: ${color.warning};
-        color: ${color.warningDark};
+        background: ${c('warningBackground')};
+        border-left-color: ${c('warning')};
+        color: ${c('warningDark')};
       `;
     case 'info':
     default:
       return css`
-        background: ${color.secondary100};
-        border-left-color: ${color.secondary500};
-        color: ${color.secondary700};
+        background: ${c('secondary100')};
+        border-left-color: ${c('secondary500')};
+        color: ${c('secondary700')};
       `;
   }
 };
 
 export const StyledInfoMessage = styled.div<StyledInfoMessageProps>`
   border-left: 4px solid;
-  border-radius: ${shape.md};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.sm};
-  line-height: ${typography.leading.relaxed};
-  padding: ${spacing.sm};
+  border-radius: ${sh('md')};
+  font-family: ${tf('body')};
+  font-size: ${ts('sm')};
+  line-height: ${tl('relaxed')};
+  padding: ${s('sm')};
   ${({ $variant }) => getVariantStyles($variant)}
 `;

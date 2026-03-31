@@ -12,7 +12,7 @@
 
 **BEFORE writing any code:**
 1. **No framework dependencies** — ZERO Next.js, Redux, i18n, router imports. Library must be fully agnostic.
-2. **Tokens always** — ALWAYS use tokens: `${spacing.md}`, `${color.white}`, `${typography.size.lg}` — NEVER direct values like `16px`, `white`, `1rem`
+2. **CSS var helpers always** — ALWAYS use helpers: `${s('md')}`, `${c('white')}`, `${ts('lg')}` — NEVER direct values like `16px`, `white`, `1rem`, and NEVER direct token access like `${color.white}`
 3. **CSS alphabetical** — CSS properties ALWAYS in alphabetical order
 4. **No HTML elements** — NEVER use `<div>`, `<span>`, `<button>` directly — create a styled-component
 5. **No inline styles** — NEVER use `style={{}}` in JSX — use transient props (`$prop`) in styled definitions
@@ -54,8 +54,11 @@ sovereignty-ui/
 │   │       └── index.ts             # Barrel: export * + export type *
 │   ├── tokens/               # Design system tokens (source of truth)
 │   │   ├── tokens.ts         # All design tokens (flat maps)
-│   │   ├── presets.ts        # Token presets (shorthand helpers)
 │   │   ├── tokens.types.ts   # Token TypeScript types
+│   │   ├── css-variables.ts  # CSS var helpers: c(), s(), sh(), ts(), tw(), etc.
+│   │   ├── inject.ts         # injectSuiTokens() — consumer runtime theming
+│   │   ├── presets.ts        # Token presets (shorthand helpers)
+│   │   ├── create-tokens.ts  # createTokens() — legacy factory
 │   │   └── index.ts          # Barrel
 │   └── index.ts              # Library entry: re-exports all components
 ├── .storybook/               # Storybook configuration
@@ -103,35 +106,40 @@ export const ComponentName = ({ prop1, prop2 }: ComponentNameProps) => {
 
 ## Tokens Usage (MANDATORY)
 
-Import tokens from `../../tokens` (relative) or from the package root in consuming projects:
+Import CSS var helpers from `../../tokens` (relative). All styled files use these helpers for runtime theming support:
 
 ```typescript
-// In component files
-import { color, spacing, typography, shape, elevation, motion } from '../../tokens';
+// In styled files — import ONLY the helpers you need
+import { c, s, sh, ts, tw, mo } from '../../tokens';
 
-// Correct usage in styled-components
+// Correct usage — CSS var helpers
 const Wrapper = styled.div`
-  background-color: ${color.primary};
-  border-radius: ${shape.borderRadius.md};
-  font-size: ${typography.size.md};
-  padding: ${spacing.md};
+  background-color: ${c('primary')};
+  border-radius: ${sh('md')};
+  font-size: ${ts('md')};
+  padding: ${s('md')};
 `;
 
 // WRONG - never do this
 const Wrapper = styled.div`
-  background-color: #5B4FCF;  // ❌ hardcoded
-  border-radius: 8px;          // ❌ hardcoded
-  padding: 16px;               // ❌ hardcoded
+  background-color: #5B4FCF;      // ❌ hardcoded
+  background-color: ${color.primary}; // ❌ direct token (no theming)
+  border-radius: 8px;              // ❌ hardcoded
+  padding: 16px;                   // ❌ hardcoded
 `;
 ```
+
+**Helpers**: `c()` color, `s()` spacing, `sh()` shape, `ts()` font-size, `tw()` font-weight, `tf()` font-family, `tl()` line-height, `tt()` letter-spacing, `el()` elevation, `mo()` motion.
+
+Each produces `var(--sui-token-name, static-fallback)` — consumers override via `:root` or `injectSuiTokens()`.
 
 ---
 
 ## Export Strategy
 
 **Library entry points:**
-- `sovereignty-ui` → `src/index.ts` → all components
-- `sovereignty-ui/tokens` → `src/tokens/index.ts` → all tokens
+- `sovereignty-ui` → `src/index.ts` → all components + patterns + hooks + utils
+- `sovereignty-ui/tokens` → `src/tokens/index.ts` → tokens + CSS var helpers + `injectSuiTokens()`
 
 **Adding a new component to the library:**
 1. Create `src/components/NewComponent/` with 5-file structure
@@ -162,10 +170,10 @@ interface ButtonStyledProps {
   $fullWidth?: boolean;
 }
 
-// styled
+// styled — use CSS var helpers, not direct tokens
 const StyledButton = styled.button<ButtonStyledProps>`
-  background: ${({ $variant }) => $variant === 'primary' ? color.primary : color.secondary};
-  padding: ${({ $size }) => $size === 'lg' ? spacing.lg : spacing.md};
+  background: ${({ $variant }) => $variant === 'primary' ? c('primary') : c('secondary')};
+  padding: ${({ $size }) => $size === 'lg' ? s('lg') : s('md')};
   width: ${({ $fullWidth }) => $fullWidth ? '100%' : 'auto'};
 `;
 
@@ -245,12 +253,13 @@ npm run test             # Vitest unit tests
 | Working On | Pattern |
 |-----------|---------|
 | New component | `.claude/patterns/component-pattern.md` |
-| Design tokens | `.claude/patterns/tokens-pattern.md` |
+| Design tokens / CSS vars | `.claude/patterns/tokens-pattern.md` |
 | Storybook stories | `.claude/patterns/stories-pattern.md` |
-| Component testing | `~/.claude/sovereignty/frontend/testing/vitest.md` |
-| Token system | `src/tokens/tokens.ts` (source of truth) |
+| Component testing | `~/Documents/proyectos/soberania-del-codigo/frontend/testing/vitest.md` |
+| Token system | `src/tokens/tokens.ts` (raw values) + `src/tokens/css-variables.ts` (helpers) |
+| Global alignment | `.claude/GLOBAL-ALIGNMENT.md` |
 
 ---
 
-**Version**: 1.0 | **Created**: 2026-03-06
+**Version**: 2.0 | **Created**: 2026-03-06 | **Updated**: 2026-03-30
 **Philosophy**: Code Sovereignty — agnostic, sovereign, composable UI primitives

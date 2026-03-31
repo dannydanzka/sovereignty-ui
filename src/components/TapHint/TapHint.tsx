@@ -39,7 +39,7 @@ export const TapHint = ({
   const iconSize = Math.round(size * 0.5);
 
   return (
-    <TapHintWrapper $isHidden={isHidden} $position={position} $size={size}>
+    <TapHintWrapper $isHidden={isHidden} $position={position} $size={size} data-testid='tap-hint'>
       <Maximize2 size={iconSize} />
     </TapHintWrapper>
   );

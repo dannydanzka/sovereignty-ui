@@ -4,21 +4,21 @@
 
 import styled from 'styled-components';
 
-import { color, shape, spacing, typography } from '../../tokens';
+import { c, s, sh, tf, ts, tw } from '../../tokens/css-variables';
 import type { StyledInputProps, StyledInputWrapperProps } from './Input.interfaces';
 
 export const InputWrapper = styled.div<StyledInputWrapperProps>`
   display: flex;
   flex-direction: column;
-  gap: ${spacing.xs};
+  gap: ${s('xs')};
   ${({ $fullWidth }) => $fullWidth && 'width: 100%;'}
 `;
 
 export const InputLabel = styled.label`
-  color: ${color.textPrimary};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.sm};
-  font-weight: ${typography.weight.medium};
+  color: ${c('textPrimary')};
+  font-family: ${tf('body')};
+  font-size: ${ts('sm')};
+  font-weight: ${tw('medium')};
 `;
 
 export const InputContainer = styled.div`
@@ -27,36 +27,36 @@ export const InputContainer = styled.div`
 `;
 
 export const StyledInput = styled.input<StyledInputProps>`
-  background-color: ${color.white};
-  border: 2px solid ${({ $hasError }) => ($hasError ? color.error : color.neutral200)};
-  border-radius: ${shape.md};
-  color: ${color.textPrimary};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.base};
-  min-height: ${spacing.xl};
-  padding: ${spacing.sm};
-  padding-right: ${({ $hasToggle }) => ($hasToggle ? '48px' : spacing.sm)};
+  background-color: ${c('white')};
+  border: 2px solid ${({ $hasError }) => ($hasError ? c('error') : c('neutral200'))};
+  border-radius: ${sh('md')};
+  color: ${c('textPrimary')};
+  font-family: ${tf('body')};
+  font-size: ${ts('base')};
+  min-height: ${s('xl')};
+  padding: ${s('sm')};
+  padding-right: ${({ $hasToggle }) => ($hasToggle ? '48px' : s('sm'))};
   transition: all 0.2s ease-in-out;
   width: 100%;
 
   &::placeholder {
-    color: ${color.textTertiary};
+    color: ${c('textTertiary')};
   }
 
   &:hover:not(:disabled) {
-    border-color: ${({ $hasError }) => ($hasError ? color.errorDark : color.neutral300)};
+    border-color: ${({ $hasError }) => ($hasError ? c('errorDark') : c('neutral300'))};
   }
 
   &:focus {
-    border-color: ${({ $hasError }) => ($hasError ? color.error : color.primary500)};
+    border-color: ${({ $hasError }) => ($hasError ? c('error') : c('primary500'))};
     box-shadow: 0 0 0 3px
-      ${({ $hasError }) => ($hasError ? color.errorFocusShadow : color.primaryFocusShadow)};
+      ${({ $hasError }) => ($hasError ? c('errorFocusShadow') : c('primaryFocusShadow'))};
     outline: none;
   }
 
   &:disabled {
-    background-color: ${color.neutral50};
-    color: ${color.textDisabled};
+    background-color: ${c('neutral50')};
+    color: ${c('textDisabled')};
     cursor: not-allowed;
   }
 `;
@@ -67,10 +67,10 @@ export const PasswordToggle = styled.button`
   border: none;
   cursor: pointer;
   display: flex;
-  font-size: ${typography.size.lg};
+  font-size: ${ts('lg')};
   height: 100%;
   justify-content: center;
-  padding: 0 ${spacing.sm};
+  padding: 0 ${s('sm')};
   position: absolute;
   right: 0;
   top: 0;
@@ -80,18 +80,18 @@ export const PasswordToggle = styled.button`
   }
 
   &:focus-visible {
-    outline: 2px solid ${color.primary500};
+    outline: 2px solid ${c('primary500')};
     outline-offset: -2px;
   }
 `;
 
 export const InputError = styled.span`
-  color: ${color.error};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.xs};
+  color: ${c('error')};
+  font-family: ${tf('body')};
+  font-size: ${ts('xs')};
 `;
 
 export const InputRequired = styled.span`
-  color: ${color.error};
-  margin-left: ${spacing.micro};
+  color: ${c('error')};
+  margin-left: ${s('micro')};
 `;

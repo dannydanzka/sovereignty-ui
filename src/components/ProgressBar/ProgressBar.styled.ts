@@ -6,7 +6,7 @@
 
 import styled, { keyframes } from 'styled-components';
 
-import { color, shape, spacing, typography } from '../../tokens';
+import { c, s, sh, tf, ts, tw } from '../../tokens/css-variables';
 
 const fillAnimation = keyframes`
   from {
@@ -17,7 +17,7 @@ const fillAnimation = keyframes`
 export const ProgressContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${spacing.micro};
+  gap: ${s('micro')};
   width: 100%;
 `;
 
@@ -28,21 +28,21 @@ export const ProgressHeader = styled.div`
 `;
 
 export const ProgressLabel = styled.span`
-  color: ${color.textSecondary};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.sm};
+  color: ${c('textSecondary')};
+  font-family: ${tf('body')};
+  font-size: ${ts('sm')};
 `;
 
 export const ProgressPercentage = styled.span`
-  color: ${color.accent500};
-  font-family: ${typography.family.display};
-  font-size: ${typography.size.sm};
-  font-weight: ${typography.weight.bold};
+  color: ${c('accent500')};
+  font-family: ${tf('display')};
+  font-size: ${ts('sm')};
+  font-weight: ${tw('bold')};
 `;
 
 export const ProgressTrack = styled.div<{ $size: 'large' | 'medium' | 'small' }>`
-  background: ${color.neutral200};
-  border-radius: ${shape.full};
+  background: ${c('neutral200')};
+  border-radius: ${sh('full')};
   height: ${({ $size }) => {
     switch ($size) {
       case 'small':
@@ -65,14 +65,14 @@ export const ProgressFill = styled.div<{
   background: ${({ $variant }) => {
     switch ($variant) {
       case 'success':
-        return color.success;
+        return c('success');
       case 'warning':
-        return color.warning;
+        return c('warning');
       case 'default':
-        return `linear-gradient(90deg, ${color.accent500}, ${color.tertiary300})`;
+        return `linear-gradient(90deg, ${c('accent500')}, ${c('tertiary300')})`;
     }
   }};
-  border-radius: ${shape.full};
+  border-radius: ${sh('full')};
   height: 100%;
   transition: width 0.3s ease-out;
   width: ${({ $percentage }) => `${Math.min(100, Math.max(0, $percentage))}%`};

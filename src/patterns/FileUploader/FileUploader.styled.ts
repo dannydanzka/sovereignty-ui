@@ -4,20 +4,20 @@
 
 import styled, { css } from 'styled-components';
 
-import { color, shape, spacing, typography } from '../../tokens';
+import { c, s, sh, tf, ts, tw } from '../../tokens/css-variables';
 
 export const FileUploaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${spacing.xs};
+  gap: ${s('xs')};
   width: 100%;
 `;
 
 export const FileUploaderLabel = styled.label`
-  color: ${color.textPrimary};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.sm};
-  font-weight: ${typography.weight.medium};
+  color: ${c('textPrimary')};
+  font-family: ${tf('body')};
+  font-size: ${ts('sm')};
+  font-weight: ${tw('medium')};
 `;
 
 export const FileUploaderDropzone = styled.div<{
@@ -26,108 +26,108 @@ export const FileUploaderDropzone = styled.div<{
   $isDragOver: boolean;
 }>`
   align-items: center;
-  border: 2px dashed ${({ $hasError }) => ($hasError ? color.error : color.border)};
-  border-radius: ${shape.lg};
+  border: 2px dashed ${({ $hasError }) => ($hasError ? c('error') : c('border'))};
+  border-radius: ${sh('lg')};
   cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
   display: flex;
   flex-direction: column;
-  gap: ${spacing.xs};
+  gap: ${s('xs')};
   justify-content: center;
   min-height: 8rem;
   opacity: ${({ $disabled }) => ($disabled ? 0.5 : 1)};
-  padding: ${spacing.lg};
+  padding: ${s('lg')};
   transition: all 0.2s ease;
 
   ${({ $hasError, $isDragOver }) =>
     $isDragOver &&
     css`
-      background-color: ${$hasError ? color.errorBackground : color.primary50};
-      border-color: ${$hasError ? color.error : color.primary500};
+      background-color: ${$hasError ? c('errorBackground') : c('primary50')};
+      border-color: ${$hasError ? c('error') : c('primary500')};
     `}
 
   &:hover {
     border-color: ${({ $disabled, $hasError }) =>
-      $disabled ? undefined : $hasError ? color.error : color.primary500};
+      $disabled ? undefined : $hasError ? c('error') : c('primary500')};
   }
 `;
 
 export const FileUploaderIcon = styled.div`
-  color: ${color.textTertiary};
+  color: ${c('textTertiary')};
 `;
 
 export const FileUploaderText = styled.span`
-  color: ${color.textSecondary};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.sm};
+  color: ${c('textSecondary')};
+  font-family: ${tf('body')};
+  font-size: ${ts('sm')};
   text-align: center;
 `;
 
 export const FileUploaderBrowse = styled.span`
-  color: ${color.primary500};
+  color: ${c('primary500')};
   cursor: pointer;
-  font-weight: ${typography.weight.medium};
+  font-weight: ${tw('medium')};
   text-decoration: underline;
 `;
 
 export const FileUploaderDescription = styled.span`
-  color: ${color.textTertiary};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.xs};
+  color: ${c('textTertiary')};
+  font-family: ${tf('body')};
+  font-size: ${ts('xs')};
   text-align: center;
 `;
 
 export const FileUploaderError = styled.span`
-  color: ${color.error};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.xs};
+  color: ${c('error')};
+  font-family: ${tf('body')};
+  font-size: ${ts('xs')};
 `;
 
 export const FileUploaderFileList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${spacing.micro};
+  gap: ${s('micro')};
 `;
 
 export const FileUploaderFileItem = styled.div`
   align-items: center;
-  background-color: ${color.neutral50};
-  border: 1px solid ${color.border};
-  border-radius: ${shape.md};
+  background-color: ${c('neutral50')};
+  border: 1px solid ${c('border')};
+  border-radius: ${sh('md')};
   display: flex;
-  gap: ${spacing.xs};
+  gap: ${s('xs')};
   justify-content: space-between;
-  padding: ${spacing.xs} ${spacing.sm};
+  padding: ${s('xs')} ${s('sm')};
 `;
 
 export const FileUploaderFileName = styled.span`
-  color: ${color.textPrimary};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.sm};
+  color: ${c('textPrimary')};
+  font-family: ${tf('body')};
+  font-size: ${ts('sm')};
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
 
 export const FileUploaderFileSize = styled.span`
-  color: ${color.textTertiary};
+  color: ${c('textTertiary')};
   flex-shrink: 0;
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.xs};
+  font-family: ${tf('body')};
+  font-size: ${ts('xs')};
 `;
 
 export const FileUploaderRemoveButton = styled.button`
   align-items: center;
   background: none;
   border: none;
-  color: ${color.textTertiary};
+  color: ${c('textTertiary')};
   cursor: pointer;
   display: inline-flex;
   flex-shrink: 0;
-  padding: ${spacing.micro};
+  padding: ${s('micro')};
   transition: color 0.2s ease;
 
   &:hover {
-    color: ${color.error};
+    color: ${c('error')};
   }
 `;
 

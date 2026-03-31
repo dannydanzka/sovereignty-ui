@@ -16,7 +16,7 @@ import type {
   ButtonVariant,
   StyledButtonProps,
 } from './Button.interfaces';
-import { color, shape, spacing, typography } from '../../tokens';
+import { c, s, sh, tf, ts, tw } from '../../tokens/css-variables';
 
 const spin = keyframes`
   to {
@@ -27,153 +27,153 @@ const spin = keyframes`
 const getVariantStyles = (variant: ButtonVariant) => {
   const variants: Record<ButtonVariant, ReturnType<typeof css>> = {
     accent: css`
-      background: ${color.accent500};
+      background: ${c('accent500')};
       border: none;
-      color: ${color.white};
+      color: ${c('white')};
 
       &:hover:not(:disabled) {
-        background: ${color.accent600};
+        background: ${c('accent600')};
       }
 
       &:focus-visible {
-        box-shadow: 0 0 0 3px ${color.accent200};
+        box-shadow: 0 0 0 3px ${c('accent200')};
       }
     `,
     brand: css`
-      background: ${color.accent500};
+      background: ${c('accent500')};
       border: none;
-      color: ${color.white};
+      color: ${c('white')};
 
       &:hover:not(:disabled) {
-        background: ${color.accent700};
+        background: ${c('accent700')};
         transform: translateY(-1px);
       }
 
       &:focus-visible {
-        box-shadow: 0 0 0 3px ${color.accent200};
+        box-shadow: 0 0 0 3px ${c('accent200')};
       }
     `,
     'brand-ghost': css`
       background: transparent;
       border: none;
-      color: ${color.accent500};
+      color: ${c('accent500')};
 
       &:hover:not(:disabled) {
-        color: ${color.accent700};
+        color: ${c('accent700')};
         text-decoration: underline;
       }
 
       &:focus-visible {
-        box-shadow: 0 0 0 2px ${color.accent200};
+        box-shadow: 0 0 0 2px ${c('accent200')};
       }
     `,
     'brand-outline': css`
-      background: ${color.white};
-      border: 2px solid ${color.accent500};
-      color: ${color.accent500};
+      background: ${c('white')};
+      border: 2px solid ${c('accent500')};
+      color: ${c('accent500')};
 
       &:hover:not(:disabled) {
-        background: ${color.accent500};
-        color: ${color.white};
+        background: ${c('accent500')};
+        color: ${c('white')};
       }
 
       &:focus-visible {
-        box-shadow: 0 0 0 3px ${color.accent200};
+        box-shadow: 0 0 0 3px ${c('accent200')};
       }
     `,
     danger: css`
-      background: ${color.error};
+      background: ${c('error')};
       border: none;
-      color: ${color.white};
+      color: ${c('white')};
 
       &:hover:not(:disabled) {
-        background: ${color.errorDark};
+        background: ${c('errorDark')};
       }
 
       &:focus-visible {
-        box-shadow: 0 0 0 3px ${color.errorBackground};
+        box-shadow: 0 0 0 3px ${c('errorBackground')};
       }
     `,
     ghost: css`
-      background: ${color.neutral100};
+      background: ${c('neutral100')};
       border: none;
-      color: ${color.textSecondary};
+      color: ${c('textSecondary')};
 
       &:hover:not(:disabled) {
-        background: ${color.neutral200};
-        color: ${color.textPrimary};
+        background: ${c('neutral200')};
+        color: ${c('textPrimary')};
       }
 
       &:focus-visible {
-        box-shadow: 0 0 0 2px ${color.neutral300};
+        box-shadow: 0 0 0 2px ${c('neutral300')};
       }
     `,
     outline: css`
-      background: ${color.white};
-      border: 1px solid ${color.neutral300};
-      color: ${color.textPrimary};
+      background: ${c('white')};
+      border: 1px solid ${c('neutral300')};
+      color: ${c('textPrimary')};
 
       &:hover:not(:disabled) {
-        background: ${color.neutral50};
-        border-color: ${color.primary300};
+        background: ${c('neutral50')};
+        border-color: ${c('primary300')};
       }
 
       &:focus-visible {
-        border-color: ${color.primary500};
+        border-color: ${c('primary500')};
       }
     `,
     primary: css`
-      background: ${color.primary500};
+      background: ${c('primary500')};
       border: none;
-      color: ${color.neutral900};
+      color: ${c('neutral900')};
 
       &:hover:not(:disabled) {
-        background: ${color.primary400};
+        background: ${c('primary400')};
       }
 
       &:focus-visible {
-        box-shadow: 0 0 0 3px ${color.primary200};
+        box-shadow: 0 0 0 3px ${c('primary200')};
       }
     `,
     secondary: css`
-      background: ${color.white};
-      border: 1px solid ${color.neutral300};
-      color: ${color.textPrimary};
+      background: ${c('white')};
+      border: 1px solid ${c('neutral300')};
+      color: ${c('textPrimary')};
 
       &:hover:not(:disabled) {
-        background: ${color.neutral50};
-        border-color: ${color.neutral400};
+        background: ${c('neutral50')};
+        border-color: ${c('neutral400')};
       }
 
       &:focus-visible {
-        border-color: ${color.primary500};
-        box-shadow: 0 0 0 3px ${color.primary100};
+        border-color: ${c('primary500')};
+        box-shadow: 0 0 0 3px ${c('primary100')};
       }
     `,
     success: css`
-      background: ${color.success};
+      background: ${c('success')};
       border: none;
-      color: ${color.white};
+      color: ${c('white')};
 
       &:hover:not(:disabled) {
-        background: ${color.successDark};
+        background: ${c('successDark')};
       }
 
       &:focus-visible {
-        box-shadow: 0 0 0 3px ${color.successBackground};
+        box-shadow: 0 0 0 3px ${c('successBackground')};
       }
     `,
     warning: css`
-      background: ${color.warning};
+      background: ${c('warning')};
       border: none;
-      color: ${color.neutral900};
+      color: ${c('neutral900')};
 
       &:hover:not(:disabled) {
-        background: ${color.warningDark};
+        background: ${c('warningDark')};
       }
 
       &:focus-visible {
-        box-shadow: 0 0 0 3px ${color.warningBackground};
+        box-shadow: 0 0 0 3px ${c('warningBackground')};
       }
     `,
   };
@@ -195,9 +195,9 @@ const normalizeSize = (size: ButtonSize): 'sm' | 'md' | 'lg' => {
 
 const getBorderRadius = (buttonShape?: ButtonShape): string => {
   if (buttonShape === 'circle' || buttonShape === 'pill') {
-    return shape.full;
+    return sh('full');
   }
-  return shape.md;
+  return sh('md');
 };
 
 const getSizeStyles = (size: ButtonSize, iconOnly: boolean, buttonShape?: ButtonShape) => {
@@ -208,24 +208,24 @@ const getSizeStyles = (size: ButtonSize, iconOnly: boolean, buttonShape?: Button
     const iconOnlySizes: Record<'sm' | 'md' | 'lg', ReturnType<typeof css>> = {
       lg: css`
         border-radius: ${borderRadius};
-        height: ${spacing.md};
-        min-width: ${spacing.md};
+        height: ${s('md')};
+        min-width: ${s('md')};
         padding: 0;
-        width: ${spacing.md};
+        width: ${s('md')};
       `,
       md: css`
         border-radius: ${borderRadius};
-        height: ${spacing.md};
-        min-width: ${spacing.md};
+        height: ${s('md')};
+        min-width: ${s('md')};
         padding: 0;
-        width: ${spacing.md};
+        width: ${s('md')};
       `,
       sm: css`
         border-radius: ${borderRadius};
-        height: ${spacing.md};
-        min-width: ${spacing.md};
+        height: ${s('md')};
+        min-width: ${s('md')};
         padding: 0;
-        width: ${spacing.md};
+        width: ${s('md')};
       `,
     };
     return iconOnlySizes[normalizedSize];
@@ -233,19 +233,19 @@ const getSizeStyles = (size: ButtonSize, iconOnly: boolean, buttonShape?: Button
 
   const sizes: Record<'sm' | 'md' | 'lg', ReturnType<typeof css>> = {
     lg: css`
-      font-size: ${typography.size.sm};
-      min-height: ${spacing.lg};
-      padding: ${spacing.xs} ${spacing.md};
+      font-size: ${ts('sm')};
+      min-height: ${s('lg')};
+      padding: ${s('xs')} ${s('md')};
     `,
     md: css`
-      font-size: ${typography.size.sm};
-      min-height: ${spacing.md};
-      padding: ${spacing.xs} ${spacing.sm};
+      font-size: ${ts('sm')};
+      min-height: ${s('md')};
+      padding: ${s('xs')} ${s('sm')};
     `,
     sm: css`
-      font-size: ${typography.size.xs};
-      min-height: ${spacing.sm};
-      padding: ${spacing.micro} ${spacing.sm};
+      font-size: ${ts('xs')};
+      min-height: ${s('sm')};
+      padding: ${s('micro')} ${s('sm')};
     `,
   };
 
@@ -257,9 +257,9 @@ export const StyledButton = styled.button<StyledButtonProps>`
   border-radius: ${({ $shape }) => getBorderRadius($shape)};
   cursor: pointer;
   display: inline-flex;
-  font-family: ${typography.family.body};
-  font-weight: ${typography.weight.medium};
-  gap: ${spacing.xs};
+  font-family: ${tf('body')};
+  font-weight: ${tw('medium')};
+  gap: ${s('xs')};
   justify-content: center;
   outline: none;
   transition: all 0.2s ease;
@@ -281,8 +281,8 @@ export const ButtonLoader = styled.span`
   border-radius: 50%;
   border-top-color: transparent;
   display: inline-block;
-  height: ${spacing.sm};
-  width: ${spacing.sm};
+  height: ${s('sm')};
+  width: ${s('sm')};
 `;
 
 export const ButtonIcon = styled.span`

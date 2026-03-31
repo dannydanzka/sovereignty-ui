@@ -4,7 +4,7 @@
 
 import styled from 'styled-components';
 
-import { color, shape, spacing, typography } from '../../tokens';
+import { c, s, sh, tf, ts } from '../../tokens/css-variables';
 
 export const Wrapper = styled.div`
   position: relative;
@@ -12,35 +12,35 @@ export const Wrapper = styled.div`
 `;
 
 export const Input = styled.input<{ $hasIcon?: boolean }>`
-  background: ${color.white};
-  border: 1px solid ${color.border};
-  border-radius: ${shape.md};
-  color: ${color.textPrimary};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.sm};
-  padding: ${spacing.xs};
-  padding-right: ${({ $hasIcon }) => ($hasIcon ? '48px' : spacing.xs)};
+  background: ${c('white')};
+  border: 1px solid ${c('border')};
+  border-radius: ${sh('md')};
+  color: ${c('textPrimary')};
+  font-family: ${tf('body')};
+  font-size: ${ts('sm')};
+  padding: ${s('xs')};
+  padding-right: ${({ $hasIcon }) => ($hasIcon ? '48px' : s('xs'))};
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease;
   width: 100%;
 
   &::placeholder {
-    color: ${color.textTertiary};
+    color: ${c('textTertiary')};
   }
 
   &:hover:not(:disabled) {
-    border-color: ${color.primary300};
+    border-color: ${c('primary300')};
   }
 
   &:focus {
-    border-color: ${color.primary500};
-    box-shadow: 0 0 0 3px ${color.primary100};
+    border-color: ${c('primary500')};
+    box-shadow: 0 0 0 3px ${c('primary100')};
     outline: none;
   }
 
   &:disabled {
-    background: ${color.neutral100};
+    background: ${c('neutral100')};
     cursor: not-allowed;
   }
 `;
@@ -49,18 +49,18 @@ export const ToggleButton = styled.button`
   align-items: center;
   background: transparent;
   border: none;
-  color: ${color.textTertiary};
+  color: ${c('textTertiary')};
   cursor: pointer;
   display: flex;
-  padding: ${spacing.xs};
+  padding: ${s('xs')};
   position: absolute;
-  right: ${spacing.micro};
+  right: ${s('micro')};
   top: 50%;
   transform: translateY(-50%);
   transition: color 0.2s ease;
 
   &:hover:not(:disabled) {
-    color: ${color.textPrimary};
+    color: ${c('textPrimary')};
   }
 
   &:disabled {

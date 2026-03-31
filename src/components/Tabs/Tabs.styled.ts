@@ -6,7 +6,8 @@
 
 import styled from 'styled-components';
 
-import { color, layout, shape, spacing, typography } from '../../tokens';
+import { c, s, sh, tf, ts, tw } from '../../tokens/css-variables';
+import { layout } from '../../tokens';
 
 export const TabsContainer = styled.div`
   display: flex;
@@ -15,14 +16,14 @@ export const TabsContainer = styled.div`
 `;
 
 export const TabList = styled.div`
-  border-bottom: 2px solid ${color.neutral200};
+  border-bottom: 2px solid ${c('neutral200')};
   display: flex;
-  gap: ${spacing.micro};
+  gap: ${s('micro')};
   overflow-x: auto;
   scrollbar-width: none;
 
   @media (min-width: ${layout.breakpoint.md}) {
-    gap: ${spacing.xs};
+    gap: ${s('xs')};
   }
 
   &::-webkit-scrollbar {
@@ -34,52 +35,51 @@ export const TabButton = styled.button<{ $isActive: boolean; $isDisabled: boolea
   align-items: center;
   background: transparent;
   border: none;
-  border-bottom: 3px solid ${({ $isActive }) => ($isActive ? color.accent500 : 'transparent')};
+  border-bottom: 3px solid ${({ $isActive }) => ($isActive ? c('accent500') : 'transparent')};
   color: ${({ $isActive, $isDisabled }) => {
-    if ($isDisabled) return color.neutral400;
-    return $isActive ? color.accent500 : color.textSecondary;
+    if ($isDisabled) return c('neutral400');
+    return $isActive ? c('accent500') : c('textSecondary');
   }};
   cursor: ${({ $isDisabled }) => ($isDisabled ? 'not-allowed' : 'pointer')};
   display: flex;
   flex-shrink: 0;
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.sm};
-  font-weight: ${({ $isActive }) =>
-    $isActive ? typography.weight.semibold : typography.weight.medium};
-  gap: ${spacing.xs};
+  font-family: ${tf('body')};
+  font-size: ${ts('sm')};
+  font-weight: ${({ $isActive }) => ($isActive ? tw('semibold') : tw('medium'))};
+  gap: ${s('xs')};
   margin-bottom: -2px;
   opacity: ${({ $isDisabled }) => ($isDisabled ? 0.5 : 1)};
-  padding: ${spacing.sm} ${spacing.sm};
+  padding: ${s('sm')} ${s('sm')};
   transition: all 0.2s ease-in-out;
   white-space: nowrap;
 
   @media (min-width: ${layout.breakpoint.md}) {
-    font-size: ${typography.size.base};
-    padding: ${spacing.sm} ${spacing.md};
+    font-size: ${ts('base')};
+    padding: ${s('sm')} ${s('md')};
   }
 
   &:hover:not(:disabled) {
-    background: ${color.neutral50};
-    color: ${({ $isActive }) => ($isActive ? color.accent500 : color.textPrimary)};
+    background: ${c('neutral50')};
+    color: ${({ $isActive }) => ($isActive ? c('accent500') : c('textPrimary'))};
   }
 
   svg {
-    height: ${spacing.sm};
-    width: ${spacing.sm};
+    height: ${s('sm')};
+    width: ${s('sm')};
   }
 `;
 
 export const TabBadge = styled.span`
-  background: ${color.accent500};
-  border-radius: ${shape.full};
-  color: ${color.white};
-  font-size: ${typography.size.xs};
-  font-weight: ${typography.weight.semibold};
-  min-width: ${spacing.sm};
-  padding: ${spacing.micro} ${spacing.xs};
+  background: ${c('accent500')};
+  border-radius: ${sh('full')};
+  color: ${c('white')};
+  font-size: ${ts('xs')};
+  font-weight: ${tw('semibold')};
+  min-width: ${s('sm')};
+  padding: ${s('micro')} ${s('xs')};
   text-align: center;
 `;
 
 export const TabContent = styled.div`
-  padding: ${spacing.md} 0;
+  padding: ${s('md')} 0;
 `;

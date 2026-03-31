@@ -4,7 +4,8 @@
 
 import styled from 'styled-components';
 
-import { color, spacing, typography } from '../../tokens';
+import { c, s, tf, ts } from '../../tokens/css-variables';
+import { color } from '../../tokens';
 
 const TRACK_SIZES = {
   md: { height: '24px', thumb: '20px', width: '44px' },
@@ -15,7 +16,7 @@ export const ToggleWrapper = styled.label<{ $disabled: boolean }>`
   align-items: center;
   cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
   display: inline-flex;
-  gap: ${spacing.xs};
+  gap: ${s('xs')};
   opacity: ${({ $disabled }) => ($disabled ? 0.6 : 1)};
 `;
 
@@ -30,7 +31,7 @@ export const ToggleTrack = styled.div<{
   $checked: boolean;
   $size: 'sm' | 'md';
 }>`
-  background-color: ${({ $checked }) => ($checked ? color.success : color.neutral300)};
+  background-color: ${({ $checked }) => ($checked ? c('success') : c('neutral300'))};
   border-radius: 9999px;
   height: ${({ $size }) => TRACK_SIZES[$size].height};
   position: relative;
@@ -42,7 +43,7 @@ export const ToggleThumb = styled.div<{
   $checked: boolean;
   $size: 'sm' | 'md';
 }>`
-  background-color: ${color.white};
+  background-color: ${c('white')};
   border-radius: 50%;
   box-shadow: 0 1px 3px rgb(${color.blackRgb} / 0.2);
   height: ${({ $size }) => TRACK_SIZES[$size].thumb};
@@ -58,7 +59,7 @@ export const ToggleThumb = styled.div<{
 `;
 
 export const ToggleLabel = styled.span`
-  color: ${color.textPrimary};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.sm};
+  color: ${c('textPrimary')};
+  font-family: ${tf('body')};
+  font-size: ${ts('sm')};
 `;

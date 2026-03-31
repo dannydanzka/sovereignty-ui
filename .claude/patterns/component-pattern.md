@@ -2,6 +2,7 @@
 
 > **PURPOSE**: Standard pattern for creating agnostic UI components in sovereignty-ui
 > **RULE**: Zero framework dependencies — React + styled-components only
+> **THEMING**: All styled files use CSS variable helpers for runtime theming
 
 ---
 
@@ -10,7 +11,7 @@
 ```
 src/components/ComponentName/
 ├── ComponentName.tsx           # Component logic and JSX
-├── ComponentName.styled.ts     # All visual styling
+├── ComponentName.styled.ts     # All visual styling (CSS var helpers)
 ├── ComponentName.interfaces.ts # TypeScript interfaces and types
 ├── ComponentName.test.tsx      # Vitest + RTL unit tests
 ├── ComponentName.stories.tsx   # Storybook documentation
@@ -50,54 +51,56 @@ export interface ComponentNameStyledProps {
 ```typescript
 import styled from 'styled-components';
 
-import { color, motion, shape, spacing, typography } from '../../tokens';
+import { c, mo, s, sh, ts } from '../../tokens';
 
 import type { ComponentNameStyledProps } from './ComponentName.interfaces';
 
 const variantStyles = {
   ghost: `
     background: transparent;
-    border: 1px solid ${color.border.default};
-    color: ${color.text.primary};
+    border: 1px solid ${c('borderDefault')};
+    color: ${c('textPrimary')};
   `,
   primary: `
-    background: ${color.primary};
+    background: ${c('primary')};
     border: none;
-    color: ${color.white};
+    color: ${c('white')};
   `,
   secondary: `
-    background: ${color.secondary};
+    background: ${c('secondary')};
     border: none;
-    color: ${color.white};
+    color: ${c('white')};
   `,
 };
 
 const sizeStyles = {
   lg: `
-    font-size: ${typography.size.lg};
-    padding: ${spacing.md} ${spacing.xl};
+    font-size: ${ts('lg')};
+    padding: ${s('md')} ${s('xl')};
   `,
   md: `
-    font-size: ${typography.size.md};
-    padding: ${spacing.sm} ${spacing.lg};
+    font-size: ${ts('md')};
+    padding: ${s('sm')} ${s('lg')};
   `,
   sm: `
-    font-size: ${typography.size.sm};
-    padding: ${spacing.xs} ${spacing.md};
+    font-size: ${ts('sm')};
+    padding: ${s('xs')} ${s('md')};
   `,
 };
 
 export const ComponentNameWrapper = styled.div<ComponentNameStyledProps>`
-  border-radius: ${shape.borderRadius.md};
+  border-radius: ${sh('md')};
   cursor: pointer;
   display: inline-flex;
-  transition: all ${motion.duration.fast} ${motion.easing.standard};
+  transition: all ${mo('fast')};
   width: ${({ $fullWidth }) => ($fullWidth ? '100%' : 'auto')};
 
   ${({ $variant }) => variantStyles[$variant]}
   ${({ $size }) => sizeStyles[$size]}
 `;
 ```
+
+> **CSS Variable Helpers**: `c()` = color, `s()` = spacing, `sh()` = shape, `ts()` = font-size, `tw()` = font-weight, `tf()` = font-family, `tl()` = line-height, `tt()` = letter-spacing, `el()` = elevation, `mo()` = motion. Each produces `var(--sui-token, fallback)`.
 
 ---
 
@@ -199,11 +202,6 @@ describe('ComponentName', () => {
     await userEvent.click(screen.getByText('Click me'));
     expect(onClick).toHaveBeenCalledOnce();
   });
-
-  it('applies fullWidth when prop is true', () => {
-    const { container } = render(<ComponentName fullWidth>Full</ComponentName>);
-    expect(container.firstChild).toHaveStyle({ width: '100%' });
-  });
 });
 ```
 
@@ -212,7 +210,7 @@ describe('ComponentName', () => {
 ## Critical Rules
 
 1. **NEVER import from Next.js, Redux, or i18n libraries**
-2. **ALL CSS values MUST use tokens** — no `16px`, `#fff`, `bold`
+2. **ALL CSS values MUST use CSS var helpers** — `c()`, `s()`, `sh()`, etc. — never direct token values or hardcoded `16px`, `#fff`
 3. **CSS properties in alphabetical order**
 4. **Transient props ($prop) for all dynamic styled values**
 5. **Named exports only** — no default exports except in stories/config files
@@ -220,4 +218,4 @@ describe('ComponentName', () => {
 
 ---
 
-**Version**: 1.0 | **Created**: 2026-03-06
+**Version**: 2.0 | **Created**: 2026-03-06 | **Updated**: 2026-03-30

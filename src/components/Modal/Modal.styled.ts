@@ -4,13 +4,14 @@
 
 import styled, { css, keyframes } from 'styled-components';
 
-import { color, elevation, layout, shape, spacing, typography } from '../../tokens';
+import { c, el, s, sh, tf, ts, tw } from '../../tokens/css-variables';
 import type {
   ConfirmVariant,
   StyledModalContainerProps,
   StyledModalIconProps,
   StyledModalOverlayProps,
 } from './Modal.interfaces';
+import { layout } from '../../tokens';
 
 const fadeIn = keyframes`
   from { opacity: 0; }
@@ -47,11 +48,11 @@ const slideDown = keyframes`
 export const ModalOverlay = styled.div<StyledModalOverlayProps>`
   align-items: center;
   animation: ${({ $isClosing }) => ($isClosing ? fadeOut : fadeIn)} 0.2s ease-out forwards;
-  background-color: ${color.modalOverlay};
+  background-color: ${c('modalOverlay')};
   display: flex;
   inset: 0;
   justify-content: center;
-  padding: ${spacing.sm};
+  padding: ${s('sm')};
   position: fixed;
   z-index: 1100;
 `;
@@ -78,9 +79,9 @@ const sizeStyles: Record<'full' | 'lg' | 'md' | 'sm' | 'xl', ReturnType<typeof c
 
 export const ModalContainer = styled.div<StyledModalContainerProps>`
   animation: ${({ $isClosing }) => ($isClosing ? slideDown : slideUp)} 0.2s ease-out forwards;
-  background-color: ${color.white};
-  border-radius: ${shape.lg};
-  box-shadow: ${elevation.xl};
+  background-color: ${c('white')};
+  border-radius: ${sh('lg')};
+  box-shadow: ${el('xl')};
   display: flex;
   flex-direction: column;
   max-height: 90vh;
@@ -97,19 +98,19 @@ export const ModalHeader = styled.div`
   align-items: center;
   display: flex;
   justify-content: space-between;
-  padding: ${spacing.sm};
+  padding: ${s('sm')};
 `;
 
 export const ModalTitle = styled.h2<{ $centered?: boolean }>`
-  color: ${color.textPrimary};
-  font-family: ${typography.family.display};
-  font-size: ${typography.size.xl};
-  font-weight: ${typography.weight.bold};
+  color: ${c('textPrimary')};
+  font-family: ${tf('display')};
+  font-size: ${ts('xl')};
+  font-weight: ${tw('bold')};
   margin: 0;
   ${({ $centered }) =>
     $centered &&
     `
-    margin-bottom: ${spacing.xs};
+    margin-bottom: ${s('xs')};
     text-align: center;
   `}
 `;
@@ -117,33 +118,33 @@ export const ModalTitle = styled.h2<{ $centered?: boolean }>`
 export const ModalContent = styled.div<{ $noPadding?: boolean }>`
   flex: 1;
   overflow-y: auto;
-  padding: ${({ $noPadding }) => ($noPadding ? '0' : spacing.sm)};
+  padding: ${({ $noPadding }) => ($noPadding ? '0' : s('sm'))};
 `;
 
 export const ModalFooterBar = styled.div`
   display: flex;
-  gap: ${spacing.sm};
+  gap: ${s('sm')};
   justify-content: flex-end;
-  padding: ${spacing.xs} ${spacing.sm};
+  padding: ${s('xs')} ${s('sm')};
 `;
 
 const getIconVariantStyles = (variant: ConfirmVariant) => {
   const variants: Record<ConfirmVariant, ReturnType<typeof css>> = {
     danger: css`
-      background: ${color.errorBackground};
-      color: ${color.error};
+      background: ${c('errorBackground')};
+      color: ${c('error')};
     `,
     info: css`
-      background: ${color.primary50};
-      color: ${color.primary500};
+      background: ${c('primary50')};
+      color: ${c('primary500')};
     `,
     success: css`
-      background: ${color.successBackground};
-      color: ${color.success};
+      background: ${c('successBackground')};
+      color: ${c('success')};
     `,
     warning: css`
-      background: ${color.warningBackground};
-      color: ${color.warning};
+      background: ${c('warningBackground')};
+      color: ${c('warning')};
     `,
   };
   return variants[variant];
@@ -151,33 +152,33 @@ const getIconVariantStyles = (variant: ConfirmVariant) => {
 
 export const ModalIcon = styled.div<StyledModalIconProps>`
   align-items: center;
-  border-radius: ${shape.full};
+  border-radius: ${sh('full')};
   display: flex;
-  height: ${spacing['4xl']};
+  height: ${s('4xl')};
   justify-content: center;
-  margin: 0 auto ${spacing.sm};
-  width: ${spacing['4xl']};
+  margin: 0 auto ${s('sm')};
+  width: ${s('4xl')};
   ${({ $variant }) => getIconVariantStyles($variant)}
 `;
 
 export const ModalMessage = styled.p`
-  color: ${color.textSecondary};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.sm};
+  color: ${c('textSecondary')};
+  font-family: ${tf('body')};
+  font-size: ${ts('sm')};
   line-height: 1.6;
-  margin: 0 0 ${spacing.md};
+  margin: 0 0 ${s('md')};
   text-align: center;
 `;
 
 export const ModalConfirmChildren = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: ${spacing.md};
+  margin-bottom: ${s('md')};
   width: 100%;
 `;
 
 export const ModalActions = styled.div`
   display: flex;
-  gap: ${spacing.sm};
+  gap: ${s('sm')};
   justify-content: center;
 `;

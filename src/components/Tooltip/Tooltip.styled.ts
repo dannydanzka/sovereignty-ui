@@ -4,26 +4,26 @@
 
 import styled, { css } from 'styled-components';
 
-import { color, shape, spacing, typography } from '../../tokens';
+import { c, s, sh, tf, ts, tw } from '../../tokens/css-variables';
 
 const POSITION_STYLES = {
   bottom: css`
     left: 50%;
-    top: calc(100% + ${spacing.xs});
+    top: calc(100% + ${s('xs')});
     transform: translateX(-50%);
   `,
   left: css`
-    right: calc(100% + ${spacing.xs});
+    right: calc(100% + ${s('xs')});
     top: 50%;
     transform: translateY(-50%);
   `,
   right: css`
-    left: calc(100% + ${spacing.xs});
+    left: calc(100% + ${s('xs')});
     top: 50%;
     transform: translateY(-50%);
   `,
   top: css`
-    bottom: calc(100% + ${spacing.xs});
+    bottom: calc(100% + ${s('xs')});
     left: 50%;
     transform: translateX(-50%);
   `,
@@ -35,15 +35,15 @@ export const TooltipContainer = styled.div`
 `;
 
 export const TooltipContent = styled.div<{ $position: 'top' | 'bottom' | 'left' | 'right' }>`
-  background-color: ${color.dark300};
-  border-radius: ${shape.md};
-  color: ${color.white};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.xs};
-  font-weight: ${typography.weight.medium};
+  background-color: ${c('dark300')};
+  border-radius: ${sh('md')};
+  color: ${c('white')};
+  font-family: ${tf('body')};
+  font-size: ${ts('xs')};
+  font-weight: ${tw('medium')};
   max-width: 250px;
   opacity: 0;
-  padding: ${spacing.micro} ${spacing.xs};
+  padding: ${s('micro')} ${s('xs')};
   pointer-events: none;
   position: absolute;
   transition: opacity 0.15s ease;

@@ -4,46 +4,46 @@
 
 import styled, { css } from 'styled-components';
 
-import { color, shape, spacing, typography } from '../../tokens';
+import { c, s, sh, tf, ts, tw } from '../../tokens/css-variables';
 import type { StyledBadgeProps } from './Badge.interfaces';
 
 const getVariantStyles = ($variant: StyledBadgeProps['$variant']) => {
   switch ($variant) {
     case 'primary':
       return css`
-        background: ${color.primary100};
-        color: ${color.primary700};
+        background: ${c('primary100')};
+        color: ${c('primary700')};
       `;
     case 'success':
       return css`
-        background: ${color.successBackground};
-        color: ${color.successDark};
+        background: ${c('successBackground')};
+        color: ${c('successDark')};
       `;
     case 'warning':
       return css`
-        background: ${color.warningBackground};
-        color: ${color.warningDark};
+        background: ${c('warningBackground')};
+        color: ${c('warningDark')};
       `;
     case 'danger':
       return css`
-        background: ${color.errorBackground};
-        color: ${color.errorDark};
+        background: ${c('errorBackground')};
+        color: ${c('errorDark')};
       `;
     case 'info':
       return css`
-        background: ${color.secondary100};
-        color: ${color.secondary700};
+        background: ${c('secondary100')};
+        color: ${c('secondary700')};
       `;
     case 'secondary':
       return css`
-        background: ${color.secondary50};
-        color: ${color.secondary600};
+        background: ${c('secondary50')};
+        color: ${c('secondary600')};
       `;
     case 'default':
     default:
       return css`
-        background: ${color.neutral100};
-        color: ${color.neutral700};
+        background: ${c('neutral100')};
+        color: ${c('neutral700')};
       `;
   }
 };
@@ -52,29 +52,29 @@ const getSizeStyles = ($size: StyledBadgeProps['$size']) => {
   switch ($size) {
     case 'sm':
       return css`
-        font-size: ${typography.size.xs};
-        padding: 2px ${spacing.xs};
+        font-size: ${ts('xs')};
+        padding: 2px ${s('xs')};
       `;
     case 'lg':
       return css`
-        font-size: ${typography.size.sm};
-        padding: ${spacing.xs} ${spacing.md};
+        font-size: ${ts('sm')};
+        padding: ${s('xs')} ${s('md')};
       `;
     case 'md':
     case undefined:
     default:
       return css`
-        font-size: ${typography.size.xs};
-        padding: ${spacing.micro} ${spacing.sm};
+        font-size: ${ts('xs')};
+        padding: ${s('micro')} ${s('sm')};
       `;
   }
 };
 
 export const StyledBadge = styled.span<StyledBadgeProps>`
-  border-radius: ${shape.full};
+  border-radius: ${sh('full')};
   display: inline-block;
-  font-family: ${typography.family.body};
-  font-weight: ${typography.weight.medium};
+  font-family: ${tf('body')};
+  font-weight: ${tw('medium')};
   white-space: nowrap;
   ${({ $size }) => getSizeStyles($size)}
   ${({ $variant }) => getVariantStyles($variant)}

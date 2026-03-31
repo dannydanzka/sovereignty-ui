@@ -4,8 +4,8 @@
 
 import styled from 'styled-components';
 
-import { spacing } from '../../tokens';
+import { s } from '../../tokens/css-variables';
 
 export const StyledFormGroup = styled.div`
-  margin-bottom: ${spacing.sm};
+  margin-bottom: ${s('sm')};
 `;

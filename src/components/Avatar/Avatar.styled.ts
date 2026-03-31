@@ -4,7 +4,7 @@
 
 import styled from 'styled-components';
 
-import { color, typography } from '../../tokens';
+import { c, tf, ts, tw } from '../../tokens/css-variables';
 
 const SIZE_MAP = {
   lg: '48px',
@@ -14,22 +14,22 @@ const SIZE_MAP = {
 } as const;
 
 const FONT_MAP = {
-  lg: typography.size.lg,
-  md: typography.size.base,
-  sm: typography.size.xs,
-  xl: typography.size['2xl'],
+  lg: ts('lg'),
+  md: ts('base'),
+  sm: ts('xs'),
+  xl: ts('2xl'),
 } as const;
 
 export const AvatarContainer = styled.div<{ $size: 'sm' | 'md' | 'lg' | 'xl' }>`
   align-items: center;
-  background-color: ${color.primary200};
+  background-color: ${c('primary200')};
   border-radius: 50%;
-  color: ${color.textPrimary};
+  color: ${c('textPrimary')};
   display: inline-flex;
   flex-shrink: 0;
-  font-family: ${typography.family.display};
+  font-family: ${tf('display')};
   font-size: ${({ $size }) => FONT_MAP[$size]};
-  font-weight: ${typography.weight.semibold};
+  font-weight: ${tw('semibold')};
   height: ${({ $size }) => SIZE_MAP[$size]};
   justify-content: center;
   overflow: hidden;

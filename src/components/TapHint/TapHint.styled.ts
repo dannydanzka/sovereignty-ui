@@ -6,7 +6,7 @@
 
 import styled, { css, keyframes } from 'styled-components';
 
-import { color, shape, spacing } from '../../tokens';
+import { c, s, sh } from '../../tokens/css-variables';
 import type { StyledTapHintProps, TapHintPosition } from './TapHint.interfaces';
 
 const pulse = keyframes`
@@ -23,13 +23,13 @@ const getPositionStyles = (position: TapHintPosition) => {
   switch (position) {
     case 'bottom-right':
       return css`
-        bottom: ${spacing.sm};
-        right: ${spacing.sm};
+        bottom: ${s('sm')};
+        right: ${s('sm')};
       `;
     case 'top-right':
       return css`
-        right: ${spacing.sm};
-        top: ${spacing.sm};
+        right: ${s('sm')};
+        top: ${s('sm')};
       `;
     case 'center':
       return css`
@@ -53,9 +53,9 @@ const visibleAnimation = css`
 export const TapHintWrapper = styled.div<StyledTapHintProps & { $isHidden: boolean }>`
   align-items: center;
   ${({ $isHidden }) => ($isHidden ? hiddenAnimation : visibleAnimation)}
-  background: ${color.black};
-  border-radius: ${shape.full};
-  color: ${color.white};
+  background: ${c('black')};
+  border-radius: ${sh('full')};
+  color: ${c('white')};
   display: flex;
   height: ${({ $size }) => `${$size}px`};
   justify-content: center;

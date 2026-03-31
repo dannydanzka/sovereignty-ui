@@ -4,38 +4,38 @@
 
 import styled from 'styled-components';
 
-import { color, shape, spacing, typography } from '../../tokens';
+import { c, s, sh, tf, ts, tw } from '../../tokens/css-variables';
 
 export const ErrorContainer = styled.div`
   align-items: center;
-  background-color: ${color.errorBackground};
-  border: 1px solid ${color.errorBorder};
-  border-radius: ${shape.lg};
+  background-color: ${c('errorBackground')};
+  border: 1px solid ${c('errorBorder')};
+  border-radius: ${sh('lg')};
   display: flex;
   flex-direction: column;
-  gap: ${spacing.sm};
+  gap: ${s('sm')};
   justify-content: center;
   min-height: 200px;
-  padding: ${spacing.lg};
+  padding: ${s('lg')};
 `;
 
 export const ErrorIconWrapper = styled.div`
-  color: ${color.error};
+  color: ${c('error')};
 `;
 
 export const ErrorTitle = styled.h3`
-  color: ${color.textPrimary};
-  font-family: ${typography.family.display};
-  font-size: ${typography.size.xl};
-  font-weight: ${typography.weight.semibold};
+  color: ${c('textPrimary')};
+  font-family: ${tf('display')};
+  font-size: ${ts('xl')};
+  font-weight: ${tw('semibold')};
   margin: 0;
   text-align: center;
 `;
 
 export const ErrorDescription = styled.p`
-  color: ${color.textSecondary};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.base};
+  color: ${c('textSecondary')};
+  font-family: ${tf('body')};
+  font-size: ${ts('base')};
   margin: 0;
   max-width: 500px;
   text-align: center;
@@ -44,27 +44,27 @@ export const ErrorDescription = styled.p`
 export const ErrorActions = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: ${spacing.xs};
+  gap: ${s('xs')};
   justify-content: center;
-  margin-top: ${spacing.xs};
+  margin-top: ${s('xs')};
 `;
 
 export const ActionButton = styled.button<{ $variant: 'primary' | 'secondary' }>`
   background-color: ${({ $variant }) =>
-    $variant === 'primary' ? color.primary500 : color.transparent};
-  border: 1px solid ${({ $variant }) => ($variant === 'primary' ? color.primary500 : color.border)};
-  border-radius: ${shape.md};
-  color: ${({ $variant }) => ($variant === 'primary' ? color.white : color.textPrimary)};
+    $variant === 'primary' ? c('primary500') : c('transparent')};
+  border: 1px solid ${({ $variant }) => ($variant === 'primary' ? c('primary500') : c('border'))};
+  border-radius: ${sh('md')};
+  color: ${({ $variant }) => ($variant === 'primary' ? c('white') : c('textPrimary'))};
   cursor: pointer;
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.sm};
-  font-weight: ${typography.weight.medium};
-  padding: ${spacing.xs} ${spacing.sm};
+  font-family: ${tf('body')};
+  font-size: ${ts('sm')};
+  font-weight: ${tw('medium')};
+  padding: ${s('xs')} ${s('sm')};
   transition: all 0.2s ease;
 
   &:hover {
     background-color: ${({ $variant }) =>
-      $variant === 'primary' ? color.primary600 : color.backgroundDark};
+      $variant === 'primary' ? c('primary600') : c('backgroundDark')};
   }
 
   &:disabled {

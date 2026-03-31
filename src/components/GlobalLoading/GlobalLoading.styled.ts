@@ -6,11 +6,12 @@
 
 import styled from 'styled-components';
 
-import { color, layout } from '../../tokens';
+import { c } from '../../tokens/css-variables';
+import { layout } from '../../tokens';
 
 export const LoadingOverlay = styled.div<{ $isVisible: boolean }>`
   align-items: center;
-  background: ${color.background};
+  background: ${c('background')};
   display: ${({ $isVisible }) => ($isVisible ? 'flex' : 'none')};
   flex-direction: column;
   inset: 0;

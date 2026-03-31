@@ -7,18 +7,18 @@
 
 import styled from 'styled-components';
 
-import { color, elevation, spacing } from '../../tokens';
+import { c, el, s } from '../../tokens/css-variables';
 
 const getPaddingStyles = (padding: 'large' | 'medium' | 'none' | 'small') => {
   switch (padding) {
     case 'none':
       return 'padding: 0;';
     case 'small':
-      return `padding: ${spacing.sm};`;
+      return `padding: ${s('sm')};`;
     case 'medium':
-      return `padding: ${spacing.md};`;
+      return `padding: ${s('md')};`;
     case 'large':
-      return `padding: ${spacing.lg};`;
+      return `padding: ${s('lg')};`;
   }
 };
 
@@ -26,9 +26,9 @@ export const StyledCard = styled.div<{
   $clickable?: boolean;
   $padding: 'large' | 'medium' | 'none' | 'small';
 }>`
-  background-color: ${color.white};
+  background-color: ${c('white')};
   border-radius: 12px;
-  box-shadow: ${elevation.sm};
+  box-shadow: ${el('sm')};
   transition: all 0.2s ease-in-out;
 
   ${({ $padding }) => getPaddingStyles($padding)}
@@ -39,7 +39,7 @@ export const StyledCard = styled.div<{
     cursor: pointer;
 
     &:hover {
-      box-shadow: ${elevation.md};
+      box-shadow: ${el('md')};
       transform: translateY(-4px);
     }
 
