@@ -4,14 +4,14 @@
 
 import styled from 'styled-components';
 
-import { color, spacing } from '../../tokens';
+import { c, s } from '../../tokens/css-variables';
 
 export const StyledDivider = styled.hr<{
   $color?: string;
   $orientation: 'horizontal' | 'vertical';
   $spacing?: string;
 }>`
-  background-color: ${({ $color }) => $color ?? color.border};
+  background-color: ${({ $color }) => $color ?? c('border')};
   border: none;
   flex-shrink: 0;
 
@@ -19,13 +19,13 @@ export const StyledDivider = styled.hr<{
     $orientation === 'vertical'
       ? `
     height: auto;
-    margin: 0 ${$gap ?? spacing.sm};
+    margin: 0 ${$gap ?? s('sm')};
     min-height: 100%;
     width: 1px;
   `
       : `
     height: 1px;
-    margin: ${$gap ?? spacing.sm} 0;
+    margin: ${$gap ?? s('sm')} 0;
     width: 100%;
   `}
 `;

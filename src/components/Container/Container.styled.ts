@@ -7,7 +7,7 @@
 import styled from 'styled-components';
 
 import type { ContainerSize } from './Container.interfaces';
-import { spacing } from '../../tokens';
+import { s } from '../../tokens/css-variables';
 
 const getMaxWidth = (size: ContainerSize) => {
   switch (size) {
@@ -25,17 +25,17 @@ const getMaxWidth = (size: ContainerSize) => {
 export const StyledContainer = styled.div<{ $size: ContainerSize }>`
   margin: 0 auto;
   max-width: ${({ $size }) => getMaxWidth($size)};
-  padding-left: ${spacing.sm};
-  padding-right: ${spacing.sm};
+  padding-left: ${s('sm')};
+  padding-right: ${s('sm')};
   width: 100%;
 
   @media (width >= 768px) {
-    padding-left: ${spacing.md};
-    padding-right: ${spacing.md};
+    padding-left: ${s('md')};
+    padding-right: ${s('md')};
   }
 
   @media (width >= 1024px) {
-    padding-left: ${spacing.lg};
-    padding-right: ${spacing.lg};
+    padding-left: ${s('lg')};
+    padding-right: ${s('lg')};
   }
 `;

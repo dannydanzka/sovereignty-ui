@@ -4,7 +4,7 @@
 
 import styled, { keyframes } from 'styled-components';
 
-import { color, elevation, shape, spacing, typography } from '../../tokens';
+import { c, el, s, sh, tf, ts, tw } from '../../tokens/css-variables';
 import type { StyledContainerProps, StyledIconProps } from './NotificationToast.interfaces';
 
 const slideIn = keyframes`
@@ -32,28 +32,28 @@ const slideOut = keyframes`
 const getBorderColor = ($type: StyledContainerProps['$type']) => {
   switch ($type) {
     case 'success':
-      return color.success;
+      return c('success');
     case 'error':
-      return color.error;
+      return c('error');
     case 'warning':
-      return color.warning;
+      return c('warning');
     case 'info':
-      return color.info;
+      return c('info');
   }
 };
 
 export const ToastContainer = styled.div<StyledContainerProps>`
   align-items: center;
   animation: ${({ $isClosing }) => ($isClosing ? slideOut : slideIn)} 0.3s ease-in-out;
-  background: ${color.white};
+  background: ${c('white')};
   border-left: 4px solid ${({ $type }) => getBorderColor($type)};
-  border-radius: ${shape.md};
-  box-shadow: ${elevation.lg};
+  border-radius: ${sh('md')};
+  box-shadow: ${el('lg')};
   display: flex;
-  gap: ${spacing.sm};
+  gap: ${s('sm')};
   max-width: 400px;
   min-width: 300px;
-  padding: ${spacing.sm};
+  padding: ${s('sm')};
   pointer-events: auto;
   position: relative;
 `;
@@ -68,17 +68,17 @@ export const ToastContent = styled.div`
 `;
 
 export const ToastTitle = styled.p`
-  color: ${color.textPrimary};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.sm};
-  font-weight: ${typography.weight.semibold};
-  margin: 0 0 ${spacing.micro};
+  color: ${c('textPrimary')};
+  font-family: ${tf('body')};
+  font-size: ${ts('sm')};
+  font-weight: ${tw('semibold')};
+  margin: 0 0 ${s('micro')};
 `;
 
 export const ToastMessage = styled.p`
-  color: ${color.textSecondary};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.sm};
+  color: ${c('textSecondary')};
+  font-family: ${tf('body')};
+  font-size: ${ts('sm')};
   line-height: 1.4;
   margin: 0;
 `;
@@ -86,19 +86,19 @@ export const ToastMessage = styled.p`
 export const ToastCloseButton = styled.button`
   background: transparent;
   border: none;
-  color: ${color.textSecondary};
+  color: ${c('textSecondary')};
   cursor: pointer;
   flex-shrink: 0;
-  padding: ${spacing.micro};
+  padding: ${s('micro')};
   transition: color 0.2s ease-in-out;
 
   &:hover {
-    color: ${color.textPrimary};
+    color: ${c('textPrimary')};
   }
 
   &:focus {
-    color: ${color.textPrimary};
-    outline: 2px solid ${color.primary500};
+    color: ${c('textPrimary')};
+    outline: 2px solid ${c('primary500')};
     outline-offset: 2px;
   }
 `;

@@ -17,8 +17,9 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "verbatimModuleSyntax": false
+    "verbatimModuleSyntax": false,
+    "types": ["vitest/globals", "@testing-library/jest-dom/vitest"]
   },
-  "include": ["src"],
+  "include": ["src", "vitest.setup.ts"],
   "exclude": ["node_modules", "dist"]
 }

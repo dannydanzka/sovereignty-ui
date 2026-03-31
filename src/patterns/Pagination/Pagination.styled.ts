@@ -4,36 +4,36 @@
 
 import styled, { css } from 'styled-components';
 
-import { color, shape, spacing, typography } from '../../tokens';
+import { c, s, sh, tf, ts, tw } from '../../tokens/css-variables';
 
 export const PaginationWrapper = styled.nav`
   align-items: center;
   display: flex;
-  gap: ${spacing.micro};
+  gap: ${s('micro')};
   justify-content: center;
 `;
 
 const buttonBase = css`
   align-items: center;
   background: none;
-  border: 1px solid ${color.border};
-  border-radius: ${shape.md};
-  color: ${color.textSecondary};
+  border: 1px solid ${c('border')};
+  border-radius: ${sh('md')};
+  color: ${c('textSecondary')};
   cursor: pointer;
   display: inline-flex;
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.sm};
-  font-weight: ${typography.weight.medium};
+  font-family: ${tf('body')};
+  font-size: ${ts('sm')};
+  font-weight: ${tw('medium')};
   justify-content: center;
   min-height: 2rem;
   min-width: 2rem;
-  padding: ${spacing.micro} ${spacing.xs};
+  padding: ${s('micro')} ${s('xs')};
   transition: all 0.2s ease;
 
   &:hover:not(:disabled) {
-    background-color: ${color.neutral50};
-    border-color: ${color.primary500};
-    color: ${color.primary500};
+    background-color: ${c('neutral50')};
+    border-color: ${c('primary500')};
+    color: ${c('primary500')};
   }
 
   &:disabled {
@@ -48,23 +48,23 @@ export const PaginationButton = styled.button<{ $active?: boolean }>`
   ${({ $active }) =>
     $active &&
     css`
-      background-color: ${color.primary500};
-      border-color: ${color.primary500};
-      color: ${color.white};
+      background-color: ${c('primary500')};
+      border-color: ${c('primary500')};
+      color: ${c('white')};
 
       &:hover:not(:disabled) {
-        background-color: ${color.primary600};
-        border-color: ${color.primary600};
-        color: ${color.white};
+        background-color: ${c('primary600')};
+        border-color: ${c('primary600')};
+        color: ${c('white')};
       }
     `}
 `;
 
 export const PaginationEllipsis = styled.span`
   align-items: center;
-  color: ${color.textTertiary};
+  color: ${c('textTertiary')};
   display: inline-flex;
-  font-size: ${typography.size.sm};
+  font-size: ${ts('sm')};
   justify-content: center;
   min-height: 2rem;
   min-width: 2rem;

@@ -4,14 +4,14 @@
 
 import styled from 'styled-components';
 
-import { color, shape, spacing, typography } from '../../tokens';
+import { c, s, sh, tf, ts } from '../../tokens/css-variables';
 import type { StyledSwitchTrackProps, StyledSwitchWrapperProps } from './Switch.interfaces';
 
 export const Wrapper = styled.label<StyledSwitchWrapperProps>`
   align-items: center;
   cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
   display: inline-flex;
-  gap: ${spacing.xs};
+  gap: ${s('xs')};
   opacity: ${({ $disabled }) => ($disabled ? 0.5 : 1)};
   user-select: none;
 `;
@@ -24,35 +24,35 @@ export const HiddenInput = styled.input`
 `;
 
 export const Track = styled.span<StyledSwitchTrackProps>`
-  background-color: ${({ $checked }) => ($checked ? color.primary500 : color.neutral300)};
-  border-radius: ${shape.full};
+  background-color: ${({ $checked }) => ($checked ? c('primary500') : c('neutral300'))};
+  border-radius: ${sh('full')};
   display: inline-block;
-  height: ${spacing.md};
+  height: ${s('md')};
   position: relative;
   transition: background-color 0.2s ease;
-  width: ${spacing.xl};
+  width: ${s('xl')};
 
   &::after {
-    background-color: ${color.white};
-    border-radius: ${shape.full};
+    background-color: ${c('white')};
+    border-radius: ${sh('full')};
     content: '';
-    height: ${spacing.sm};
+    height: ${s('sm')};
     left: ${({ $checked }) => ($checked ? '22px' : '2px')};
     position: absolute;
     top: 2px;
     transition: left 0.2s ease;
-    width: ${spacing.sm};
+    width: ${s('sm')};
   }
 
   ${({ $disabled }) =>
     $disabled &&
     `
-    background-color: ${color.neutral200};
+    background-color: ${c('neutral200')};
   `}
 `;
 
 export const Label = styled.span`
-  color: ${color.textPrimary};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.sm};
+  color: ${c('textPrimary')};
+  font-family: ${tf('body')};
+  font-size: ${ts('sm')};
 `;

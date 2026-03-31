@@ -49,7 +49,7 @@ export interface TypographyTokens {
 }
 
 export interface TokenOverrides {
-  readonly color?: Partial<typeof color>;
+  readonly color?: Partial<Record<ColorToken, string>>;
   readonly typography?: {
     readonly family?: Partial<TypographyFamilyTokens>;
   };

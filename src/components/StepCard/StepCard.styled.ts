@@ -6,49 +6,49 @@
 
 import styled from 'styled-components';
 
-import { color, elevation, shape, spacing, typography } from '../../tokens';
+import { c, el, s, sh, tf, ts, tw } from '../../tokens/css-variables';
 
 export const StepCardContainer = styled.div`
-  background-color: ${color.surface};
-  border: 1px solid ${color.border};
-  border-radius: ${shape.lg};
-  padding: ${spacing.xl};
+  background-color: ${c('surface')};
+  border: 1px solid ${c('border')};
+  border-radius: ${sh('lg')};
+  padding: ${s('xl')};
   text-align: center;
   transition:
     box-shadow 0.3s ease,
     transform 0.3s ease;
 
   &:hover {
-    box-shadow: ${elevation.md};
+    box-shadow: ${el('md')};
     transform: translateY(-4px);
   }
 `;
 
 export const StepNumber = styled.div`
   align-items: center;
-  background: linear-gradient(135deg, ${color.primary500}, ${color.textAccent});
+  background: linear-gradient(135deg, ${c('primary500')}, ${c('textAccent')});
   border-radius: 50%;
-  color: ${color.white};
+  color: ${c('white')};
   display: flex;
-  font-size: ${typography.size['2xl']};
-  font-weight: ${typography.weight.bold};
-  height: ${spacing['2xl']};
+  font-size: ${ts('2xl')};
+  font-weight: ${tw('bold')};
+  height: ${s('2xl')};
   justify-content: center;
-  margin: 0 auto ${spacing.md};
-  width: ${spacing['2xl']};
+  margin: 0 auto ${s('md')};
+  width: ${s('2xl')};
 `;
 
 export const StepTitle = styled.div`
-  color: ${color.textPrimary};
-  font-family: ${typography.family.display};
-  font-size: ${typography.size.xl};
-  font-weight: ${typography.weight.semibold};
-  margin-bottom: ${spacing.sm};
+  color: ${c('textPrimary')};
+  font-family: ${tf('display')};
+  font-size: ${ts('xl')};
+  font-weight: ${tw('semibold')};
+  margin-bottom: ${s('sm')};
 `;
 
 export const StepDescription = styled.p`
-  color: ${color.textSecondary};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.base};
+  color: ${c('textSecondary')};
+  font-family: ${tf('body')};
+  font-size: ${ts('base')};
   line-height: 1.6;
 `;

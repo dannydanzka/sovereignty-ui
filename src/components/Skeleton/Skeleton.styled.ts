@@ -6,7 +6,7 @@
 
 import styled, { keyframes } from 'styled-components';
 
-import { color, shape, spacing } from '../../tokens';
+import { c, s, sh } from '../../tokens/css-variables';
 
 const shimmer = keyframes`
   0% {
@@ -18,9 +18,9 @@ const shimmer = keyframes`
 `;
 
 const VARIANT_DEFAULTS = {
-  circular: { borderRadius: '50%', height: spacing.xl, width: spacing.xl },
-  rectangular: { borderRadius: shape.md, height: '120px', width: '100%' },
-  text: { borderRadius: shape.sm, height: spacing.sm, width: '100%' },
+  circular: { borderRadius: '50%', height: s('xl'), width: s('xl') },
+  rectangular: { borderRadius: sh('md'), height: '120px', width: '100%' },
+  text: { borderRadius: sh('sm'), height: s('sm'), width: '100%' },
 } as const;
 
 export const SkeletonBox = styled.div<{
@@ -32,9 +32,9 @@ export const SkeletonBox = styled.div<{
   animation: ${shimmer} 1.5s ease-in-out infinite;
   background: linear-gradient(
     90deg,
-    ${color.neutral100} 25%,
-    ${color.neutral50} 50%,
-    ${color.neutral100} 75%
+    ${c('neutral100')} 25%,
+    ${c('neutral50')} 50%,
+    ${c('neutral100')} 75%
   );
   background-size: 200% 100%;
   border-radius: ${({ $borderRadius, $variant }) =>

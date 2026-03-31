@@ -7,21 +7,21 @@
 
 import styled, { css } from 'styled-components';
 
-import { color, elevation, shape, spacing, typography } from '../../tokens';
+import { c, el, s, sh, tf, ts, tw } from '../../tokens/css-variables';
 import type { PopButtonVariant, StyledPopButtonProps } from './PopButton.interfaces';
 
 const getBackgroundColor = (variant: PopButtonVariant) => {
   switch (variant) {
     case 'blue':
     case 'secondary':
-      return color.secondary300;
+      return c('secondary300');
     case 'pill':
     case 'accent':
-      return color.accent500;
+      return c('accent500');
     case 'primary':
-      return color.primary400;
+      return c('primary400');
     case 'yellow':
-      return color.primary200;
+      return c('primary200');
   }
 };
 
@@ -31,9 +31,9 @@ const pillStyles = css`
   border: none;
   border-radius: 9999px;
   box-shadow: none;
-  color: ${color.white};
-  font-size: ${typography.size.sm};
-  padding: ${spacing.sm} ${spacing.md};
+  color: ${c('white')};
+  font-size: ${ts('sm')};
+  padding: ${s('sm')} ${s('md')};
 
   &:hover:not(:disabled) {
     box-shadow: none;
@@ -47,18 +47,18 @@ const pillStyles = css`
 `;
 
 const solidStyles = css`
-  border: 2px solid ${color.neutral900};
-  border-radius: ${shape.full};
-  color: ${color.neutral900};
-  padding: ${spacing.sm} ${spacing.lg};
+  border: 2px solid ${c('neutral900')};
+  border-radius: ${sh('full')};
+  color: ${c('neutral900')};
+  padding: ${s('sm')} ${s('lg')};
 
   &:hover:not(:disabled) {
-    box-shadow: ${elevation.md};
+    box-shadow: ${el('md')};
     transform: translateY(2px);
   }
 
   &:active:not(:disabled) {
-    box-shadow: ${elevation.sm};
+    box-shadow: ${el('sm')};
     transform: translateY(4px);
   }
 `;
@@ -66,15 +66,15 @@ const solidStyles = css`
 export const StyledPopButton = styled.button<StyledPopButtonProps>`
   background-color: ${({ $variant }) => getBackgroundColor($variant ?? 'yellow')};
   cursor: pointer;
-  font-family: ${typography.family.body};
-  font-size: ${typography.size['2xl']};
-  font-weight: ${typography.weight.bold};
+  font-family: ${tf('body')};
+  font-size: ${ts('2xl')};
+  font-weight: ${tw('bold')};
   letter-spacing: 0.02em;
-  min-height: ${spacing['2xl']};
+  min-height: ${s('2xl')};
   transition: all 0.15s ease;
 
   &:focus-visible {
-    outline: 2px solid ${color.cyan500};
+    outline: 2px solid ${c('cyan500')};
     outline-offset: 2px;
   }
 

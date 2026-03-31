@@ -4,31 +4,31 @@
 
 import styled from 'styled-components';
 
-import { color, shape, spacing, typography } from '../../tokens';
+import { c, s, sh, tf, tl, ts } from '../../tokens/css-variables';
 
 export const TextareaWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${spacing.micro};
+  gap: ${s('micro')};
   width: 100%;
 `;
 
 export const TextareaLabel = styled.label`
-  color: ${color.textPrimary};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.sm};
-  font-weight: ${typography.weight.medium};
+  color: ${c('textPrimary')};
+  font-family: ${tf('body')};
+  font-size: ${ts('sm')};
+  font-weight: var(--sui-font-weight-medium, 500);
 `;
 
 export const StyledTextarea = styled.textarea<{ $hasError: boolean }>`
-  border: 1px solid ${({ $hasError }) => ($hasError ? color.error : color.border)};
-  border-radius: ${shape.md};
-  color: ${color.textPrimary};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.sm};
-  line-height: ${typography.leading.relaxed};
+  border: 1px solid ${({ $hasError }) => ($hasError ? c('error') : c('border'))};
+  border-radius: ${sh('md')};
+  color: ${c('textPrimary')};
+  font-family: ${tf('body')};
+  font-size: ${ts('sm')};
+  line-height: ${tl('relaxed')};
   outline: none;
-  padding: ${spacing.xs} ${spacing.sm};
+  padding: ${s('xs')} ${s('sm')};
   resize: vertical;
   transition:
     border-color 0.2s ease,
@@ -36,17 +36,17 @@ export const StyledTextarea = styled.textarea<{ $hasError: boolean }>`
   width: 100%;
 
   &::placeholder {
-    color: ${color.textDisabled};
+    color: ${c('textDisabled')};
   }
 
   &:focus {
-    border-color: ${({ $hasError }) => ($hasError ? color.error : color.primary500)};
+    border-color: ${({ $hasError }) => ($hasError ? c('error') : c('primary500'))};
     box-shadow: 0 0 0 3px
-      ${({ $hasError }) => ($hasError ? color.errorFocusShadow : color.primaryFocusShadow)};
+      ${({ $hasError }) => ($hasError ? c('errorFocusShadow') : c('primaryFocusShadow'))};
   }
 
   &:disabled {
-    background-color: ${color.backgroundDark};
+    background-color: ${c('backgroundDark')};
     cursor: not-allowed;
     opacity: 0.6;
   }
@@ -58,16 +58,16 @@ export const TextareaFooter = styled.div`
 `;
 
 export const TextareaError = styled.span`
-  color: ${color.error};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.xs};
+  color: ${c('error')};
+  font-family: ${tf('body')};
+  font-size: ${ts('xs')};
 `;
 
 export const TextareaSpacer = styled.span``;
 
 export const TextareaCount = styled.span<{ $isOver: boolean }>`
-  color: ${({ $isOver }) => ($isOver ? color.error : color.textTertiary)};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.xs};
+  color: ${({ $isOver }) => ($isOver ? c('error') : c('textTertiary'))};
+  font-family: ${tf('body')};
+  font-size: ${ts('xs')};
   margin-left: auto;
 `;

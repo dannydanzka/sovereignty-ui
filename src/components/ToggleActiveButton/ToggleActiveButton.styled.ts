@@ -8,7 +8,7 @@
 
 import styled, { keyframes } from 'styled-components';
 
-import { color, shape, spacing } from '../../tokens';
+import { c, s, sh } from '../../tokens/css-variables';
 import type { StyledToggleButtonProps } from './ToggleActiveButton.interfaces';
 
 const spin = keyframes`
@@ -16,19 +16,19 @@ const spin = keyframes`
   to { transform: rotate(360deg); }
 `;
 
-const buttonSize = ($size: 'sm' | 'md') => ($size === 'sm' ? spacing.md : spacing.lg);
+const buttonSize = ($size: 'sm' | 'md') => ($size === 'sm' ? s('md') : s('lg'));
 
 export const StyledToggleButton = styled.button<StyledToggleButtonProps>`
   align-items: center;
   background: ${({ $isActive, $isLoading }) => {
-    if ($isLoading) return color.warningBackground;
-    return $isActive ? color.errorBackground : color.successBackground;
+    if ($isLoading) return c('warningBackground');
+    return $isActive ? c('errorBackground') : c('successBackground');
   }};
   border: none;
-  border-radius: ${({ $shape }) => ($shape === 'circle' ? shape.full : shape.md)};
+  border-radius: ${({ $shape }) => ($shape === 'circle' ? sh('full') : sh('md'))};
   color: ${({ $isActive, $isLoading }) => {
-    if ($isLoading) return color.warningDark;
-    return $isActive ? color.errorDark : color.successDark;
+    if ($isLoading) return c('warningDark');
+    return $isActive ? c('errorDark') : c('successDark');
   }};
   cursor: ${({ $isLoading }) => ($isLoading ? 'wait' : 'pointer')};
   display: inline-flex;

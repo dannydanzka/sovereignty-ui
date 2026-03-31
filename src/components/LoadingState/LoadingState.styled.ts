@@ -4,7 +4,7 @@
 
 import styled, { keyframes } from 'styled-components';
 
-import { color, spacing, typography } from '../../tokens';
+import { c, s, tf, ts } from '../../tokens/css-variables';
 
 const spin = keyframes`
   from { transform: rotate(0deg); }
@@ -15,23 +15,23 @@ export const Container = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
-  gap: ${spacing.sm};
+  gap: ${s('sm')};
   justify-content: center;
-  padding: ${spacing['2xl']};
+  padding: ${s('2xl')};
   text-align: center;
 `;
 
 export const SpinnerElement = styled.div`
   animation: ${spin} 1s linear infinite;
-  border: 3px solid ${color.neutral200};
+  border: 3px solid ${c('neutral200')};
   border-radius: 50%;
-  border-top-color: ${color.primary500};
-  height: ${spacing.xl};
-  width: ${spacing.xl};
+  border-top-color: ${c('primary500')};
+  height: ${s('xl')};
+  width: ${s('xl')};
 `;
 
 export const Text = styled.span`
-  color: ${color.textSecondary};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.sm};
+  color: ${c('textSecondary')};
+  font-family: ${tf('body')};
+  font-size: ${ts('sm')};
 `;

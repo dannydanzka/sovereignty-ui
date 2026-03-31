@@ -4,17 +4,16 @@
 
 import styled from 'styled-components';
 
-import { color, layout, shape, spacing, typography } from '../../tokens';
+import { c, s, sh, tf, ts } from '../../tokens/css-variables';
+import { layout } from '../../tokens';
 
 const CHECKBOX_SIZE = layout.icon.md;
-const CHECK_HEIGHT = `${spacing.xs}`;
-const CHECK_WIDTH = `${spacing.micro}`;
 
 export const CheckboxWrapper = styled.label<{ $disabled: boolean }>`
   align-items: center;
   cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
   display: inline-flex;
-  gap: ${spacing.xs};
+  gap: ${s('xs')};
   opacity: ${({ $disabled }) => ($disabled ? 0.6 : 1)};
 `;
 
@@ -27,9 +26,9 @@ export const HiddenInput = styled.input`
 
 export const CheckboxBox = styled.div<{ $checked: boolean }>`
   align-items: center;
-  background-color: ${({ $checked }) => ($checked ? color.primary500 : color.white)};
-  border: 2px solid ${({ $checked }) => ($checked ? color.primary500 : color.neutral300)};
-  border-radius: ${shape.sm};
+  background-color: ${({ $checked }) => ($checked ? c('primary500') : c('white'))};
+  border: 2px solid ${({ $checked }) => ($checked ? c('primary500') : c('neutral300'))};
+  border-radius: ${sh('sm')};
   display: flex;
   flex-shrink: 0;
   height: ${CHECKBOX_SIZE};
@@ -38,18 +37,18 @@ export const CheckboxBox = styled.div<{ $checked: boolean }>`
   width: ${CHECKBOX_SIZE};
 
   &::after {
-    border: solid ${color.white};
+    border: solid ${c('white')};
     border-width: 0 2px 2px 0;
     content: '';
     display: ${({ $checked }) => ($checked ? 'block' : 'none')};
-    height: ${CHECK_HEIGHT};
+    height: ${s('xs')};
     transform: rotate(45deg) translate(-1px, -1px);
-    width: ${CHECK_WIDTH};
+    width: ${s('micro')};
   }
 `;
 
 export const CheckboxLabel = styled.span`
-  color: ${color.textPrimary};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.sm};
+  color: ${c('textPrimary')};
+  font-family: ${tf('body')};
+  font-size: ${ts('sm')};
 `;

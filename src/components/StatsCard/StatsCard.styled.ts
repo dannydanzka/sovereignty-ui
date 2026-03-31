@@ -6,7 +6,7 @@
 
 import styled from 'styled-components';
 
-import { color, elevation, shape, spacing, typography } from '../../tokens';
+import { c, el, s, sh, tf, ts, tw } from '../../tokens/css-variables';
 
 export const CardContainer = styled.div<{
   $variant: 'default' | 'primary' | 'success' | 'warning';
@@ -14,21 +14,21 @@ export const CardContainer = styled.div<{
   background: ${({ $variant }) => {
     switch ($variant) {
       case 'primary':
-        return `linear-gradient(135deg, ${color.accent500}, ${color.tertiary300})`;
+        return `linear-gradient(135deg, ${c('accent500')}, ${c('tertiary300')})`;
       case 'success':
-        return color.successLight;
+        return c('successLight');
       case 'warning':
-        return color.warningLight;
+        return c('warningLight');
       case 'default':
-        return color.white;
+        return c('white');
     }
   }};
-  border-radius: ${shape.lg};
-  box-shadow: ${elevation.sm};
+  border-radius: ${sh('lg')};
+  box-shadow: ${el('sm')};
   display: flex;
   flex-direction: column;
-  gap: ${spacing.xs};
-  padding: ${spacing.md};
+  gap: ${s('xs')};
+  padding: ${s('md')};
 `;
 
 export const CardIcon = styled.div<{
@@ -36,43 +36,43 @@ export const CardIcon = styled.div<{
 }>`
   align-items: center;
   background: ${({ $variant }) =>
-    $variant === 'primary' ? 'rgba(255, 255, 255, 0.2)' : color.primary200};
-  border-radius: ${shape.full};
-  color: ${({ $variant }) => ($variant === 'primary' ? color.white : color.accent500)};
+    $variant === 'primary' ? 'rgba(255, 255, 255, 0.2)' : c('primary200')};
+  border-radius: ${sh('full')};
+  color: ${({ $variant }) => ($variant === 'primary' ? c('white') : c('accent500'))};
   display: flex;
-  height: ${spacing.xl};
+  height: ${s('xl')};
   justify-content: center;
-  width: ${spacing.xl};
+  width: ${s('xl')};
 
   svg {
-    height: ${spacing.sm};
-    width: ${spacing.sm};
+    height: ${s('sm')};
+    width: ${s('sm')};
   }
 `;
 
 export const CardValue = styled.span<{
   $variant: 'default' | 'primary' | 'success' | 'warning';
 }>`
-  color: ${({ $variant }) => ($variant === 'primary' ? color.white : color.textPrimary)};
-  font-family: ${typography.family.display};
-  font-size: ${typography.size['3xl']};
-  font-weight: ${typography.weight.bold};
+  color: ${({ $variant }) => ($variant === 'primary' ? c('white') : c('textPrimary'))};
+  font-family: ${tf('display')};
+  font-size: ${ts('3xl')};
+  font-weight: ${tw('bold')};
 `;
 
 export const CardLabel = styled.span<{
   $variant: 'default' | 'primary' | 'success' | 'warning';
 }>`
   color: ${({ $variant }) =>
-    $variant === 'primary' ? 'rgba(255, 255, 255, 0.9)' : color.textSecondary};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.sm};
+    $variant === 'primary' ? 'rgba(255, 255, 255, 0.9)' : c('textSecondary')};
+  font-family: ${tf('body')};
+  font-size: ${ts('sm')};
 `;
 
 export const CardSublabel = styled.span<{
   $variant: 'default' | 'primary' | 'success' | 'warning';
 }>`
   color: ${({ $variant }) =>
-    $variant === 'primary' ? 'rgba(255, 255, 255, 0.7)' : color.neutral400};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.xs};
+    $variant === 'primary' ? 'rgba(255, 255, 255, 0.7)' : c('neutral400')};
+  font-family: ${tf('body')};
+  font-size: ${ts('xs')};
 `;

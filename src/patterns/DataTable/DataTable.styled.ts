@@ -4,46 +4,46 @@
 
 import styled, { css, keyframes } from 'styled-components';
 
-import { color, shape, spacing, typography } from '../../tokens';
+import { c, s, sh, tf, ts, tt, tw } from '../../tokens/css-variables';
 
 export const DataTableWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${spacing.sm};
+  gap: ${s('sm')};
   width: 100%;
 `;
 
 export const DataTableToolbar = styled.div`
   display: flex;
-  gap: ${spacing.sm};
+  gap: ${s('sm')};
   justify-content: flex-end;
 `;
 
 export const DataTableSearchInput = styled.input`
-  border: 1px solid ${color.border};
-  border-radius: ${shape.md};
-  color: ${color.textPrimary};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.sm};
+  border: 1px solid ${c('border')};
+  border-radius: ${sh('md')};
+  color: ${c('textPrimary')};
+  font-family: ${tf('body')};
+  font-size: ${ts('sm')};
   max-width: 20rem;
   outline: none;
-  padding: ${spacing.xs} ${spacing.sm};
+  padding: ${s('xs')} ${s('sm')};
   transition: border-color 0.2s ease;
   width: 100%;
 
   &::placeholder {
-    color: ${color.textDisabled};
+    color: ${c('textDisabled')};
   }
 
   &:focus {
-    border-color: ${color.primary500};
-    box-shadow: 0 0 0 3px ${color.primaryFocusShadow};
+    border-color: ${c('primary500')};
+    box-shadow: 0 0 0 3px ${c('primaryFocusShadow')};
   }
 `;
 
 export const DataTableContainer = styled.div`
-  border: 1px solid ${color.border};
-  border-radius: ${shape.lg};
+  border: 1px solid ${c('border')};
+  border-radius: ${sh('lg')};
   overflow-x: auto;
   width: 100%;
 `;
@@ -55,11 +55,11 @@ export const StyledTable = styled.table`
 `;
 
 export const TableHead = styled.thead`
-  background-color: ${color.neutral50};
+  background-color: ${c('neutral50')};
 `;
 
 export const TableHeadRow = styled.tr`
-  border-bottom: 1px solid ${color.border};
+  border-bottom: 1px solid ${c('border')};
 `;
 
 export const TableHeadCell = styled.th<{
@@ -67,13 +67,13 @@ export const TableHeadCell = styled.th<{
   $sortable: boolean;
   $width?: string;
 }>`
-  color: ${color.textSecondary};
+  color: ${c('textSecondary')};
   cursor: ${({ $sortable }) => ($sortable ? 'pointer' : 'default')};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.xs};
-  font-weight: ${typography.weight.semibold};
-  letter-spacing: ${typography.tracking.wide};
-  padding: ${spacing.xs} ${spacing.sm};
+  font-family: ${tf('body')};
+  font-size: ${ts('xs')};
+  font-weight: ${tw('semibold')};
+  letter-spacing: ${tt('wide')};
+  padding: ${s('xs')} ${s('sm')};
   text-align: ${({ $align }) => $align};
   text-transform: uppercase;
   user-select: none;
@@ -84,7 +84,7 @@ export const TableHeadCell = styled.th<{
     $sortable &&
     css`
       &:hover {
-        color: ${color.textPrimary};
+        color: ${c('textPrimary')};
       }
     `}
 `;
@@ -92,18 +92,18 @@ export const TableHeadCell = styled.th<{
 export const TableHeadCellContent = styled.span`
   align-items: center;
   display: inline-flex;
-  gap: ${spacing.micro};
+  gap: ${s('micro')};
 `;
 
 export const SortIcon = styled.span<{ $active: boolean }>`
-  color: ${({ $active }) => ($active ? color.primary500 : color.textDisabled)};
+  color: ${({ $active }) => ($active ? c('primary500') : c('textDisabled'))};
   display: inline-flex;
 `;
 
 export const TableBody = styled.tbody``;
 
 export const TableRow = styled.tr`
-  border-bottom: 1px solid ${color.borderLight};
+  border-bottom: 1px solid ${c('borderLight')};
   transition: background-color 0.15s ease;
 
   &:last-child {
@@ -111,25 +111,25 @@ export const TableRow = styled.tr`
   }
 
   &:hover {
-    background-color: ${color.neutral50};
+    background-color: ${c('neutral50')};
   }
 `;
 
 export const TableCell = styled.td<{ $align: 'center' | 'left' | 'right' }>`
-  color: ${color.textPrimary};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.sm};
-  padding: ${spacing.xs} ${spacing.sm};
+  color: ${c('textPrimary')};
+  font-family: ${tf('body')};
+  font-size: ${ts('sm')};
+  padding: ${s('xs')} ${s('sm')};
   text-align: ${({ $align }) => $align};
 `;
 
 export const TableEmptyRow = styled.tr``;
 
 export const TableEmptyCell = styled.td`
-  color: ${color.textTertiary};
-  font-family: ${typography.family.body};
-  font-size: ${typography.size.sm};
-  padding: ${spacing.xl} ${spacing.sm};
+  color: ${c('textTertiary')};
+  font-family: ${tf('body')};
+  font-size: ${ts('sm')};
+  padding: ${s('xl')} ${s('sm')};
   text-align: center;
 `;
 
@@ -139,19 +139,19 @@ const shimmer = keyframes`
 `;
 
 export const TableLoadingCell = styled.td`
-  padding: ${spacing.xs} ${spacing.sm};
+  padding: ${s('xs')} ${s('sm')};
 `;
 
 export const TableLoadingBar = styled.div`
   animation: ${shimmer} 1.5s infinite;
   background: linear-gradient(
     90deg,
-    ${color.neutral50} 25%,
-    ${color.neutral100} 50%,
-    ${color.neutral50} 75%
+    ${c('neutral50')} 25%,
+    ${c('neutral100')} 50%,
+    ${c('neutral50')} 75%
   );
   background-size: 200% 100%;
-  border-radius: ${shape.sm};
+  border-radius: ${sh('sm')};
   height: 1rem;
   width: 100%;
 `;
@@ -159,5 +159,5 @@ export const TableLoadingBar = styled.div`
 export const DataTableFooter = styled.div`
   display: flex;
   justify-content: center;
-  padding-top: ${spacing.xs};
+  padding-top: ${s('xs')};
 `;
