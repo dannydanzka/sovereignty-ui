@@ -161,3 +161,16 @@ export const DataTableFooter = styled.div`
   justify-content: center;
   padding-top: ${s('xs')};
 `;
+
+export const SelectionCheckbox = styled.input`
+  accent-color: ${c('primary500')};
+  cursor: pointer;
+  height: ${s('sm')};
+  width: ${s('sm')};
+`;
+
+export const RowActions = styled.div`
+  display: inline-flex;
+  gap: ${s('micro')};
+  justify-content: flex-end;
+`;

@@ -1,0 +1,68 @@
+#!/bin/bash
+# pre-push — Protected-branch guard (Code Sovereignty)
+#
+# Blocks DIRECT pushes to protected/integration branches across ALL repos on
+# this machine. Promotion to these branches happens ONLY via Pull Request.
+#
+# Source of truth (versioned): soberania-del-codigo/core/git/hooks/pre-push
+# Install: global via
+#   git config --global core.hooksPath ~/.config/git/hooks
+#   ln -sf "$PWD/core/git/hooks/pre-push" ~/.config/git/hooks/pre-push
+#
+# Protected set verified against Bitbucket betterwaremx on 2026-06-10:
+#   master (=prod), main, dev, qa, lab  (+ prod/production defensive)
+#
+# Bypass (use consciously, rarely): `git push --no-verify`
+set -uo pipefail
+
+PROTECTED="prod production master main dev qa lab"
+remote="${1:-origin}"
+url="${2:-}"
+
+# Exempt repos (by remote URL) where a protected-name branch is the normal integration
+# branch and direct pushes are expected. Kept hook-side so no exempt repo is modified.
+#   - sovereignty (betterware): `dev` is its integration branch.
+#   - soverum (governance/knowledge repo): `dev` is its integration branch — direct push expected.
+#   - sovertainty (financial sovereignty product): `dev` is its integration branch — direct push expected.
+EXEMPT_REMOTES='/(sovereignty|soverum|sovertainty)(\.git)?$'
+[ -z "$url" ] && url="$(git config --get "remote.${remote}.url" 2>/dev/null || true)"
+if [ -n "$url" ] && printf '%s' "$url" | grep -qE "$EXEMPT_REMOTES"; then
+  exit 0
+fi
+
+z40="0000000000000000000000000000000000000000"
+blocked=0
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+  case "$remote_ref" in
+    refs/heads/*) branch="${remote_ref#refs/heads/}" ;;
+    *) continue ;;
+  esac
+
+  # Allow branch DELETIONS (local_sha all-zeros) to pass.
+  [ "$local_sha" = "$z40" ] && continue
+
+  for p in $PROTECTED; do
+    if [ "$branch" = "$p" ]; then
+      blocked=1
+      echo "" >&2
+      echo "  ⛔ BLOCKED: direct push to protected branch '$branch' ($remote → $url)" >&2
+      echo "     Protected branches are PR-only: $PROTECTED" >&2
+    fi
+  done
+done
+
+# Delegate to a repo-local escape hook if one exists.
+local_hook="$(git rev-parse --git-path hooks 2>/dev/null)/pre-push.local"
+if [ -x "$local_hook" ]; then
+  "$local_hook" "$@" || exit $?
+fi
+
+if [ "$blocked" -eq 1 ]; then
+  echo "" >&2
+  echo "  → Open a Pull Request instead. Override (rare): git push --no-verify" >&2
+  echo "" >&2
+  exit 1
+fi
+
+exit 0

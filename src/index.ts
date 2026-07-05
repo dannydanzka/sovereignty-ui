@@ -1,3 +1,4 @@
+export * from './components/ActionButton';
 export * from './components/Alert';
 export * from './components/Avatar';
 export * from './components/Badge';
@@ -47,9 +48,20 @@ export * from './components/Toggle';
 export * from './components/ToggleActiveButton';
 export * from './components/Tooltip';
 
+export * from './components/ImagePreviewModal';
+export * from './components/InlineIcon';
+
+export * from './patterns/AppFooter';
+export * from './patterns/AppHeader';
+export * from './patterns/AuthLayout';
+export * from './patterns/AvatarUpload';
 export * from './patterns/DataTable';
 export * from './patterns/FileUploader';
 export * from './patterns/FormField';
+export * from './patterns/FloatingActions';
+export * from './patterns/FormFields';
+export * from './patterns/ImageUploader';
+export * from './patterns/NotificationContainer';
 export * from './patterns/Pagination';
 
 export * from './hooks';

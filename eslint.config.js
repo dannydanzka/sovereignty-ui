@@ -26,12 +26,18 @@ import { essentialTestingRule } from './scripts/eslint-rules/essential-testing.j
 import { importStrategyRule } from './scripts/eslint-rules/import-strategy.js';
 import { indexBarrelExportsOnlyRule } from './scripts/eslint-rules/index-barrel-exports-only.js';
 import { noAliasExportsRule } from './scripts/eslint-rules/no-alias-exports.js';
+import { noAwaitImportInBeforeEachRule } from './scripts/eslint-rules/no-await-import-in-beforeeach.js';
 import { noEmojisInJsxRule } from './scripts/eslint-rules/no-emojis-in-jsx.js';
 import { noEslintDisableRule } from './scripts/eslint-rules/no-eslint-disable.js';
 import { noInlineStylesRule } from './scripts/eslint-rules/no-inline-styles.js';
+import { noJsxInNonComponentFilesRule } from './scripts/eslint-rules/no-jsx-in-non-component-files.js';
 import { noMagicLiteralComparisonRule } from './scripts/eslint-rules/no-magic-literal-comparison.js';
 import { noNativeHtmlRule } from './scripts/eslint-rules/no-native-html.js';
+import { noRedundantClearMocksRule } from './scripts/eslint-rules/no-redundant-clear-mocks.js';
 import { noUnderscorePrefixRule } from './scripts/eslint-rules/no-underscore-prefix.js';
+import { noUtilityTypeCastRule } from './scripts/eslint-rules/no-utility-type-cast.js';
+import { preferMockedHelperRule } from './scripts/eslint-rules/prefer-mocked-helper.js';
+import { preferOnceInTestRule } from './scripts/eslint-rules/prefer-once-in-test.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -39,7 +45,7 @@ const __dirname = path.dirname(__filename);
 /**
  * ESLint Configuration - sovereignty-ui
  *
- * CUSTOM RULES (16 total — adapted from DearAdry, without framework-specific rules):
+ * CUSTOM RULES (22 total — library subset of the sovereignty canon, no framework-specific rules):
  *
  * Styling & Tokens:
  * - design-tokens-policy: No hardcoded colors/spacing (use tokens)
@@ -62,10 +68,25 @@ const __dirname = path.dirname(__filename);
  * - no-eslint-disable: Forbid eslint/typescript/prettier disable comments
  * - no-magic-literal-comparison: No magic strings/numbers in comparisons
  * - no-underscore-prefix: Zero tolerance underscore prefix
+ * - no-jsx-in-non-component-files: JSX only in component files (not .styled/.interfaces/.constants/.helpers)
+ * - no-utility-type-cast: No Parameters/ReturnType/ComponentProps inside casts — import the interface
+ *
+ * Testing (canon subset applicable to a library):
+ * - prefer-once-in-test: mockReturnValueOnce/mockResolvedValueOnce inside it() bodies
+ * - prefer-mocked-helper: vi.mocked() instead of `as Mock` casts
+ * - no-await-import-in-beforeeach: no await import() in beforeEach/beforeAll
+ * - no-redundant-clear-mocks: clearMocks/restoreMocks handled by vitest.config
  *
  * Imports:
  * - import-strategy: Consistent import strategy
  * - import-order: Consistent import organization
+ *
+ * Canon rules intentionally EXCLUDED (app-only, not applicable to an agnostic lib):
+ * redux/*, supabase/*, i18n (no-hardcoded-ui-strings, prefer-i18n-keys-in-errors),
+ * enforce-zod-forms, require-use-client-directive, e2e-testing-policy, use-case-policy,
+ * architecture-boundaries, no-direct-service-calls, enforce-filename-convention (Clean
+ * Architecture layer segments), no-try-catch-abuse (logger/handleRequest app patterns),
+ * no-redundant-global-mocks + no-inline-hook-mock-factory (app global-mock setups).
  *
  * @version 1.0.0
  * @updated 2026-03-06
@@ -117,9 +138,15 @@ export default [
           'no-emojis-in-jsx': noEmojisInJsxRule,
           'no-eslint-disable': noEslintDisableRule,
           'no-inline-styles': noInlineStylesRule,
+          'no-await-import-in-beforeeach': noAwaitImportInBeforeEachRule,
+          'no-jsx-in-non-component-files': noJsxInNonComponentFilesRule,
           'no-magic-literal-comparison': noMagicLiteralComparisonRule,
           'no-native-html': noNativeHtmlRule,
+          'no-redundant-clear-mocks': noRedundantClearMocksRule,
           'no-underscore-prefix': noUnderscorePrefixRule,
+          'no-utility-type-cast': noUtilityTypeCastRule,
+          'prefer-mocked-helper': preferMockedHelperRule,
+          'prefer-once-in-test': preferOnceInTestRule,
         },
       },
       'import-x': importX,
@@ -237,12 +264,18 @@ export default [
       'custom/import-strategy': ['warn', { maxRelativeLevels: 2 }],
       'custom/index-barrel-exports-only': 'warn',
       'custom/no-alias-exports': 'warn',
+      'custom/no-await-import-in-beforeeach': 'warn',
       'custom/no-emojis-in-jsx': 'warn',
       'custom/no-eslint-disable': 'warn',
       'custom/no-inline-styles': 'warn',
+      'custom/no-jsx-in-non-component-files': 'warn',
       'custom/no-magic-literal-comparison': 'warn',
       'custom/no-native-html': 'warn',
+      'custom/no-redundant-clear-mocks': 'warn',
       'custom/no-underscore-prefix': 'warn',
+      'custom/no-utility-type-cast': 'warn',
+      'custom/prefer-mocked-helper': 'warn',
+      'custom/prefer-once-in-test': 'warn',
 
       'default-param-last': 'off',
       eqeqeq: 'warn',
