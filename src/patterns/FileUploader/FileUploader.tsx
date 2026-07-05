@@ -67,9 +67,7 @@ export const FileUploader = ({
       setLocalError(null);
       const newFiles: FileUploaderFile[] = [];
 
-      for (let i = 0; i < fileList.length; i++) {
-        const file = fileList[i];
-
+      for (const file of Array.from(fileList)) {
         if (file.size > maxSizeBytes) {
           setLocalError(`File "${file.name}" exceeds ${maxSizeMB}MB limit`);
           return;

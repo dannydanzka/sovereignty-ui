@@ -5,6 +5,8 @@ export type * from './useLoading.interfaces';
 export * from './useMediaQuery';
 export * from './useModal';
 export type * from './useModal.interfaces';
+export * from './useNotifications';
+export type * from './useNotifications.interfaces';
 export * from './usePagination';
 export type * from './usePagination.interfaces';
 export * from './useTableSort';

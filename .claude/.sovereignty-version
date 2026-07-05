@@ -1,0 +1,6 @@
+f5d8089
+synced: 2026-07-05 08:58:04
+commit: f5d8089 backup(dearadry): Mango checkout, book nivel/coupon levels, logged-in storefront access
+discipline: lib
+parent: frontend
+layers: doctrine core frontend lib

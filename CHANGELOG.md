@@ -1,5 +1,13 @@
 # @dannydanzka/sovereignty-ui
 
+## 0.5.0
+
+### Minor Changes
+
+- Add `createBrandPalette` factory for per-tenant SUI theming
+  - Expands brand base colors into a full 50–900 SUI color-token override set (pure color math, no project knowledge)
+  - Pairs with `injectSuiTokens()` to theme all components from a brand color (multi-tenant; consumed by Trackia SuiThemeBridge)
+
 ## 0.4.0
 
 ### Minor Changes
