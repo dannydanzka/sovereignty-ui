@@ -61,7 +61,7 @@ const tokens = createTokens({
 
 ## What's Included
 
-### Components (48)
+### Components (51)
 
 | Category | Components |
 |----------|-----------|
@@ -71,9 +71,11 @@ const tokens = createTokens({
 | **Feedback** | Alert, Badge, ErrorFallback, NotificationToast, Tooltip, EmptyState, ErrorState, LoadingState, InfoMessage |
 | **Layout** | Card, Container, Tabs, StepCard, Modal, ModalFooter, PageLayout, DetailLayout |
 | **Data** | StatsCard, StatItem, ProgressBar, Image, Avatar, EntityCell, SortableHeader |
-| **Actions** | Button, PopButton, ToggleActiveButton, TapHint |
+| **Detail** | DetailLayout (DetailSection/Row/Label/Value/Divider/Amount/ContentBox/Media) |
+| **Actions** | Button, PopButton, ToggleActiveButton, TapHint, ActionButton |
+| **Media** | ImagePreviewModal, InlineIcon |
 
-### Patterns (4)
+### Patterns (12)
 
 | Pattern | Description |
 |---------|-------------|
@@ -81,8 +83,16 @@ const tokens = createTokens({
 | **Pagination** | Page numbers with ellipsis, prev/next, first/last |
 | **FormField** | Label + any input + error + help text wrapper |
 | **FileUploader** | Drag-and-drop zone with file list and validation |
+| **FormFields** | TextField / SelectField / TextareaField — ready-to-use field compositions |
+| **AvatarUpload** | Avatar with click-to-change photo (consumer owns the upload) |
+| **ImageUploader** | Image upload area with preview (consumer owns the upload) |
+| **NotificationContainer** | Toast queue stack (pairs with useNotifications) |
+| **AuthLayout** | Auth screen shell (title/subtitle/side slots) + AuthCard |
+| **AppHeader** | App bar shell with logo/nav/actions slots + mobile menu |
+| **AppFooter** | Footer shell with brand/columns/social slots |
+| **FloatingActions** | Floating side buttons (links or actions, icon-injected) |
 
-### Hooks (7)
+### Hooks (8)
 
 | Hook | Description |
 |------|-------------|
@@ -93,6 +103,7 @@ const tokens = createTokens({
 | `useMediaQuery` | Responsive breakpoint detection (SSR-safe) |
 | `useClickOutside` | Click outside ref detection |
 | `useDebounce` | Debounce value changes |
+| `useNotifications` | Toast queue: notify/remove/clear, auto-dismiss, max cap |
 
 ### Utils (5 modules, ~30 functions)
 
@@ -172,9 +183,9 @@ Override via `injectSuiTokens()` (runtime) or CSS custom properties (`:root { --
 ```bash
 npm run dev              # Storybook (port 6006)
 npm run build            # Build library (ESM + CJS + types)
-npm run lint             # ESLint (0 warnings required, 16 custom rules)
+npm run lint             # ESLint (0 warnings required, 22 custom rules)
 npm run type-check       # TypeScript strict
-npm run test             # Vitest (184 tests)
+npm run test             # Vitest (229 tests)
 npm run build:storybook  # Build static Storybook
 ```
 
@@ -192,10 +203,10 @@ git push                 # CI publishes to GitHub Packages
 
 ```
 src/
-  tokens/        # Design tokens + CSS var helpers + runtime injection
-  components/    # 48 components (atoms + molecules)
-  patterns/      # 4 patterns (organisms)
-  hooks/         # 7 React hooks
+  tokens/        # Design tokens + CSS var helpers + runtime injection + createBrandPalette
+  components/    # 51 components (atoms + molecules)
+  patterns/      # 12 patterns (organisms)
+  hooks/         # 8 React hooks
   utils/         # 5 utility modules (~30 functions)
   index.ts       # Main entry point
 ```
