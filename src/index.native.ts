@@ -34,12 +34,16 @@ export * from './components/Card';
 export * from './components/Checkbox';
 export * from './components/Divider';
 export * from './components/EmptyState';
+export * from './components/ImagePreviewModal';
 export * from './components/InlineIcon';
 export * from './components/Input';
 export * from './components/Modal';
+export * from './components/NotificationToast';
 export * from './components/ProgressBar';
 export * from './components/SearchInput';
 export * from './components/Spacer';
 export * from './components/StatsCard';
 export * from './components/Textarea';
 export * from './components/Toggle';
+
+export * from './patterns/NotificationContainer';

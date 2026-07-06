@@ -4,8 +4,7 @@
  * Toast notification with type-based icon and color.
  */
 
-import { AlertTriangle, CheckCircle, Info, X, XCircle } from 'lucide-react';
-
+import { AlertTriangle, CheckCircle, Info, X, XCircle } from '../../internal/icons';
 import type { NotificationToastProps } from './NotificationToast.interfaces';
 
 import {
