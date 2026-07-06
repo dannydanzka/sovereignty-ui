@@ -22,6 +22,7 @@ import {
   EmptyState,
   InlineIcon,
   Input,
+  Modal,
   ProgressBar,
   SearchInput,
   Spacer,
@@ -58,6 +59,8 @@ export const GalleryScreen = () => {
   const [notes, setNotes] = useState('');
   const [agree, setAgree] = useState(false);
   const [wifi, setWifi] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   return (
     <Screen>
@@ -197,6 +200,17 @@ export const GalleryScreen = () => {
             />
           </Section>
 
+          <Section title='Modal (native RN Modal host)'>
+            <Row>
+              <Button variant='primary' onClick={() => setModalOpen(true)}>
+                Open modal
+              </Button>
+              <Button variant='danger' onClick={() => setConfirmOpen(true)}>
+                Confirm dialog
+              </Button>
+            </Row>
+          </Section>
+
           <Section title='EmptyState'>
             <EmptyState
               icon={<Inbox color='#9E9E9E' size={28} />}
@@ -217,6 +231,26 @@ export const GalleryScreen = () => {
           </Section>
         </Content>
       </ScrollView>
+
+      <Modal isOpen={modalOpen} title='Native modal' onClose={() => setModalOpen(false)}>
+        <InlineLabel>
+          This dialog is the RN Modal host wrapping sovereignty-ui surfaces. Tap outside is disabled;
+          use the close button.
+        </InlineLabel>
+      </Modal>
+
+      <Modal
+        confirmText='Delete'
+        isOpen={confirmOpen}
+        message='This action cannot be undone.'
+        title='Delete item?'
+        variant='confirm'
+        onClose={() => setConfirmOpen(false)}
+        onConfirm={() => {
+          setConfirmOpen(false);
+          notify({ message: 'Deleted', type: 'success' });
+        }}
+      />
     </Screen>
   );
 };
