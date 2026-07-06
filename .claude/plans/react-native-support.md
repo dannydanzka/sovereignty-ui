@@ -161,7 +161,12 @@ SUI theming = CSS custom properties (`var(--sui-*, fallback)`). **RN has no CSS 
      migrating them, first move to a value-based `onChange(checked)` in a coordinated major.
    - **Select**: native picker/action-sheet (heavy).
    - **FormField(s)** pattern: compose the above once Select lands.
-4. **Overlays** (Modal, toast/NotificationContainer, ImagePreviewModal) — native `Modal` + safe-area.
+4. **Overlays**:
+   - **Modal** — ✅ DONE (v0.11.0, Batch 10) via `.native.tsx` on the RN `<Modal>` host (backdrop,
+     Android back, fade); default + confirm variants reuse the native Button. Web (portal + document
+     keydown/scroll-lock) untouched. Follow-up: wrap `ModalContent` in a ScrollView for long content.
+   - **NotificationContainer** (toast queue) + **ImagePreviewModal** — pending (RN Modal + safe-area /
+     RN Image zoom).
 5. **Native list patterns** (`ListScreen` replacing DataTable) — FlatList-based.
 6. Publish as minor with `react-native` optional peer; document in soberania `mobile/` + `lib/`.
 
