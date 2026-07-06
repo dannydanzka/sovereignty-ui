@@ -16,7 +16,12 @@
 > **Checkbox** and **Toggle** get a dedicated `Component.native.tsx` (Pressable + rendered indicator)
 > while web keeps its hidden `<input>` + CSS pseudo (best a11y/form semantics, untouched). Switch and
 > RadioGroup deferred (their public `onChange` is a raw DOM event, not a value callback → porting is
-> breaking). Remaining phases below.
+> breaking).
+> **BATCH 10 EXECUTED** (2026-07-06, v0.11.0) — **Modal** on native via the RN `<Modal>` host
+> (`.native.tsx`; default + confirm variants; web untouched).
+> **BATCH 11 EXECUTED** (2026-07-06, v0.12.0) — overlays complete: **NotificationToast +
+> NotificationContainer** (styles-only) and **ImagePreviewModal** (`.native.tsx`, RN Modal + Image).
+> ~20 components/patterns now RN-ready; only Phase 5 (native list pattern) remains.
 > **Reference implementation studied**: `~/Documents/betterware/betterware-ui` (`@betternet/design-system`) — dual-platform React + RN library in production use. We adopt its mechanics, NOT its Betterware-specific components/theme.
 > **Written**: 2026-07-05
 
@@ -165,9 +170,13 @@ SUI theming = CSS custom properties (`var(--sui-*, fallback)`). **RN has no CSS 
    - **Modal** — ✅ DONE (v0.11.0, Batch 10) via `.native.tsx` on the RN `<Modal>` host (backdrop,
      Android back, fade); default + confirm variants reuse the native Button. Web (portal + document
      keydown/scroll-lock) untouched. Follow-up: wrap `ModalContent` in a ScrollView for long content.
-   - **NotificationContainer** (toast queue) + **ImagePreviewModal** — pending (RN Modal + safe-area /
-     RN Image zoom).
-5. **Native list patterns** (`ListScreen` replacing DataTable) — FlatList-based.
+   - **NotificationToast + NotificationContainer** — ✅ DONE (v0.12.0, Batch 11), styles-only port
+     (icon module + Pressable via `.attrs`; container is `position: absolute` since RN has no `fixed`).
+   - **ImagePreviewModal** — ✅ DONE (v0.12.0, Batch 11) via `.native.tsx` on RN `<Modal>` + RN `Image`
+     (gradients → flat scrims). Web untouched.
+5. **Native list patterns** (`ListScreen` replacing DataTable) — FlatList-based. PENDING (last phase):
+   DataTable's web implementation (table semantics, column sort headers, row selection) does not map to
+   native; the plan is a NEW native-only `ListScreen`/`ListView` pattern built on FlatList, not a port.
 6. Publish as minor with `react-native` optional peer; document in soberania `mobile/` + `lib/`.
 
 ### The `.attrs` prop-mapping pattern (Batch 7 learning)

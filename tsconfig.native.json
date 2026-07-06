@@ -15,6 +15,7 @@
     "src/stories",
     "src/components/Checkbox/Checkbox.tsx",
     "src/components/Toggle/Toggle.tsx",
-    "src/components/Modal/Modal.tsx"
+    "src/components/Modal/Modal.tsx",
+    "src/components/ImagePreviewModal/ImagePreviewModal.tsx"
   ]
 }
