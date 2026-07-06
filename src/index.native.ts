@@ -26,10 +26,14 @@ export type * from './hooks/usePagination.interfaces';
 export * from './hooks/useTableSort';
 export type * from './hooks/useTableSort.interfaces';
 
+export * from './components/Alert';
 export * from './components/Avatar';
 export * from './components/Badge';
+export * from './components/Button';
+export * from './components/Card';
 export * from './components/Divider';
 export * from './components/EmptyState';
 export * from './components/InlineIcon';
+export * from './components/ProgressBar';
 export * from './components/Spacer';
 export * from './components/StatsCard';

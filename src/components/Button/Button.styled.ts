@@ -291,3 +291,7 @@ export const ButtonIcon = styled.span`
   flex-shrink: 0;
   justify-content: center;
 `;
+
+export const ButtonLabel = styled.span<{ $size?: ButtonSize; $variant?: ButtonVariant }>`
+  color: inherit;
+`;
