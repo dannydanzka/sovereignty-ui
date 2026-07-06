@@ -11,7 +11,12 @@
 > value change to one `onValueChange(value)` callback; maps secureTextEntry/multiline/type per
 > platform) and native resolutions for the text-input Forms: **Input** (incl. password toggle),
 > **SearchInput**, **Textarea** (multiline). Web `.tsx` refactored to route through the primitive with
-> the SAME public `onChange(value)` API (235 tests green). Remaining phases below.
+> the SAME public `onChange(value)` API (235 tests green).
+> **BATCH 9 EXECUTED** (2026-07-06, v0.10.0) — toggle family via the sanctioned `.native.tsx` pattern:
+> **Checkbox** and **Toggle** get a dedicated `Component.native.tsx` (Pressable + rendered indicator)
+> while web keeps its hidden `<input>` + CSS pseudo (best a11y/form semantics, untouched). Switch and
+> RadioGroup deferred (their public `onChange` is a raw DOM event, not a value callback → porting is
+> breaking). Remaining phases below.
 > **Reference implementation studied**: `~/Documents/betterware/betterware-ui` (`@betternet/design-system`) — dual-platform React + RN library in production use. We adopt its mechanics, NOT its Betterware-specific components/theme.
 > **Written**: 2026-07-05
 
@@ -149,13 +154,13 @@ SUI theming = CSS custom properties (`var(--sui-*, fallback)`). **RN has no CSS 
    - **Text inputs** — ✅ DONE (v0.9.0, Batch 8): `TextField` primitive + Input/SearchInput/Textarea.
      PasswordInput deferred (its public `onChange` is a raw DOM handler, not a value callback —
      migrating it is a breaking API change; Input already ships a built-in password toggle).
-   - **Toggle family** (Checkbox/Switch/Toggle/RadioGroup) — NOT done: structural divergence — web uses
-     a hidden `<input>` + CSS `::after` checkmark / `::before` thumb which have no native equivalent;
-     native needs a rendered check/thumb child. Requires markup divergence, not styles-only. Plan: add
-     a `Toggle`/`Checkable` primitive (Pressable + rendered indicator Span/Div) and a small shared
-     `.tsx` change to render the indicator on both platforms.
+   - **Toggle family**: **Checkbox + Toggle** ✅ DONE (v0.10.0, Batch 9) via `.native.tsx` (web keeps
+     hidden input + CSS pseudo; native = Pressable + rendered indicator). **Switch + RadioGroup**
+     deferred — their public `onChange` is a raw DOM event (`ChangeEvent<HTMLInputElement>`), not a
+     value callback; a native version would be a breaking API change (same rule as PasswordInput). When
+     migrating them, first move to a value-based `onChange(checked)` in a coordinated major.
    - **Select**: native picker/action-sheet (heavy).
-   - **FormField(s)** pattern: compose the above once the toggle family lands.
+   - **FormField(s)** pattern: compose the above once Select lands.
 4. **Overlays** (Modal, toast/NotificationContainer, ImagePreviewModal) — native `Modal` + safe-area.
 5. **Native list patterns** (`ListScreen` replacing DataTable) — FlatList-based.
 6. Publish as minor with `react-native` optional peer; document in soberania `mobile/` + `lib/`.

@@ -81,6 +81,7 @@ export const componentOrganizationRule = {
       filename.endsWith('.mock.tsx') ||
       filename.endsWith('.styled.ts') ||
       filename.endsWith('.styled.tsx') ||
+      filename.endsWith('.styled.native.ts') ||
       filename.includes('/mocks/') ||
       filename.includes('/__tests__/') ||
       filename.includes('/testing/') ||
