@@ -20,9 +20,11 @@ import {
   Checkbox,
   Divider,
   EmptyState,
+  ImagePreviewModal,
   InlineIcon,
   Input,
   Modal,
+  NotificationContainer,
   ProgressBar,
   SearchInput,
   Spacer,
@@ -52,7 +54,7 @@ const Section = ({ children, title }: SectionProps) => (
 );
 
 export const GalleryScreen = () => {
-  const { notifications, notify } = useNotifications({ autoDismissMs: 3000 });
+  const { notifications, notify, remove } = useNotifications({ autoDismissMs: 3000 });
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [search, setSearch] = useState('');
@@ -61,6 +63,7 @@ export const GalleryScreen = () => {
   const [wifi, setWifi] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const [previewOpen, setPreviewOpen] = useState(false);
 
   return (
     <Screen>
@@ -219,15 +222,17 @@ export const GalleryScreen = () => {
             />
           </Section>
 
-          <Section title='useNotifications (hook queue)'>
+          <Section title='useNotifications + NotificationContainer'>
             <Button variant='primary' onClick={() => notify({ message: 'Saved on native', title: 'Done', type: 'success' })}>
               Push a success notification
             </Button>
-            {notifications.map((notification) => (
-              <Badge key={notification.id} variant='success'>
-                {notification.title ?? 'ok'}: {notification.message}
-              </Badge>
-            ))}
+            <Badge variant='info'>{notifications.length} active (shown as toasts top-right)</Badge>
+          </Section>
+
+          <Section title='ImagePreviewModal'>
+            <Button variant='secondary' onClick={() => setPreviewOpen(true)}>
+              Open image preview
+            </Button>
           </Section>
         </Content>
       </ScrollView>
@@ -251,6 +256,16 @@ export const GalleryScreen = () => {
           notify({ message: 'Deleted', type: 'success' });
         }}
       />
+
+      <ImagePreviewModal
+        description='Rendered with the RN Image inside the Modal host.'
+        imageUrl='https://picsum.photos/600/800'
+        isOpen={previewOpen}
+        title='Preview'
+        onClose={() => setPreviewOpen(false)}
+      />
+
+      <NotificationContainer notifications={notifications} position='top-right' onClose={remove} />
     </Screen>
   );
 };
