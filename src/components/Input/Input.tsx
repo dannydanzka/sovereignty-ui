@@ -4,10 +4,9 @@
  * Text input with label, error state, and optional password visibility toggle.
  */
 
-import type { ChangeEvent } from 'react';
-import { Eye, EyeOff } from 'lucide-react';
 import { useCallback, useState } from 'react';
 
+import { Eye, EyeOff } from '../../internal/icons';
 import type { InputProps } from './Input.interfaces';
 
 import {
@@ -39,20 +38,9 @@ export const Input = ({
   const [showPassword, setShowPassword] = useState(false);
   const isPassword = type === 'password';
 
-  const handleChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      if (onChange) {
-        onChange(event.target.value);
-      }
-    },
-    [onChange]
-  );
-
   const handleTogglePassword = useCallback(() => {
     setShowPassword((prev) => !prev);
   }, []);
-
-  const inputType = isPassword && showPassword ? 'text' : type;
 
   return (
     <InputWrapper $fullWidth={fullWidth}>
@@ -73,9 +61,10 @@ export const Input = ({
           name={name}
           placeholder={placeholder}
           required={required}
-          type={inputType}
+          secureTextEntry={isPassword && !showPassword}
+          type={type}
           value={value}
-          onChange={handleChange}
+          onValueChange={onChange}
         />
         {isPassword && (
           <PasswordToggle

@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import { c, s, sh, tf, ts, tw } from '../../tokens/css-variables';
 import type { StyledInputProps, StyledInputWrapperProps } from './Input.interfaces';
+import { TextField } from '../../primitives';
 
 export const InputWrapper = styled.div<StyledInputWrapperProps>`
   display: flex;
@@ -26,7 +27,7 @@ export const InputContainer = styled.div`
   width: 100%;
 `;
 
-export const StyledInput = styled.input<StyledInputProps>`
+export const StyledInput = styled(TextField)<StyledInputProps>`
   background-color: ${c('white')};
   border: 2px solid ${({ $hasError }) => ($hasError ? c('error') : c('neutral200'))};
   border-radius: ${sh('md')};
