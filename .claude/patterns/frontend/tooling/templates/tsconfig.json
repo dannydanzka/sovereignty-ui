@@ -1,0 +1,308 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "types": [
+      "vitest/globals"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    // === STRICT MODE (Zero Tolerance) ===
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    // === ADDITIONAL STRICT FLAGS (Zero Tolerance) ===
+    "noUncheckedIndexedAccess": true,
+    "noPropertyAccessFromIndexSignature": true,
+    // "exactOptionalPropertyTypes": true, // Temporarily disabled - causing issues with API route params
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+    // === FILE SYSTEM ===
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "module": "esnext",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      // === CONTEXT-SPECIFIC SHORT ALIASES ===
+      // Pattern: @apps/{context}/{layer} → src/apps/{context}/...
+      // These are explicit but short, avoiding deep paths like presentation/components
+
+      // Admin context
+      "@apps/admin/components": ["./src/apps/admin/presentation/components"],
+      "@apps/admin/components/*": ["./src/apps/admin/presentation/components/*"],
+      "@apps/admin/hooks": ["./src/apps/admin/presentation/hooks"],
+      "@apps/admin/hooks/*": ["./src/apps/admin/presentation/hooks/*"],
+      "@apps/admin/screens": ["./src/apps/admin/presentation/screens"],
+      "@apps/admin/screens/*": ["./src/apps/admin/presentation/screens/*"],
+      "@apps/admin/layouts": ["./src/apps/admin/presentation/layouts"],
+      "@apps/admin/layouts/*": ["./src/apps/admin/presentation/layouts/*"],
+      "@apps/admin/constants": ["./src/apps/admin/constants"],
+      "@apps/admin/constants/*": ["./src/apps/admin/constants/*"],
+      "@apps/admin/domain": ["./src/apps/admin/domain"],
+      "@apps/admin/domain/*": ["./src/apps/admin/domain/*"],
+
+      // Public context
+      "@apps/public/components": ["./src/apps/public/presentation/components"],
+      "@apps/public/components/*": ["./src/apps/public/presentation/components/*"],
+      "@apps/public/hooks": ["./src/apps/public/presentation/hooks"],
+      "@apps/public/hooks/*": ["./src/apps/public/presentation/hooks/*"],
+      "@apps/public/screens": ["./src/apps/public/presentation/screens"],
+      "@apps/public/screens/*": ["./src/apps/public/presentation/screens/*"],
+      "@apps/public/layouts": ["./src/apps/public/presentation/layouts"],
+      "@apps/public/layouts/*": ["./src/apps/public/presentation/layouts/*"],
+      "@apps/public/constants": ["./src/apps/public/constants"],
+      "@apps/public/constants/*": ["./src/apps/public/constants/*"],
+      "@apps/public/domain": ["./src/apps/public/domain"],
+      "@apps/public/domain/*": ["./src/apps/public/domain/*"],
+
+      // Auth context
+      "@apps/auth/domain": ["./src/apps/auth/domain"],
+      "@apps/auth/domain/*": ["./src/apps/auth/domain/*"],
+
+      // Fallback for direct access
+      "@apps/*": ["./src/apps/*"],
+      // === API ROUTES ===
+      "@api/*": [
+        "./src/app/api/*"
+      ],
+      // === CENTRALIZED ALIASES (Preferred) ===
+      "@components": [
+        "./src/libs/presentation/components"
+      ],
+      "@hooks": [
+        "./src/libs/presentation/hooks"
+      ],
+      "@utils": [
+        "./src/libs/shared/utils"
+      ],
+      "@testing": [
+        "./src/libs/shared/testing"
+      ],
+      "@mocks": [
+        "./src/libs/shared/testing/mocks"
+      ],
+      "@styles": [
+        "./src/libs/presentation/styles"
+      ],
+      "@domain": [
+        "./src/libs/domain"
+      ],
+      "@interfaces": [
+        "./src/libs/domain/interfaces"
+      ],
+      "@entities": [
+        "./src/libs/domain/entities"
+      ],
+      "@validation": [
+        "./src/libs/domain/validation"
+      ],
+      "@domain-types": [
+        "./src/libs/domain/types"
+      ],
+      // === INFRASTRUCTURE ===
+      "@redux": [
+        "./src/libs/infrastructure/state"
+      ],
+      "@store": [
+        "./src/libs/infrastructure/state/store"
+      ],
+      "@middleware": [
+        "./src/libs/infrastructure/middleware"
+      ],
+      "@config": [
+        "./src/libs/infrastructure/config"
+      ],
+      "@services": [
+        "./src/libs/infrastructure/services"
+      ],
+      "@services/*": [
+        "./src/libs/infrastructure/services/*"
+      ],
+      "@repositories": [
+        "./src/libs/infrastructure/repositories"
+      ],
+      "@database": [
+        "./src/libs/infrastructure/database"
+      ],
+      "@email": [
+        "./src/libs/infrastructure/email"
+      ],
+      // === SHARED ===
+      "@i18n": [
+        "./src/libs/shared/i18n"
+      ],
+      "@i18n/*": [
+        "./src/libs/shared/i18n/*"
+      ],
+      "@constants": [
+        "./src/libs/shared/constants"
+      ],
+      "@helpers": [
+        "./src/libs/shared/helpers"
+      ],
+      "@app-error": [
+        "./src/libs/shared/helpers/error-handling/app-error"
+      ],
+      "@api-error": [
+        "./src/libs/shared/helpers/error-handling/api-error-handler"
+      ],
+      "@use-case-error": [
+        "./src/libs/shared/helpers/error-handling/use-case-error-handler"
+      ],
+      "@error-provider": [
+        "./src/libs/shared/helpers/error-handling/error-provider"
+      ],
+      "@logger": [
+        "./src/libs/shared/helpers/error-handling/logger"
+      ],
+      "@thunks": [
+        "./src/libs/shared/helpers/thunk"
+      ],
+      // === SOVEREIGNTY-UI SUBPATHS ===
+      "@dannydanzka/sovereignty-ui/tokens": ["./node_modules/@dannydanzka/sovereignty-ui/dist/tokens/index.d.ts"],
+      "@dannydanzka/sovereignty-ui/hooks": ["./node_modules/@dannydanzka/sovereignty-ui/dist/hooks/index.d.ts"],
+      "@dannydanzka/sovereignty-ui/utils": ["./node_modules/@dannydanzka/sovereignty-ui/dist/utils/index.d.ts"],
+      // === PRESENTATION ===
+      "@assets": [
+        "./src/libs/presentation/assets"
+      ],
+      "@providers": [
+        "./src/libs/presentation/providers"
+      ],
+      "@pages/admin": [
+        "./src/apps/admin/presentation/screens"
+      ],
+      "@pages/public": [
+        "./src/apps/public/presentation/screens"
+      ],
+      "@layouts": [
+        "./src/libs/presentation/layouts"
+      ],
+      // === MULTI-PATH ALIASES (Include module-specific paths) ===
+      "@components/*": [
+        "./src/libs/presentation/components/*",
+        "./src/apps/admin/presentation/components/*",
+        "./src/apps/public/presentation/components/*"
+      ],
+      "@hooks/*": [
+        "./src/libs/presentation/hooks/*",
+        "./src/apps/admin/presentation/hooks/*",
+        "./src/apps/public/presentation/hooks/*"
+      ],
+      "@layouts/*": [
+        "./src/libs/presentation/layouts/*",
+        "./src/apps/admin/presentation/layouts/*",
+        "./src/apps/public/presentation/layouts/*"
+      ],
+      "@providers/*": [
+        "./src/libs/presentation/providers/*",
+        "./src/apps/admin/presentation/providers/*",
+        "./src/apps/public/presentation/providers/*"
+      ],
+      // === GRANULAR PATHS (When centralized not sufficient) ===
+      "@assets/*": [
+        "./src/libs/presentation/assets/*"
+      ],
+      "@utils/*": [
+        "./src/libs/shared/utils/*"
+      ],
+      "@testing/*": [
+        "./src/libs/shared/testing/*"
+      ],
+      "@mocks/*": [
+        "./src/libs/shared/testing/mocks/*"
+      ],
+      "@styles/*": [
+        "./src/libs/presentation/styles/*"
+      ],
+      "@domain/*": [
+        "./src/libs/domain/*"
+      ],
+      "@interfaces/*": [
+        "./src/libs/domain/interfaces/*"
+      ],
+      "@entities/*": [
+        "./src/libs/domain/entities/*"
+      ],
+      "@domain-types/*": [
+        "./src/libs/domain/types/*"
+      ],
+      "@redux/*": [
+        "./src/libs/infrastructure/state/*"
+      ],
+      "@middleware/*": [
+        "./src/libs/infrastructure/middleware/*"
+      ],
+      "@config/*": [
+        "./src/libs/infrastructure/config/*"
+      ],
+      "@repositories/*": [
+        "./src/libs/infrastructure/repositories/*",
+        "./src/apps/admin/infrastructure/repositories/*",
+        "./src/apps/public/infrastructure/repositories/*"
+      ],
+      "@constants/*": [
+        "./src/libs/shared/constants/*"
+      ],
+      "@helpers/*": [
+        "./src/libs/shared/helpers/*"
+      ],
+      "@thunks/*": [
+        "./src/libs/shared/helpers/thunk/*"
+      ],
+      "@pages/admin/*": [
+        "./src/apps/admin/presentation/screens/*"
+      ],
+      "@pages/public/*": [
+        "./src/apps/public/presentation/screens/*"
+      ],
+      "@validation/*": [
+        "./src/libs/domain/validation/*"
+      ]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "vitest.setup.ts",
+    "vitest.config.ts",
+    "src/libs/domain/types/external/assets.d.ts",
+    "src/libs/domain/types/external/eslint-modules.d.ts",
+    "src/libs/domain/types/external/svg.d.ts",
+    "src/libs/shared/testing/types/vitest-global.d.ts",
+    ".next/types/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "prisma",
+    "scripts/**/*.js",
+    "scripts/**/*.cjs",
+    "scripts/eslint-rules"
+  ]
+}

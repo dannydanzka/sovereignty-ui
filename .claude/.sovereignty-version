@@ -1,0 +1,6 @@
+09f16f6
+synced: 2026-07-06 08:38:51
+commit: 09f16f6 feat(projects): register sovereignty-ui-lab (mobile discipline) + RN pointer in mobile/index (#36)
+discipline: mobile
+parent: frontend
+layers: doctrine core frontend mobile
