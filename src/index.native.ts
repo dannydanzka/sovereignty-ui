@@ -36,6 +36,7 @@ export * from './components/Divider';
 export * from './components/EmptyState';
 export * from './components/InlineIcon';
 export * from './components/Input';
+export * from './components/Modal';
 export * from './components/ProgressBar';
 export * from './components/SearchInput';
 export * from './components/Spacer';
