@@ -33,11 +33,12 @@ BEFORE writing code:
 - Peer dependencies only (react, react-dom, styled-components) — never bundle them
 - No imports from any app codebase, Next.js, Redux, Prisma, Supabase, or i18n libraries
 - Every component ships the 5-file structure + story + test (see `rules/reference/component-standards.md`)
+- React Native: shared `Component.tsx`; platform styling via `Component.styled.native.ts` (Div/Span primitives, RN-safe CSS: flexbox only, no hover/transition/media/grid, raw text always inside Span); export RN-ready components from `src/index.native.ts`
 
 AFTER writing code:
 
-- TypeScript: `npm run type-check`
-- Lint: `npm run lint` (0 warnings, 16 custom rules)
+- TypeScript: `npm run type-check` (web) + `npm run type-check:native` (React Native resolution)
+- Lint: `npm run lint` (0 warnings, 22 custom rules)
 - Tests: `npm run test`
 - Build: `npm run build` (tsup — ESM + CJS + d.ts must succeed)
 
@@ -50,7 +51,10 @@ AFTER writing code:
 ```
 src/
   tokens/        # Design tokens + CSS var helpers + injectSuiTokens() + createBrandPalette()
-  components/    # 48+ agnostic components (5-file structure each)
+                 #   *.native.ts: raw px-value resolution + setSuiTokens() (RN has no CSS vars)
+  primitives/    # Div (div ↔ View) and Span (span ↔ Text) — cross-platform building blocks
+  components/    # 51+ agnostic components (5-file structure each)
+                 #   RN-ready ones add Component.styled.native.ts (same exports, Div/Span based)
   patterns/      # Composed organisms (DataTable, FileUploader, FormField, Pagination, ...)
   hooks/         # Generic React hooks (useModal, usePagination, ...)
   utils/         # Pure functions (array, string, date, format, object)

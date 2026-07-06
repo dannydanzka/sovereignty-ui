@@ -41,3 +41,7 @@ export const AvatarImage = styled.img`
   object-fit: cover;
   width: 100%;
 `;
+
+export const AvatarInitials = styled.span<{ $size?: 'sm' | 'md' | 'lg' | 'xl' }>`
+  font-size: inherit;
+`;
