@@ -219,7 +219,13 @@ export const noNativeHtmlRule = {
     }
 
     // Skip .styled.ts files - they define styled components
-    const isStyledFile = filename.endsWith('.styled.ts') || filename.endsWith('.styled.tsx');
+    const isStyledFile =
+      filename.endsWith('.styled.ts') ||
+      filename.endsWith('.styled.tsx') ||
+      filename.endsWith('.styled.native.ts') ||
+      filename.endsWith('.styled.native.tsx') ||
+      filename.endsWith('.styled.web.ts') ||
+      filename.endsWith('.styled.web.tsx');
 
     if (isStyledFile) {
       return {};

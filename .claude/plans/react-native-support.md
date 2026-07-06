@@ -1,6 +1,9 @@
 # Plan — React Native Support for sovereignty-ui
 
-> **Status**: PLAN ONLY — not scheduled. Trigger: first Soverum mobile product (React Native/Expo).
+> **Status**: PHASE 1-2 EXECUTED (2026-07-05, v0.7.0) — token bridge, Div/Span primitives, native
+> type-check, exports/react-native wiring, and first component batch (Avatar, Badge, Divider,
+> EmptyState, InlineIcon, Spacer, StatsCard) shipped. Remaining phases trigger with the first
+> Soverum mobile product (React Native/Expo).
 > **Reference implementation studied**: `~/Documents/betterware/betterware-ui` (`@betternet/design-system`) — dual-platform React + RN library in production use. We adopt its mechanics, NOT its Betterware-specific components/theme.
 > **Written**: 2026-07-05
 
@@ -39,7 +42,16 @@ package.json:
 }
 ```
 
-### 2. File convention per component
+### 2. File convention per component — AS EXECUTED
+
+> Final decision (differs slightly from the original sketch): ONE shared `Component.tsx`;
+> only styles split. `Component.styled.ts` stays the web version (full CSS freedom, untouched);
+> `Component.styled.native.ts` exports the SAME styled names built on `src/primitives`
+> (`Div` = div↔View, `Span` = span↔Text, both with WebCompatProps so className/data-testid
+> type-check). Metro picks `.native.ts` automatically; TS validates via
+> `tsconfig.native.json` with `moduleSuffixes: ['.native', '']` (`npm run type-check:native`).
+
+#### Original sketch (kept for reference)
 
 ```
 Button/
@@ -98,10 +110,16 @@ SUI theming = CSS custom properties (`var(--sui-*, fallback)`). **RN has no CSS 
 - Metro symlink config documented for local `file:` installs (copy betterware README snippet).
 - Vitest stays for shared/web; add `@testing-library/react-native` + jest-expo only if RN-specific logic grows.
 
-## Phases (when triggered)
+## Phases
 
-1. **Token bridge** — platform-split `css-variables` + numeric native token map + `setSuiTokens()`. Gate: shared components compile under Metro.
-2. **Core primitives** (Button, Text tokens, Card, Badge, Spinner, Spacer, Divider) + example Expo app.
+1. **Token bridge** — ✅ DONE (v0.7.0): `css-variables.native.ts` + `inject.native.ts` resolve raw
+   px values from the runtime registry in `native-values.ts` (`setSuiTokens()` / `resetSuiTokens()`;
+   `injectSuiTokens()` aliases to it on native). Spacing/sizes/leading/tracking converted rem→px,
+   elevations single-shadow, motion 0ms.
+2. **Core primitives + first batch** — ✅ DONE (v0.7.0): `src/primitives` (Div/Span) and native styled
+   resolutions for Avatar, Badge, Divider, EmptyState, InlineIcon, Spacer, StatsCard; native barrel
+   `src/index.native.ts` (tokens, utils, RN-safe hooks, primitives, batch). Pending in this phase:
+   example Expo app to validate under a real Metro bundle.
 3. **Forms** (Input, Checkbox, Switch, RadioGroup, FormField(s)).
 4. **Overlays** (Modal, toast/NotificationContainer, ImagePreviewModal).
 5. **Native list patterns** (`ListScreen` replacing DataTable).

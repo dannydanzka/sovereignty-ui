@@ -2,7 +2,7 @@
   "type": "module",
   "name": "@dannydanzka/sovereignty-ui",
   "version": "0.6.0",
-  "description": "Agnostic React component library — Code Sovereignty UI System",
+  "description": "Agnostic React component library \u2014 Code Sovereignty UI System",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -12,27 +12,32 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
+      "react-native": "./src/index.native.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
     "./tokens": {
       "types": "./dist/tokens/index.d.ts",
+      "react-native": "./src/tokens/index.ts",
       "import": "./dist/tokens/index.js",
       "require": "./dist/tokens/index.cjs"
     },
     "./hooks": {
       "types": "./dist/hooks/index.d.ts",
+      "react-native": "./src/hooks/index.ts",
       "import": "./dist/hooks/index.js",
       "require": "./dist/hooks/index.cjs"
     },
     "./utils": {
       "types": "./dist/utils/index.d.ts",
+      "react-native": "./src/utils/index.ts",
       "import": "./dist/utils/index.js",
       "require": "./dist/utils/index.cjs"
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "sideEffects": false,
   "scripts": {
@@ -46,12 +51,14 @@
     "test:watch": "vitest",
     "lint": "eslint src --max-warnings=0",
     "type-check": "tsc --noEmit",
-    "release": "changeset publish"
+    "release": "changeset publish",
+    "type-check:native": "tsc --project tsconfig.native.json"
   },
   "peerDependencies": {
     "react": ">=18",
     "react-dom": ">=18",
-    "styled-components": ">=6"
+    "styled-components": ">=6",
+    "react-native": ">=0.74"
   },
   "devDependencies": {
     "@changesets/cli": "^2.30.0",
@@ -87,6 +94,7 @@
     "prettier": "^3.8.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
+    "react-native": "^0.86.0",
     "storybook": "^8.6.18",
     "styled-components": "^6.3.11",
     "tsup": "^8.5.1",
@@ -110,5 +118,14 @@
   },
   "dependencies": {
     "lucide-react": "^0.577.0"
+  },
+  "react-native": "src/index.native.ts",
+  "peerDependenciesMeta": {
+    "react-dom": {
+      "optional": true
+    },
+    "react-native": {
+      "optional": true
+    }
   }
 }

@@ -171,10 +171,33 @@ Override via `injectSuiTokens()` (runtime) or CSS custom properties (`:root { --
 ```json
 {
   "react": ">=18",
-  "react-dom": ">=18",
-  "styled-components": ">=6"
+  "react-dom": ">=18 (optional — web only)",
+  "styled-components": ">=6",
+  "react-native": ">=0.74 (optional — native only)"
 }
 ```
+
+---
+
+## React Native (experimental — v0.7.0)
+
+Same components, both platforms. Metro resolves the `react-native` entry (`src/index.native.ts`)
+and the `.native.ts` styling files automatically:
+
+```tsx
+import { Badge, StatsCard, Div, Span, setSuiTokens } from '@dannydanzka/sovereignty-ui';
+
+// Native theming (no CSS variables on RN): call once at app startup
+setSuiTokens({ color: { primary500: '#FFC107' }, typography: { family: { body: 'Inter' } } });
+```
+
+- **Primitives**: `Div` (div ↔ View, flex-column by default) and `Span` (span ↔ Text). Build custom
+  UI with them and it works on both platforms.
+- **RN-ready today**: tokens, utils, hooks (useDebounce/useLoading/useModal/useNotifications/
+  usePagination/useTableSort), Avatar, Badge, Divider, EmptyState, InlineIcon, Spacer, StatsCard.
+- **Web-only for now**: everything else (DataTable, Modal, forms, layout patterns).
+- Dual-platform component convention: shared `Component.tsx` + `Component.styled.native.ts`
+  (Div/Span-based, flexbox-only CSS). See `.claude/plans/react-native-support.md`.
 
 ---
 

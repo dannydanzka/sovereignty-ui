@@ -8,7 +8,7 @@ import { useCallback, useState } from 'react';
 
 import type { AvatarProps } from './Avatar.interfaces';
 
-import { AvatarContainer, AvatarImage } from './Avatar.styled';
+import { AvatarContainer, AvatarImage, AvatarInitials } from './Avatar.styled';
 
 const getInitials = (name?: string): string => {
   if (!name) return '?';
@@ -33,7 +33,7 @@ export const Avatar = ({ alt, className, name, size = 'md', src }: AvatarProps) 
       {showImage ? (
         <AvatarImage alt={alt ?? name ?? 'Avatar'} src={src} onError={handleError} />
       ) : (
-        getInitials(name)
+        <AvatarInitials $size={size}>{getInitials(name)}</AvatarInitials>
       )}
     </AvatarContainer>
   );

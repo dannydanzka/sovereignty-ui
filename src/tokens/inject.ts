@@ -29,7 +29,7 @@ export const injectSuiTokens = (overrides: TokenOverrides = {}): string => {
     .map(([key, val]) => `--sui-font-family-${key}: ${val};`)
     .join('\n    ');
 
-  const sizeVars = Object.entries(typography.size)
+  const sizeVars = Object.entries({ ...typography.size, ...overrides.typography?.size })
     .map(([key, val]) => `--sui-font-size-${key}: ${val};`)
     .join('\n    ');
 
