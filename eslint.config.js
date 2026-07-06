@@ -117,7 +117,10 @@ export default [
       parser: typescriptParser,
       parserOptions: {
         ecmaFeatures: { jsx: true },
-        project: path.resolve(__dirname, 'tsconfig.json'),
+        project: [
+          path.resolve(__dirname, 'tsconfig.json'),
+          path.resolve(__dirname, 'tsconfig.native.json'),
+        ],
       },
       sourceType: 'module',
     },

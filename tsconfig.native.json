@@ -12,6 +12,8 @@
     "src/**/*.test.ts",
     "src/**/*.test.tsx",
     "src/**/*.stories.tsx",
-    "src/stories"
+    "src/stories",
+    "src/components/Checkbox/Checkbox.tsx",
+    "src/components/Toggle/Toggle.tsx"
   ]
 }
