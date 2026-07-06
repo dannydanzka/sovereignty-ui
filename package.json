@@ -11,26 +11,26 @@
   },
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
       "react-native": "./src/index.native.ts",
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
     "./tokens": {
-      "types": "./dist/tokens/index.d.ts",
       "react-native": "./src/tokens/index.ts",
+      "types": "./dist/tokens/index.d.ts",
       "import": "./dist/tokens/index.js",
       "require": "./dist/tokens/index.cjs"
     },
     "./hooks": {
-      "types": "./dist/hooks/index.d.ts",
       "react-native": "./src/hooks/index.ts",
+      "types": "./dist/hooks/index.d.ts",
       "import": "./dist/hooks/index.js",
       "require": "./dist/hooks/index.cjs"
     },
     "./utils": {
-      "types": "./dist/utils/index.d.ts",
       "react-native": "./src/utils/index.ts",
+      "types": "./dist/utils/index.d.ts",
       "import": "./dist/utils/index.js",
       "require": "./dist/utils/index.cjs"
     }

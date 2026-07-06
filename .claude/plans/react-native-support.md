@@ -118,8 +118,12 @@ SUI theming = CSS custom properties (`var(--sui-*, fallback)`). **RN has no CSS 
    elevations single-shadow, motion 0ms.
 2. **Core primitives + first batch** — ✅ DONE (v0.7.0): `src/primitives` (Div/Span) and native styled
    resolutions for Avatar, Badge, Divider, EmptyState, InlineIcon, Spacer, StatsCard; native barrel
-   `src/index.native.ts` (tokens, utils, RN-safe hooks, primitives, batch). Pending in this phase:
-   example Expo app to validate under a real Metro bundle.
+   `src/index.native.ts` (tokens, utils, RN-safe hooks, primitives, batch). ✅ Validated under a real
+   Metro bundle via **sovereignty-ui-lab** (bare RN 0.86, `../sovereignty-ui-lab`,
+   github.com/dannydanzka/sovereignty-ui-lab): `file:` symlink + watchFolders, GalleryScreen demoing
+   the whole batch, tsc/eslint/Jest green, iOS+Android release bundles build. Note: consumers' TS
+   needs the `react-native` condition FIRST in package.json `exports` (before `types`) — shipped in
+   v0.7.1.
 3. **Forms** (Input, Checkbox, Switch, RadioGroup, FormField(s)).
 4. **Overlays** (Modal, toast/NotificationContainer, ImagePreviewModal).
 5. **Native list patterns** (`ListScreen` replacing DataTable).
@@ -127,5 +131,5 @@ SUI theming = CSS custom properties (`var(--sui-*, fallback)`). **RN has no CSS 
 
 ## Cross-references
 
-- `soberania-del-codigo/mobile/index.md` and `lib/index.md` — add pointer to this plan when implementation starts.
+- `soberania-del-codigo/mobile/index.md` — ✅ pointer added (PR #36), plus lab registered in `projects/mobile/sovereignty-ui-lab/`.
 - betterware-ui `progress.md` — component-by-component shared/web/native classification methodology to imitate.
