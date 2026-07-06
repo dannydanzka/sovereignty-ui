@@ -5,6 +5,7 @@
 import styled from 'styled-components';
 
 import { c, s, sh, tf, ts } from '../../tokens/css-variables';
+import { TextField } from '../../primitives';
 
 export const FilterBar = styled.div`
   align-items: center;
@@ -14,7 +15,7 @@ export const FilterBar = styled.div`
   margin-bottom: ${s('md')};
 `;
 
-export const StyledSearchInput = styled.input`
+export const StyledSearchInput = styled(TextField)`
   background: ${c('white')};
   border: 1px solid ${c('border')};
   border-radius: ${sh('md')};

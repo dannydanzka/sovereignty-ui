@@ -6,8 +6,12 @@
 > **BATCH 7 EXECUTED** (2026-07-06, v0.8.0) — `Pressable` primitive (button ↔ TouchableOpacity, maps
 > onClick→onPress via `.attrs`), internal icon module (`src/internal/icons` → lucide-react /
 > lucide-react-native, optional peers), and native resolutions for **Button, Card, Alert,
-> ProgressBar**. Validated in sovereignty-ui-lab (Metro iOS+Android bundles + Jest render). Web
-> untouched (235 tests green). Remaining phases below trigger with the first Soverum mobile product.
+> ProgressBar**. Validated in sovereignty-ui-lab (Metro iOS+Android bundles + Jest render).
+> **BATCH 8 EXECUTED** (2026-07-06, v0.9.0) — `TextField` primitive (input ↔ TextInput, normalizes
+> value change to one `onValueChange(value)` callback; maps secureTextEntry/multiline/type per
+> platform) and native resolutions for the text-input Forms: **Input** (incl. password toggle),
+> **SearchInput**, **Textarea** (multiline). Web `.tsx` refactored to route through the primitive with
+> the SAME public `onChange(value)` API (235 tests green). Remaining phases below.
 > **Reference implementation studied**: `~/Documents/betterware/betterware-ui` (`@betternet/design-system`) — dual-platform React + RN library in production use. We adopt its mechanics, NOT its Betterware-specific components/theme.
 > **Written**: 2026-07-05
 
@@ -141,15 +145,17 @@ SUI theming = CSS custom properties (`var(--sui-*, fallback)`). **RN has no CSS 
      dismiss), **ProgressBar** (solid fill instead of gradient, no keyframes).
    - Validated in sovereignty-ui-lab (Metro iOS+Android + Jest); web 235 tests green.
 
-3. **Forms** (Input, Textarea, PasswordInput, SearchInput, Checkbox, Switch, Toggle, RadioGroup, Select,
-   FormField(s)). NOT yet done — needs the two harder pieces Batch 7 deliberately deferred:
-   - **Text inputs**: a `TextField` primitive normalizing value change to ONE callback
-     (`onValueChange(value)`) since native `onChangeText(text)` has no DOM `event.target.value`; the
-     shared `.tsx` must route through it (small refactor, keep public `onChange(value)` API).
-   - **Toggle family** (Checkbox/Switch/Toggle/RadioGroup): structural divergence — web uses a hidden
-     `<input>` + CSS `::after` checkmark / `::before` thumb which have no native equivalent; native
-     needs a rendered check/thumb child. Requires markup divergence, not styles-only.
+3. **Forms**:
+   - **Text inputs** — ✅ DONE (v0.9.0, Batch 8): `TextField` primitive + Input/SearchInput/Textarea.
+     PasswordInput deferred (its public `onChange` is a raw DOM handler, not a value callback —
+     migrating it is a breaking API change; Input already ships a built-in password toggle).
+   - **Toggle family** (Checkbox/Switch/Toggle/RadioGroup) — NOT done: structural divergence — web uses
+     a hidden `<input>` + CSS `::after` checkmark / `::before` thumb which have no native equivalent;
+     native needs a rendered check/thumb child. Requires markup divergence, not styles-only. Plan: add
+     a `Toggle`/`Checkable` primitive (Pressable + rendered indicator Span/Div) and a small shared
+     `.tsx` change to render the indicator on both platforms.
    - **Select**: native picker/action-sheet (heavy).
+   - **FormField(s)** pattern: compose the above once the toggle family lands.
 4. **Overlays** (Modal, toast/NotificationContainer, ImagePreviewModal) — native `Modal` + safe-area.
 5. **Native list patterns** (`ListScreen` replacing DataTable) — FlatList-based.
 6. Publish as minor with `react-native` optional peer; document in soberania `mobile/` + `lib/`.

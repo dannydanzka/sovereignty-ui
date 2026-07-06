@@ -13,9 +13,12 @@
  * Metro resolves primitives.native.ts instead of this file for React Native.
  */
 
+import type { ChangeEvent } from 'react';
 import styled from 'styled-components';
 
-import type { PressablePrimitiveProps } from './primitives.interfaces';
+import type { PressablePrimitiveProps, TextFieldPrimitiveProps } from './primitives.interfaces';
+
+const TEXT_FIELD_INTERNAL_PROPS = ['multiline', 'onValueChange', 'secureTextEntry'];
 
 export const Div = styled.div`
   align-items: stretch;
@@ -38,4 +41,23 @@ export const Pressable = styled.button.attrs<PressablePrimitiveProps>((props) =>
   &:disabled {
     cursor: not-allowed;
   }
+`;
+
+export const TextField = styled.input
+  .withConfig({
+    shouldForwardProp: (prop) => !TEXT_FIELD_INTERNAL_PROPS.includes(prop),
+  })
+  .attrs<TextFieldPrimitiveProps>((props) => ({
+    as: props.multiline ? 'textarea' : undefined,
+    onChange: (event: ChangeEvent<HTMLInputElement>) =>
+      props.onValueChange?.(event.currentTarget.value),
+    type: props.multiline
+      ? undefined
+      : props.secureTextEntry
+        ? 'password'
+        : props.type === 'password'
+          ? 'text'
+          : (props.type ?? 'text'),
+  }))<TextFieldPrimitiveProps>`
+  font-family: inherit;
 `;

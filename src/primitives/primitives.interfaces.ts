@@ -29,3 +29,29 @@ export interface PressablePrimitiveProps extends WebCompatProps {
   title?: string;
   type?: 'button' | 'reset' | 'submit';
 }
+
+/**
+ * TextField — cross-platform text entry.
+ *
+ * Both platforms expose ONE change API: `onValueChange(value)`. The web
+ * resolution adapts the DOM change event and the native resolution adapts
+ * `onChangeText`, so shared component files never touch `event.target.value`
+ * (which does not exist on React Native). `secureTextEntry`/`multiline`/`rows`
+ * map to the right web attribute or the matching TextInput prop per platform.
+ */
+export interface TextFieldPrimitiveProps extends WebCompatProps {
+  autoComplete?: string;
+  disabled?: boolean;
+  id?: string;
+  maxLength?: number;
+  multiline?: boolean;
+  name?: string;
+  onValueChange?: (value: string) => void;
+  placeholder?: string;
+  required?: boolean;
+  rows?: number;
+  secureTextEntry?: boolean;
+  /** Web input type; native maps it to keyboardType (password → secureTextEntry). */
+  type?: 'email' | 'number' | 'password' | 'tel' | 'text';
+  value?: string;
+}

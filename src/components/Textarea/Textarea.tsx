@@ -4,8 +4,6 @@
  * Multi-line text input with label, error, and character count.
  */
 
-import { useCallback } from 'react';
-
 import type { TextareaProps } from './Textarea.interfaces';
 
 import {
@@ -33,13 +31,6 @@ export const Textarea = ({
   showCount = false,
   value = '',
 }: TextareaProps) => {
-  const handleChange = useCallback(
-    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      onChange?.(e.target.value);
-    },
-    [onChange]
-  );
-
   const textareaId = id ?? name;
   const currentLength = value.length;
   const isOver = maxLength ? currentLength > maxLength : false;
@@ -53,12 +44,13 @@ export const Textarea = ({
         disabled={disabled}
         id={textareaId}
         maxLength={maxLength}
+        multiline
         name={name}
         placeholder={placeholder}
         required={required}
         rows={rows}
         value={value}
-        onChange={handleChange}
+        onValueChange={onChange}
       />
       {hasFooter && (
         <TextareaFooter>

@@ -5,6 +5,7 @@
 import styled from 'styled-components';
 
 import { c, s, sh, tf, tl, ts } from '../../tokens/css-variables';
+import { TextField } from '../../primitives';
 
 export const TextareaWrapper = styled.div`
   display: flex;
@@ -20,7 +21,7 @@ export const TextareaLabel = styled.label`
   font-weight: var(--sui-font-weight-medium, 500);
 `;
 
-export const StyledTextarea = styled.textarea<{ $hasError: boolean }>`
+export const StyledTextarea = styled(TextField)<{ $hasError: boolean }>`
   border: 1px solid ${({ $hasError }) => ($hasError ? c('error') : c('border'))};
   border-radius: ${sh('md')};
   color: ${c('textPrimary')};

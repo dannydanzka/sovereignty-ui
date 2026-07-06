@@ -11,10 +11,22 @@
  * data-testid; React Native simply ignores them at runtime.
  */
 
-import { TouchableOpacity } from 'react-native';
+import { TextInput, TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
 
-import type { PressablePrimitiveProps, WebCompatProps } from './primitives.interfaces';
+import type {
+  PressablePrimitiveProps,
+  TextFieldPrimitiveProps,
+  WebCompatProps,
+} from './primitives.interfaces';
+
+const KEYBOARD_TYPE = {
+  email: 'email-address',
+  number: 'numeric',
+  password: 'default',
+  tel: 'phone-pad',
+  text: 'default',
+} as const;
 
 export const Div = styled.View<WebCompatProps>``;
 
@@ -27,3 +39,12 @@ export const Pressable = styled(TouchableOpacity).attrs<PressablePrimitiveProps>
   disabled: props.disabled || !props.onClick,
   onPress: props.onClick ? () => props.onClick?.() : undefined,
 }))<PressablePrimitiveProps>``;
+
+export const TextField = styled(TextInput).attrs<TextFieldPrimitiveProps>((props) => ({
+  editable: props.disabled === undefined ? undefined : !props.disabled,
+  keyboardType: props.type ? KEYBOARD_TYPE[props.type] : undefined,
+  multiline: props.multiline,
+  numberOfLines: props.rows,
+  onChangeText: props.onValueChange,
+  secureTextEntry: props.secureTextEntry,
+}))<TextFieldPrimitiveProps>``;
