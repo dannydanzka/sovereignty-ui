@@ -16,6 +16,7 @@
     "src/components/Checkbox/Checkbox.tsx",
     "src/components/Toggle/Toggle.tsx",
     "src/components/Modal/Modal.tsx",
-    "src/components/ImagePreviewModal/ImagePreviewModal.tsx"
+    "src/components/ImagePreviewModal/ImagePreviewModal.tsx",
+    "src/patterns/DataTable/DataTable.tsx"
   ]
 }
