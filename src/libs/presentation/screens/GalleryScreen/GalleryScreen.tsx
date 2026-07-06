@@ -18,6 +18,7 @@ import {
   Button,
   Card,
   Checkbox,
+  DataTable,
   Divider,
   EmptyState,
   ImagePreviewModal,
@@ -64,6 +65,13 @@ export const GalleryScreen = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [previewOpen, setPreviewOpen] = useState(false);
+  const [selectedRows, setSelectedRows] = useState<string[]>([]);
+
+  const members = [
+    { id: '1', name: 'Jane Doe', role: 'Admin' },
+    { id: '2', name: 'John Ramírez', role: 'Editor' },
+    { id: '3', name: 'Ada Lovelace', role: 'Owner' },
+  ];
 
   return (
     <Screen>
@@ -212,6 +220,28 @@ export const GalleryScreen = () => {
                 Confirm dialog
               </Button>
             </Row>
+          </Section>
+
+          <Section title='DataTable (native card list)'>
+            <DataTable
+              columns={[
+                { header: 'Name', key: 'name' },
+                { header: 'Role', key: 'role' },
+              ]}
+              data={members}
+              rowActions={[
+                {
+                  icon: <Users color='#5B4FCF' size={16} />,
+                  key: 'view',
+                  onClick: (row) => notify({ message: row.name, title: 'Row', type: 'info' }),
+                  title: 'View',
+                },
+              ]}
+              rowKey={(row) => row.id}
+              selectable
+              selectedKeys={selectedRows}
+              onSelectionChange={setSelectedRows}
+            />
           </Section>
 
           <Section title='EmptyState'>
