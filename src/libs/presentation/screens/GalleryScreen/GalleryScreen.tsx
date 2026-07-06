@@ -7,6 +7,7 @@
  * the local ../sovereignty-ui symlink.
  */
 
+import { useState } from 'react';
 import { ScrollView } from 'react-native';
 import { Inbox, TrendingUp, Users } from 'lucide-react-native';
 
@@ -19,9 +20,12 @@ import {
   Divider,
   EmptyState,
   InlineIcon,
+  Input,
   ProgressBar,
+  SearchInput,
   Spacer,
   StatsCard,
+  Textarea,
   useNotifications,
 } from '@dannydanzka/sovereignty-ui';
 
@@ -46,6 +50,10 @@ const Section = ({ children, title }: SectionProps) => (
 
 export const GalleryScreen = () => {
   const { notifications, notify } = useNotifications({ autoDismissMs: 3000 });
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [search, setSearch] = useState('');
+  const [notes, setNotes] = useState('');
 
   return (
     <Screen>
@@ -140,6 +148,43 @@ export const GalleryScreen = () => {
             <ProgressBar label='Upload' value={72} />
             <ProgressBar label='Storage' value={45} variant='warning' />
             <ProgressBar label='Complete' value={100} variant='success' />
+          </Section>
+
+          <Section title='Input / TextField (native TextInput)'>
+            <Input
+              id='email'
+              label='Email'
+              name='email'
+              placeholder='you@example.com'
+              type='email'
+              value={email}
+              onChange={setEmail}
+            />
+            <Input
+              id='password'
+              label='Password'
+              name='password'
+              placeholder='••••••••'
+              type='password'
+              value={password}
+              onChange={setPassword}
+            />
+          </Section>
+
+          <Section title='SearchInput'>
+            <SearchInput placeholder='Search members…' value={search} onChange={setSearch} />
+          </Section>
+
+          <Section title='Textarea (multiline)'>
+            <Textarea
+              label='Notes'
+              maxLength={120}
+              name='notes'
+              placeholder='Write something…'
+              showCount
+              value={notes}
+              onChange={setNotes}
+            />
           </Section>
 
           <Section title='EmptyState'>
