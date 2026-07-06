@@ -15,7 +15,7 @@
 
 import type { ButtonProps } from './Button.interfaces';
 
-import { ButtonIcon, ButtonLoader, StyledButton } from './Button.styled';
+import { ButtonIcon, ButtonLabel, ButtonLoader, StyledButton } from './Button.styled';
 
 export const Button = ({
   'aria-label': ariaLabel,
@@ -55,7 +55,9 @@ export const Button = ({
       return (
         <>
           {iconPosition === 'left' && renderLoadingIcon()}
-          {children}
+          <ButtonLabel $size={size} $variant={variant}>
+            {children}
+          </ButtonLabel>
           {iconPosition === 'right' && renderLoadingIcon()}
         </>
       );
@@ -68,7 +70,9 @@ export const Button = ({
     return (
       <>
         {iconPosition === 'left' && renderIcon()}
-        {children}
+        <ButtonLabel $size={size} $variant={variant}>
+          {children}
+        </ButtonLabel>
         {iconPosition === 'right' && renderIcon()}
       </>
     );

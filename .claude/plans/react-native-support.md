@@ -2,8 +2,12 @@
 
 > **Status**: PHASE 1-2 EXECUTED (2026-07-05, v0.7.0) — token bridge, Div/Span primitives, native
 > type-check, exports/react-native wiring, and first component batch (Avatar, Badge, Divider,
-> EmptyState, InlineIcon, Spacer, StatsCard) shipped. Remaining phases trigger with the first
-> Soverum mobile product (React Native/Expo).
+> EmptyState, InlineIcon, Spacer, StatsCard) shipped.
+> **BATCH 7 EXECUTED** (2026-07-06, v0.8.0) — `Pressable` primitive (button ↔ TouchableOpacity, maps
+> onClick→onPress via `.attrs`), internal icon module (`src/internal/icons` → lucide-react /
+> lucide-react-native, optional peers), and native resolutions for **Button, Card, Alert,
+> ProgressBar**. Validated in sovereignty-ui-lab (Metro iOS+Android bundles + Jest render). Web
+> untouched (235 tests green). Remaining phases below trigger with the first Soverum mobile product.
 > **Reference implementation studied**: `~/Documents/betterware/betterware-ui` (`@betternet/design-system`) — dual-platform React + RN library in production use. We adopt its mechanics, NOT its Betterware-specific components/theme.
 > **Written**: 2026-07-05
 
@@ -124,10 +128,41 @@ SUI theming = CSS custom properties (`var(--sui-*, fallback)`). **RN has no CSS 
    the whole batch, tsc/eslint/Jest green, iOS+Android release bundles build. Note: consumers' TS
    needs the `react-native` condition FIRST in package.json `exports` (before `types`) — shipped in
    v0.7.1.
-3. **Forms** (Input, Checkbox, Switch, RadioGroup, FormField(s)).
-4. **Overlays** (Modal, toast/NotificationContainer, ImagePreviewModal).
-5. **Native list patterns** (`ListScreen` replacing DataTable).
+2b. **Interaction primitive + icon module + Batch 7** — ✅ DONE (v0.8.0):
+   - `Pressable` primitive (web `<button>` reset ↔ native `TouchableOpacity`); native maps the shared
+     web props `onClick`→`onPress`, `disabled`, `aria-label`→`accessibilityLabel` via `.attrs`, so
+     interactive components keep ONE `.tsx` that passes web props unchanged.
+   - `src/internal/icons/{index.ts, index.native.ts}` — re-export lucide-react / lucide-react-native
+     under one internal path (components import icons from here, never `lucide-react` directly).
+     `lucide-react-native` + `react-native-svg` added as OPTIONAL peers.
+   - Native styled resolutions: **Button** (Pressable + ButtonLabel Span carrying per-variant text
+     color since RN Text doesn't inherit color; loader→ActivityIndicator), **Card** (Pressable,
+     disabled when not clickable), **Alert** (row layout, Span message, internal icons, Pressable
+     dismiss), **ProgressBar** (solid fill instead of gradient, no keyframes).
+   - Validated in sovereignty-ui-lab (Metro iOS+Android + Jest); web 235 tests green.
+
+3. **Forms** (Input, Textarea, PasswordInput, SearchInput, Checkbox, Switch, Toggle, RadioGroup, Select,
+   FormField(s)). NOT yet done — needs the two harder pieces Batch 7 deliberately deferred:
+   - **Text inputs**: a `TextField` primitive normalizing value change to ONE callback
+     (`onValueChange(value)`) since native `onChangeText(text)` has no DOM `event.target.value`; the
+     shared `.tsx` must route through it (small refactor, keep public `onChange(value)` API).
+   - **Toggle family** (Checkbox/Switch/Toggle/RadioGroup): structural divergence — web uses a hidden
+     `<input>` + CSS `::after` checkmark / `::before` thumb which have no native equivalent; native
+     needs a rendered check/thumb child. Requires markup divergence, not styles-only.
+   - **Select**: native picker/action-sheet (heavy).
+4. **Overlays** (Modal, toast/NotificationContainer, ImagePreviewModal) — native `Modal` + safe-area.
+5. **Native list patterns** (`ListScreen` replacing DataTable) — FlatList-based.
 6. Publish as minor with `react-native` optional peer; document in soberania `mobile/` + `lib/`.
+
+### The `.attrs` prop-mapping pattern (Batch 7 learning)
+
+Zero-web-risk rule for going cross-platform: **never edit the web `.styled.ts`**; put every platform
+difference in `.styled.native.ts`, and map web props→native props with styled-components/native
+`.attrs` (as Avatar's src→source did). Works when the only divergence is prop names / RN-safe CSS.
+When it does NOT suffice — raw text rendered directly in a View (wrap children in a Span, a tiny shared
+`.tsx` change), color that must reach a Text (pass `$variant` to the text Span), value extraction from a
+DOM event, or CSS pseudo-elements — the component graduates to Phase 3+ and needs a primitive or a
+shared-`.tsx` refactor, gated by re-running the full web test suite.
 
 ## Cross-references
 

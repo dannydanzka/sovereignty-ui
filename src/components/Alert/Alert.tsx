@@ -4,8 +4,7 @@
  * Status alert banner with icon, title, message, and dismiss.
  */
 
-import { AlertCircle, AlertTriangle, CheckCircle, Info, X } from 'lucide-react';
-
+import { AlertCircle, AlertTriangle, CheckCircle, Info, X } from '../../internal/icons';
 import type { AlertProps } from './Alert.interfaces';
 
 import {

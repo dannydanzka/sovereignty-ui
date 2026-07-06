@@ -48,9 +48,11 @@ Optional when needed: `ComponentName.constants.ts` (defaults, enums — no magic
 
 ## React Native (dual-platform components)
 
-- One shared `Component.tsx` for web and native — platform differences live ONLY in styling.
-- Web styles stay in `Component.styled.ts`; the native resolution is `Component.styled.native.ts` exporting the SAME styled names, built on the primitives `Div` (View) and `Span` (Text).
-- RN-safe CSS in `.styled.native.ts`: flexbox layout only; px values via token helpers (they resolve raw px on native); no `display` other than flex/none, no hover/transition/@media/grid/`vertical-align`/gradients/svg selectors; `background-color` (never the `background` shorthand); `border-radius: 9999px` instead of 50%.
-- All raw text must render inside a Span-based styled component (native Text does not inherit from Views).
+- One shared `Component.tsx` for web and native — platform differences live in styling (`.styled.native.ts`) and, only when unavoidable, tiny web-safe markup tweaks (wrapping raw text in a Span). Never edit the web `.styled.ts` to go cross-platform.
+- Web styles stay in `Component.styled.ts`; the native resolution is `Component.styled.native.ts` exporting the SAME styled names, built on the primitives `Div` (View), `Span` (Text), and `Pressable` (TouchableOpacity — tap targets).
+- **`.attrs` prop-mapping** is how the native styled file adapts web props without touching the shared `.tsx`: map `onClick`→`onPress`, `disabled`, `src`/`alt`→`source`/`accessibilityLabel`, etc. inside `styled(...).attrs()`. The `Pressable` primitive already maps `onClick`→`onPress`+`disabled`, so interactive components just do `styled(Pressable)`.
+- Icons: import from `src/internal/icons` (NOT `lucide-react` directly) — Metro swaps it for `lucide-react-native` on native. `lucide-react-native`/`react-native-svg` are optional peers.
+- RN-safe CSS in `.styled.native.ts`: flexbox layout only; px values via token helpers (they resolve raw px on native); no `display` other than flex/none, no hover/transition/@media/grid/`vertical-align`/gradients/svg selectors/keyframes; `background-color` (never the `background` shorthand); border shorthands become longhand (`border-left-width`+`border-left-color`); `border-radius: 9999px` instead of 50%.
+- Color does NOT cascade to native Text: put text color on the Span-based styled component itself (pass `$variant` to it if needed), not on an ancestor View. All raw text must render inside a Span-based styled component.
 - Never `export * as X from` (breaks Metro/Babel).
 - Export RN-ready components from `src/index.native.ts`; validate with `npm run type-check:native`.
