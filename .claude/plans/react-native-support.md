@@ -21,7 +21,12 @@
 > (`.native.tsx`; default + confirm variants; web untouched).
 > **BATCH 11 EXECUTED** (2026-07-06, v0.12.0) — overlays complete: **NotificationToast +
 > NotificationContainer** (styles-only) and **ImagePreviewModal** (`.native.tsx`, RN Modal + Image).
-> ~20 components/patterns now RN-ready; only Phase 5 (native list pattern) remains.
+> ~20 components/patterns now RN-ready.
+> **BATCH 12 EXECUTED** (2026-07-06, v0.13.0) — **DataTable** on native (`DataTable.native.tsx`, same
+> `DataTableProps<T>`, renders rows as cards via SearchInput/Checkbox/Pressable). **ALL PLAN PHASES
+> COMPLETE.** Remaining as documented follow-ups only: PasswordInput/Switch/RadioGroup (DOM-event
+> onChange → need a value-based API in a coordinated major), Select (native picker), native sort-header
+> + Pagination UI, FlatList virtualization for DataTable.
 > **Reference implementation studied**: `~/Documents/betterware/betterware-ui` (`@betternet/design-system`) — dual-platform React + RN library in production use. We adopt its mechanics, NOT its Betterware-specific components/theme.
 > **Written**: 2026-07-05
 
@@ -174,9 +179,13 @@ SUI theming = CSS custom properties (`var(--sui-*, fallback)`). **RN has no CSS 
      (icon module + Pressable via `.attrs`; container is `position: absolute` since RN has no `fixed`).
    - **ImagePreviewModal** — ✅ DONE (v0.12.0, Batch 11) via `.native.tsx` on RN `<Modal>` + RN `Image`
      (gradients → flat scrims). Web untouched.
-5. **Native list patterns** (`ListScreen` replacing DataTable) — FlatList-based. PENDING (last phase):
-   DataTable's web implementation (table semantics, column sort headers, row selection) does not map to
-   native; the plan is a NEW native-only `ListScreen`/`ListView` pattern built on FlatList, not a port.
+5. **Native list pattern** — ✅ DONE (v0.13.0, Batch 12): rather than a separate `ListScreen`, **DataTable
+   itself** got a `DataTable.native.tsx` (same `DataTableProps<T>` API) that renders each row as a CARD
+   of label/value pairs — one component, both platforms. Covered on native: search (SearchInput), row
+   selection (Checkbox + select-all), per-row actions, empty/loading states, `column.render`. Deferred
+   (web-only for now, documented in the file): sortable column-header UI and the built-in Pagination
+   footer — on native, drive sort/paging with your own controls via the same `onSort`/`onPageChange`
+   callbacks. Follow-up: swap the `.map` for a FlatList when very large datasets need virtualization.
 6. Publish as minor with `react-native` optional peer; document in soberania `mobile/` + `lib/`.
 
 ### The `.attrs` prop-mapping pattern (Batch 7 learning)

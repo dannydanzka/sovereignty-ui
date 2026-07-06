@@ -46,4 +46,5 @@ export * from './components/StatsCard';
 export * from './components/Textarea';
 export * from './components/Toggle';
 
+export * from './patterns/DataTable';
 export * from './patterns/NotificationContainer';
