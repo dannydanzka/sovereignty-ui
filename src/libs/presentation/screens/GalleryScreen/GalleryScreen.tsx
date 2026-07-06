@@ -17,6 +17,7 @@ import {
   Badge,
   Button,
   Card,
+  Checkbox,
   Divider,
   EmptyState,
   InlineIcon,
@@ -26,6 +27,7 @@ import {
   Spacer,
   StatsCard,
   Textarea,
+  Toggle,
   useNotifications,
 } from '@dannydanzka/sovereignty-ui';
 
@@ -54,6 +56,8 @@ export const GalleryScreen = () => {
   const [password, setPassword] = useState('');
   const [search, setSearch] = useState('');
   const [notes, setNotes] = useState('');
+  const [agree, setAgree] = useState(false);
+  const [wifi, setWifi] = useState(true);
 
   return (
     <Screen>
@@ -169,6 +173,12 @@ export const GalleryScreen = () => {
               value={password}
               onChange={setPassword}
             />
+          </Section>
+
+          <Section title='Checkbox + Toggle (native Pressable)'>
+            <Checkbox checked={agree} label='I accept the terms' name='agree' onChange={setAgree} />
+            <Toggle checked={wifi} label='Wi-Fi' name='wifi' onChange={setWifi} />
+            <Toggle checked={agree} label='Small toggle' name='sm' size='sm' onChange={setAgree} />
           </Section>
 
           <Section title='SearchInput'>
