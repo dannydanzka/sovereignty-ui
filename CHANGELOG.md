@@ -1,5 +1,11 @@
 # @dannydanzka/sovereignty-ui
 
+## 0.14.0
+
+### Minor Changes
+
+- Add `Calendar` component (dual-platform web + React Native): a month-grid date picker supporting single-date and range selection, per-day blocking via `isDateDisabled` (availability pickers), min/max bounds, configurable week start, and localized month/weekday/day labels. Pure date math is shared across platforms and unit-tested.
+
 ## 0.13.0
 
 ### Minor Changes
