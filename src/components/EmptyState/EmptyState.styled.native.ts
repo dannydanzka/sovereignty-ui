@@ -10,12 +10,13 @@ import styled from 'styled-components/native';
 
 import { c, s, tf, tl, ts, tw } from '../../tokens/css-variables';
 import { Div, Span } from '../../primitives';
+import type { StyledEmptyStateProps } from './EmptyState.interfaces';
 
-export const Container = styled(Div)`
+export const Container = styled(Div)<StyledEmptyStateProps>`
   align-items: center;
   gap: ${s('sm')};
   justify-content: center;
-  padding: ${s('2xl')};
+  padding: ${({ $variant }) => ($variant === 'inline' ? `${s('xl')} 0px` : s('2xl'))};
 `;
 
 export const IconWrapper = styled(Div)`
@@ -35,10 +36,10 @@ export const Title = styled(Span)`
   text-align: center;
 `;
 
-export const Message = styled(Span)`
+export const Message = styled(Span)<StyledEmptyStateProps>`
   color: ${c('textSecondary')};
   font-family: ${tf('body')};
-  font-size: ${ts('sm')};
+  font-size: ${({ $variant }) => ($variant === 'inline' ? ts('base') : ts('sm'))};
   line-height: ${tl('relaxed')};
   text-align: center;
 `;

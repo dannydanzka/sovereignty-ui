@@ -59,10 +59,14 @@ export * from './patterns/AuthLayout';
 export * from './patterns/AvatarUpload';
 export * from './patterns/ActionsCell';
 export * from './patterns/DataTable';
+/** Web-only patterns: they are CSS-grid layouts, and React Native has no grid. */
+export * from './patterns/DescriptionList';
 export * from './patterns/FileUploader';
 export * from './patterns/FormField';
 export * from './patterns/FloatingActions';
 export * from './patterns/FormFields';
+export * from './patterns/FormGrid';
+export * from './patterns/PageHeader';
 export * from './patterns/ImageUploader';
 export * from './patterns/NotificationContainer';
 export * from './patterns/FiltersBar';
