@@ -25,6 +25,9 @@ export const PageSizeGroup = styled.label`
   font-family: ${tf('body')};
   font-size: ${ts('sm')};
   gap: ${s('xs')};
+  /* The label is two short words around a dropdown ("Show … per page"): breaking it mid-phrase reads
+     as a layout bug, and its grid column is auto-sized, so it can just be as wide as its text. */
+  white-space: nowrap;
 `;
 
 export const RangeText = styled.span`
