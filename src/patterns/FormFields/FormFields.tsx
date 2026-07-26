@@ -19,11 +19,18 @@ export const TextField = ({
   error,
   helpText,
   id,
+  inputMode,
   label,
+  max,
+  maxLength,
+  min,
   name,
+  onBlur,
   onChange,
   placeholder,
   required = false,
+  showCount = false,
+  step,
   type = 'text',
   value,
 }: TextFieldProps) => (
@@ -34,12 +41,19 @@ export const TextField = ({
       error={error}
       fullWidth
       id={id}
+      inputMode={inputMode}
       label={label}
+      max={max}
+      maxLength={maxLength}
+      min={min}
       name={name ?? id}
       placeholder={placeholder}
       required={required}
+      showCount={showCount}
+      step={step}
       type={type}
       value={value}
+      onBlur={onBlur}
       onChange={onChange}
     />
   </FormField>
