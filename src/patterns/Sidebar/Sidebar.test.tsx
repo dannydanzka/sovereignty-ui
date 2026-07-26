@@ -49,15 +49,15 @@ describe('Sidebar.Nav', () => {
     expect(onNavigate).toHaveBeenCalledOnce();
   });
 
-  it('hides labels from the a11y tree when collapsed, keeping them as tooltips', () => {
+  it('keeps every entry named when collapsed, where the visible label is hidden', () => {
     const { rerender } = render(<Sidebar.Nav currentPath='/admin' items={ITEMS} />);
     expect(screen.getByRole('link', { name: 'Inventario' })).toBeInTheDocument();
 
+    // A collapsed rail is icons only. Without an aria-label the link reaches a screen reader
+    // unnamed — which is what every hand-rolled sidebar did.
     rerender(<Sidebar.Nav currentPath='/admin' isCollapsed items={ITEMS} />);
-    // The label is display:none, so it no longer names the link…
-    expect(screen.queryByRole('link', { name: 'Inventario' })).not.toBeInTheDocument();
-    // …and the tooltip is what a sighted user reads instead. (getAllByText also matches the
-    // hidden label node, which is why this counts 2 and not 1.)
+    expect(screen.getByRole('link', { name: 'Inventario' })).toBeInTheDocument();
+    // Sighted users get the tooltip instead of the label.
     expect(screen.getAllByText('Inventario')).toHaveLength(2);
   });
 
