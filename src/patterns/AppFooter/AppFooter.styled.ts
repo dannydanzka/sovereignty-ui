@@ -6,7 +6,7 @@
 
 import styled from 'styled-components';
 
-import { c, s, tf, ts, tw } from '../../tokens/css-variables';
+import { c, mo, s, tf, ts, tw } from '../../tokens/css-variables';
 import { layout } from '../../tokens';
 
 export const FooterContainer = styled.footer`
@@ -75,4 +75,20 @@ export const SocialSlot = styled.div`
   align-items: center;
   display: flex;
   gap: ${s('xs')};
+`;
+
+/**
+ * A footer link. Three variants of "muted anchor that brightens on hover" is the standard way a
+ * footer's link styling drifts, so the pattern owns it. Recolour via `--sui-app-footer-link-*`.
+ */
+export const FooterLink = styled.a`
+  color: var(--sui-app-footer-link-color, ${c('neutral400')});
+  font-family: ${tf('body')};
+  font-size: ${ts('sm')};
+  text-decoration: none;
+  transition: color ${mo('fast')};
+
+  &:hover {
+    color: var(--sui-app-footer-link-hover-color, ${c('textInverse')});
+  }
 `;

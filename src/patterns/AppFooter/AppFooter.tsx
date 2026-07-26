@@ -15,6 +15,7 @@ import {
   FooterColumnWrapper,
   FooterContainer,
   FooterContent,
+  FooterLink,
   SocialSlot,
 } from './AppFooter.styled';
 
@@ -47,3 +48,5 @@ export const AppFooter = ({
     )}
   </FooterContainer>
 );
+
+AppFooter.Link = FooterLink;
