@@ -1,7 +1,7 @@
 /**
  * Card Component
  *
- * Container with shadow and rounded corners.
+ * Container with rounded corners: shadowed (`elevated`, the default) or bordered (`outlined`).
  * Supports clickable state with hover lift effect.
  */
 
@@ -9,8 +9,22 @@ import type { CardProps } from './Card.interfaces';
 
 import { StyledCard } from './Card.styled';
 
-export const Card = ({ children, onClick, padding = 'medium' }: CardProps) => (
-  <StyledCard $clickable={Boolean(onClick)} $padding={padding} onClick={onClick}>
+export const Card = ({
+  children,
+  className,
+  clipped,
+  onClick,
+  padding = 'medium',
+  variant = 'elevated',
+}: CardProps) => (
+  <StyledCard
+    $clickable={Boolean(onClick)}
+    $clipped={clipped}
+    $padding={padding}
+    $variant={variant}
+    className={className}
+    onClick={onClick}
+  >
     {children}
   </StyledCard>
 );

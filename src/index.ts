@@ -39,6 +39,7 @@ export * from './components/Skeleton';
 export * from './components/SortableHeader';
 export * from './components/Spacer';
 export * from './components/Spinner';
+export * from './components/Stack';
 export * from './components/StatItem';
 export * from './components/StatsCard';
 export * from './components/StepCard';

@@ -1,15 +1,16 @@
 /**
  * Card Styled Components
  *
- * Container with shadow and rounded corners.
+ * Container with rounded corners: shadowed (`elevated`) or bordered (`outlined`).
  * Supports clickable state with hover lift effect.
  */
 
 import styled from 'styled-components';
 
 import { c, el, s } from '../../tokens/css-variables';
+import type { CardPadding, StyledCardProps } from './Card.interfaces';
 
-const getPaddingStyles = (padding: 'large' | 'medium' | 'none' | 'small') => {
+const getPaddingStyles = (padding: CardPadding) => {
   switch (padding) {
     case 'none':
       return 'padding: 0;';
@@ -22,14 +23,15 @@ const getPaddingStyles = (padding: 'large' | 'medium' | 'none' | 'small') => {
   }
 };
 
-export const StyledCard = styled.div<{
-  $clickable?: boolean;
-  $padding: 'large' | 'medium' | 'none' | 'small';
-}>`
+export const StyledCard = styled.div<StyledCardProps>`
   background-color: ${c('white')};
   border-radius: 12px;
-  box-shadow: ${el('sm')};
   transition: all 0.2s ease-in-out;
+
+  ${({ $variant }) =>
+    $variant === 'outlined' ? `border: 1px solid ${c('neutral200')};` : `box-shadow: ${el('sm')};`}
+
+  ${({ $clipped }) => ($clipped ? 'overflow: hidden;' : '')}
 
   ${({ $padding }) => getPaddingStyles($padding)}
 
