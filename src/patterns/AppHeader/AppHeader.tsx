@@ -48,12 +48,13 @@ export const AppHeader = ({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleToggleMenu = useCallback(() => {
-    setIsMenuOpen((prev) => {
-      const next = !prev;
-      onMenuToggle?.(next);
-      return next;
-    });
-  }, [onMenuToggle]);
+    /* The next value is computed OUTSIDE the updater on purpose. A state updater has to be pure —
+       React may re-run it during render — and notifying the consumer from inside it triggers
+       "Cannot update a component while rendering a different component". */
+    const next = !isMenuOpen;
+    setIsMenuOpen(next);
+    onMenuToggle?.(next);
+  }, [isMenuOpen, onMenuToggle]);
 
   return (
     <HeaderBar

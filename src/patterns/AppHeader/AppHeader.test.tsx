@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { StrictMode, useState } from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { AppHeader } from './AppHeader';
@@ -84,5 +85,39 @@ describe('AppHeader', () => {
     const panel = getComputedStyle(screen.getByTestId('app-header-menu')).color;
     // Text over hero imagery is unreadable — the panel must NOT inherit the on-dark colour.
     expect(panel).not.toBe(bar);
+  });
+});
+
+describe('AppHeader — onMenuToggle purity', () => {
+  it('notifies the consumer without setting state from inside a state updater', async () => {
+    /* The regression: firing onMenuToggle inside setIsMenuOpen's updater made React warn
+       "Cannot update a component while rendering a different component" when the consumer's
+       callback was itself a setState. A state updater must stay pure. */
+    const user = userEvent.setup();
+    const consoleError = vi.spyOn(console, 'error').mockImplementationOnce(() => {});
+
+    const Consumer = () => {
+      const [isOpen, setIsOpen] = useState(false);
+      return (
+        <AppHeader
+          logoSlot={<span>{isOpen ? 'open' : 'closed'}</span>}
+          mobileMenuContent={<a href='/m'>Mobile</a>}
+          onMenuToggle={setIsOpen}
+        />
+      );
+    };
+
+    /* StrictMode re-runs the state updater, which is exactly what surfaces an impure one. Without
+       it this test passes even with the bug present — verified by reverting the fix. */
+    render(
+      <StrictMode>
+        <Consumer />
+      </StrictMode>
+    );
+    await user.click(screen.getByRole('button', { name: 'Open menu' }));
+
+    expect(screen.getByText('open')).toBeInTheDocument();
+    expect(consoleError).not.toHaveBeenCalled();
+    consoleError.mockRestore();
   });
 });
