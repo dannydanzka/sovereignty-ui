@@ -75,3 +75,27 @@ export const FullWidth: Story = {
     placeholder: 'Full width input...',
   },
 };
+
+export const WithCharacterCount: Story = {
+  args: {
+    id: 'counted',
+    label: 'Con contador',
+    maxLength: 40,
+    name: 'counted',
+    placeholder: 'Máximo 40 caracteres…',
+    showCount: true,
+    value: 'Andamio tubular',
+  },
+};
+
+export const CountAndError: Story = {
+  args: {
+    error: 'Requerido',
+    id: 'counted-error',
+    label: 'Contador + error',
+    maxLength: 20,
+    name: 'counted-error',
+    showCount: true,
+    value: 'Andamio tubular',
+  },
+};

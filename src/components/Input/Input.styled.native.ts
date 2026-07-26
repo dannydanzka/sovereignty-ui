@@ -55,6 +55,20 @@ export const PasswordToggle = styled(Pressable)`
   top: 0;
 `;
 
+export const InputFooter = styled(Div)`
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const InputSpacer = styled(Span)``;
+
+export const InputCount = styled(Span)<{ $isOver: boolean }>`
+  color: ${({ $isOver }) => ($isOver ? c('error') : c('textTertiary'))};
+  font-family: ${tf('body')};
+  font-size: ${ts('xs')};
+  margin-left: auto;
+`;
+
 export const InputError = styled(Span)`
   color: ${c('error')};
   font-family: ${tf('body')};

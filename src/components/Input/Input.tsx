@@ -1,7 +1,11 @@
 /**
  * Input
  *
- * Text input with label, error state, and optional password visibility toggle.
+ * Text input with label, error state, character counter, and optional password visibility toggle.
+ *
+ * The counter contract mirrors `Textarea` on purpose (`maxLength` + `showCount`, footer with the
+ * error on the left and `current/max` on the right) so a form does not change shape depending on
+ * which field type it uses.
  */
 
 import { useCallback, useState } from 'react';
@@ -11,9 +15,12 @@ import type { InputProps } from './Input.interfaces';
 
 import {
   InputContainer,
+  InputCount,
   InputError,
+  InputFooter,
   InputLabel,
   InputRequired,
+  InputSpacer,
   InputWrapper,
   PasswordToggle,
   StyledInput,
@@ -27,16 +34,22 @@ export const Input = ({
   hidePasswordLabel = 'Hide password',
   id,
   label,
+  maxLength,
   name,
   onChange,
   placeholder,
   required = false,
+  showCount = false,
   showPasswordLabel = 'Show password',
   type = 'text',
   value,
 }: InputProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const isPassword = type === 'password';
+  const currentLength = value?.length ?? 0;
+  const isOver = maxLength ? currentLength > maxLength : false;
+  const hasCounter = showCount && Boolean(maxLength);
+  const hasFooter = Boolean(error) || hasCounter;
 
   const handleTogglePassword = useCallback(() => {
     setShowPassword((prev) => !prev);
@@ -53,11 +66,12 @@ export const Input = ({
 
       <InputContainer>
         <StyledInput
-          $hasError={Boolean(error)}
+          $hasError={Boolean(error) || isOver}
           $hasToggle={isPassword}
           autoComplete={autoComplete}
           disabled={disabled}
           id={id}
+          maxLength={maxLength}
           name={name}
           placeholder={placeholder}
           required={required}
@@ -77,7 +91,16 @@ export const Input = ({
         )}
       </InputContainer>
 
-      {error && <InputError>{error}</InputError>}
+      {hasFooter && (
+        <InputFooter>
+          {error ? <InputError>{error}</InputError> : <InputSpacer />}
+          {hasCounter && (
+            <InputCount $isOver={isOver}>
+              {currentLength}/{maxLength}
+            </InputCount>
+          )}
+        </InputFooter>
+      )}
     </InputWrapper>
   );
 };
