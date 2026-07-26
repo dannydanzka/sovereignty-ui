@@ -59,13 +59,17 @@ Sidebar.Footer = SidebarFooter;
 Sidebar.Header = SidebarHeader;
 Sidebar.Nav = SidebarNav;
 
-const SidebarLayoutRoot = ({ children, className, style, ...rest }: SidebarLayoutProps) => (
+export const SidebarLayoutRoot = ({ children, className, style, ...rest }: SidebarLayoutProps) => (
   <LayoutShell className={className} style={style} {...rest}>
     {children}
   </LayoutShell>
 );
 
-const SidebarLayoutContent = ({ children, className, isCollapsed = false }: SidebarLayoutProps) => (
+export const SidebarLayoutContent = ({
+  children,
+  className,
+  isCollapsed = false,
+}: SidebarLayoutProps) => (
   <LayoutContent
     $isCollapsed={isCollapsed}
     className={className}
@@ -75,7 +79,7 @@ const SidebarLayoutContent = ({ children, className, isCollapsed = false }: Side
   </LayoutContent>
 );
 
-const SidebarLayoutBody = ({ children, className }: SidebarLayoutProps) => (
+export const SidebarLayoutBody = ({ children, className }: SidebarLayoutProps) => (
   <LayoutBody className={className}>{children}</LayoutBody>
 );
 
