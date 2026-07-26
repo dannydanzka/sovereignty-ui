@@ -99,3 +99,26 @@ export const CountAndError: Story = {
     value: 'Andamio tubular',
   },
 };
+
+export const DateBounded: Story = {
+  args: {
+    id: 'start-date',
+    label: 'Fecha de inicio',
+    max: '2026-12-31',
+    min: '2026-01-01',
+    name: 'startDate',
+    type: 'date',
+  },
+};
+
+export const NumberWithStep: Story = {
+  args: {
+    id: 'daily-rate',
+    label: 'Tarifa diaria',
+    min: 0,
+    name: 'dailyRate',
+    placeholder: '0.00',
+    step: '0.01',
+    type: 'number',
+  },
+};

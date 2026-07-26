@@ -5,7 +5,7 @@
  * around SUI form controls.
  */
 
-import type { InputType } from '../../components/Input';
+import type { InputProps, InputType } from '../../components/Input';
 import type { SelectOption } from '../../components/Select';
 
 interface BaseFieldProps {
@@ -21,8 +21,15 @@ interface BaseFieldProps {
 
 export interface TextFieldProps extends BaseFieldProps {
   autoComplete?: string;
+  inputMode?: InputProps['inputMode'];
+  max?: number | string;
+  maxLength?: number;
+  min?: number | string;
+  onBlur?: () => void;
   onChange?: (value: string) => void;
   placeholder?: string;
+  showCount?: boolean;
+  step?: number | string;
   type?: InputType;
   value?: string;
 }

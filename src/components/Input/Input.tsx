@@ -6,6 +6,12 @@
  * The counter contract mirrors `Textarea` on purpose (`maxLength` + `showCount`, footer with the
  * error on the left and `current/max` on the right) so a form does not change shape depending on
  * which field type it uses.
+ *
+ * Dates and numbers are types of this same field, not separate components: `type="date"` (with
+ * `min`/`max` for a range) and `type="number"` (with `min`/`max`/`step`) keep the label, error and
+ * footer identical to a text field, which is why a form never needs to hand-roll one. Those bounds
+ * are browser hints — the schema still owns validation. On native, `date` has no picker and
+ * degrades to a text field; use `Calendar` there.
  */
 
 import { useCallback, useState } from 'react';
@@ -33,14 +39,19 @@ export const Input = ({
   fullWidth = false,
   hidePasswordLabel = 'Hide password',
   id,
+  inputMode,
   label,
+  max,
   maxLength,
+  min,
   name,
+  onBlur,
   onChange,
   placeholder,
   required = false,
   showCount = false,
   showPasswordLabel = 'Show password',
+  step,
   type = 'text',
   value,
 }: InputProps) => {
@@ -54,6 +65,17 @@ export const Input = ({
   const handleTogglePassword = useCallback(() => {
     setShowPassword((prev) => !prev);
   }, []);
+
+  const renderFooter = () => (
+    <InputFooter>
+      {error ? <InputError>{error}</InputError> : <InputSpacer />}
+      {hasCounter && (
+        <InputCount $isOver={isOver}>
+          {currentLength}/{maxLength}
+        </InputCount>
+      )}
+    </InputFooter>
+  );
 
   return (
     <InputWrapper $fullWidth={fullWidth}>
@@ -71,13 +93,18 @@ export const Input = ({
           autoComplete={autoComplete}
           disabled={disabled}
           id={id}
+          inputMode={inputMode}
+          max={max}
           maxLength={maxLength}
+          min={min}
           name={name}
           placeholder={placeholder}
           required={required}
           secureTextEntry={isPassword && !showPassword}
+          step={step}
           type={type}
           value={value}
+          onBlur={onBlur}
           onValueChange={onChange}
         />
         {isPassword && (
@@ -91,16 +118,7 @@ export const Input = ({
         )}
       </InputContainer>
 
-      {hasFooter && (
-        <InputFooter>
-          {error ? <InputError>{error}</InputError> : <InputSpacer />}
-          {hasCounter && (
-            <InputCount $isOver={isOver}>
-              {currentLength}/{maxLength}
-            </InputCount>
-          )}
-        </InputFooter>
-      )}
+      {hasFooter && renderFooter()}
     </InputWrapper>
   );
 };
