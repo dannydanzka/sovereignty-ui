@@ -7,6 +7,8 @@ export * from './useModal';
 export type * from './useModal.interfaces';
 export * from './useNotifications';
 export type * from './useNotifications.interfaces';
+export * from './useDataTableState';
+export type * from './useDataTableState.interfaces';
 export * from './usePagination';
 export type * from './usePagination.interfaces';
 export * from './useTableSort';
