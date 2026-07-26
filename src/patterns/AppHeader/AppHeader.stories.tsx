@@ -5,46 +5,38 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AppHeader } from './AppHeader';
-import { Button } from '../../components/Button';
 
-const meta: Meta<typeof AppHeader> = {
+const meta = {
   component: AppHeader,
+  parameters: { layout: 'fullscreen' },
   tags: ['autodocs'],
   title: 'Patterns/AppHeader',
-};
+} satisfies Meta<typeof AppHeader>;
 
 export default meta;
-type Story = StoryObj<typeof AppHeader>;
+type Story = StoryObj<typeof meta>;
 
-export const Complete: Story = {
-  render: () => (
-    <AppHeader
-      actionsSlot={<Button size='sm'>Sign in</Button>}
-      logoSlot={<strong>ACME</strong>}
-      mobileMenuContent={
-        <div>
-          <div>
-            <a href='#features'>Features</a>
-          </div>
-          <div>
-            <a href='#pricing'>Pricing</a>
-          </div>
-        </div>
-      }
-      navSlot={
-        <>
-          <a href='#features'>Features</a>
-          <a href='#pricing'>Pricing</a>
-          <a href='#docs'>Docs</a>
-        </>
-      }
-    />
+const SLOTS = {
+  actionsSlot: <a href='#actions'>Sign in</a>,
+  logoSlot: <strong>ACME</strong>,
+  mobileMenuContent: <a href='#mobile'>Pricing</a>,
+  navSlot: <a href='#nav'>Pricing</a>,
+};
+
+export const Default: Story = { args: SLOTS };
+
+/**
+ * Over a hero: the bar flips its own colour and everything in the slots inherits it — no `isOnDark`
+ * flag threaded through the logo, the links and the icons.
+ */
+export const Transparent: Story = {
+  args: { ...SLOTS, floating: true, transparent: true },
+  render: (args) => (
+    <div style={{ background: 'linear-gradient(160deg, #1A237E, #4A148C)', minHeight: '60vh' }}>
+      <AppHeader {...args} />
+    </div>
   ),
 };
 
-export const LogoOnly: Story = {
-  args: {
-    logoSlot: <strong>ACME</strong>,
-    sticky: false,
-  },
-};
+/** Hidden — what `useHeaderScroll` produces while the reader scrolls down. */
+export const Hidden: Story = { args: { ...SLOTS, hidden: true } };

@@ -1,5 +1,8 @@
 export * from './useClickOutside';
 export * from './useDebounce';
+/** Web-only: reads window.scrollY. Not in the native barrel. */
+export * from './useHeaderScroll';
+export type * from './useHeaderScroll.interfaces';
 export * from './useLoading';
 export type * from './useLoading.interfaces';
 export * from './useMediaQuery';

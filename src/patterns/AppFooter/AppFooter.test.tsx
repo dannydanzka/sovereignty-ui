@@ -28,3 +28,12 @@ describe('AppFooter', () => {
     expect(screen.getByText('© 2026 ACME')).toBeInTheDocument();
   });
 });
+
+describe('AppFooter.Link', () => {
+  it('renders a footer anchor, so a product stops re-styling one per link kind', () => {
+    render(
+      <AppFooter columns={[{ content: <AppFooter.Link href='/terms'>Terms</AppFooter.Link> }]} />
+    );
+    expect(screen.getByRole('link', { name: 'Terms' })).toHaveAttribute('href', '/terms');
+  });
+});
