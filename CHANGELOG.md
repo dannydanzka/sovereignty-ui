@@ -1,5 +1,13 @@
 # @dannydanzka/sovereignty-ui
 
+## 0.17.0
+
+### Minor Changes
+
+- 4bfa17f: Button: label weight `medium` → `bold` (web + native). A call to action reads as one; at 500 the
+  label competed with body copy, and consumers were compensating with local overrides — which is the
+  divergence the shared Button exists to prevent.
+
 ## 0.16.0
 
 ### Minor Changes
