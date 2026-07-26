@@ -5,14 +5,15 @@
 import styled from 'styled-components';
 
 import { c, s, tf, tl, ts, tw } from '../../tokens/css-variables';
+import type { StyledEmptyStateProps } from './EmptyState.interfaces';
 
-export const Container = styled.div`
+export const Container = styled.div<StyledEmptyStateProps>`
   align-items: center;
   display: flex;
   flex-direction: column;
   gap: ${s('sm')};
   justify-content: center;
-  padding: ${s('2xl')};
+  padding: ${({ $variant }) => ($variant === 'inline' ? `${s('xl')} 0` : s('2xl'))};
   text-align: center;
 `;
 
@@ -40,13 +41,13 @@ export const Title = styled.h3`
   margin: 0;
 `;
 
-export const Message = styled.p`
+export const Message = styled.p<StyledEmptyStateProps>`
   color: ${c('textSecondary')};
   font-family: ${tf('body')};
-  font-size: ${ts('sm')};
+  font-size: ${({ $variant }) => ($variant === 'inline' ? ts('base') : ts('sm'))};
   line-height: ${tl('relaxed')};
   margin: 0;
-  max-width: 400px;
+  max-width: ${({ $variant }) => ($variant === 'inline' ? 'none' : '400px')};
 `;
 
 export const Action = styled.div`
