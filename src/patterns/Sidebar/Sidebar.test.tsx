@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -136,5 +137,16 @@ describe('SidebarLayout', () => {
     const collapsed = getComputedStyle(screen.getByTestId('sidebar-layout-content')).marginLeft;
 
     expect(expanded).not.toBe(collapsed);
+  });
+});
+
+describe('SidebarLayout theming', () => {
+  it('accepts CSS custom properties on the shell, which is how a runtime tenant theme arrives', () => {
+    render(
+      <SidebarLayout data-testid='shell' style={{ '--sui-sidebar-bg': '#1A237E' } as CSSProperties}>
+        <SidebarLayout.Content>contenido</SidebarLayout.Content>
+      </SidebarLayout>
+    );
+    expect(screen.getByTestId('shell')).toHaveStyle({ '--sui-sidebar-bg': '#1A237E' });
   });
 });
