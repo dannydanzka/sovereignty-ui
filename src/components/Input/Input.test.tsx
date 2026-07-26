@@ -40,4 +40,29 @@ describe('Input', () => {
     render(<Input disabled id='field' label='Field' name='field' />);
     expect(screen.getByLabelText('Field')).toBeDisabled();
   });
+
+  it('shows the character count when showCount and maxLength are set', () => {
+    render(<Input id='sku' maxLength={100} name='sku' showCount value='Hello' />);
+    expect(screen.getByText('5/100')).toBeInTheDocument();
+  });
+
+  it('caps the value with the native maxLength', () => {
+    render(<Input id='sku' label='SKU' maxLength={10} name='sku' />);
+    expect(screen.getByLabelText('SKU')).toHaveAttribute('maxlength', '10');
+  });
+
+  it('keeps the counter hidden unless BOTH showCount and maxLength are given', () => {
+    const { rerender } = render(<Input id='sku' name='sku' showCount value='Hello' />);
+    expect(screen.queryByText(/5\//)).not.toBeInTheDocument();
+    rerender(<Input id='sku' maxLength={100} name='sku' value='Hello' />);
+    expect(screen.queryByText('5/100')).not.toBeInTheDocument();
+  });
+
+  it('renders error and counter together, error first', () => {
+    render(
+      <Input error='Requerido' id='sku' maxLength={20} name='sku' showCount value='Andamio' />
+    );
+    expect(screen.getByText('Requerido')).toBeInTheDocument();
+    expect(screen.getByText('7/20')).toBeInTheDocument();
+  });
 });

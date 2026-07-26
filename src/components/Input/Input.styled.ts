@@ -86,6 +86,20 @@ export const PasswordToggle = styled.button`
   }
 `;
 
+export const InputFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const InputSpacer = styled.span``;
+
+export const InputCount = styled.span<{ $isOver: boolean }>`
+  color: ${({ $isOver }) => ($isOver ? c('error') : c('textTertiary'))};
+  font-family: ${tf('body')};
+  font-size: ${ts('xs')};
+  margin-left: auto;
+`;
+
 export const InputError = styled.span`
   color: ${c('error')};
   font-family: ${tf('body')};
