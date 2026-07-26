@@ -41,6 +41,9 @@ export const SidebarNav = ({
             $isActive={isActive}
             $isCollapsed={isCollapsed}
             aria-current={isActive ? 'page' : undefined}
+            /* Collapsed hides the visible label, so the name has to come from here or the link
+               reaches a screen reader as an unnamed link. */
+            aria-label={item.label}
             as={linkAs}
             href={item.href}
             onClick={onNavigate}
