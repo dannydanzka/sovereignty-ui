@@ -1,6 +1,6 @@
 /** Sidebar pattern contracts. */
 
-import type { ComponentType, ReactNode } from 'react';
+import type { ComponentType, CSSProperties, HTMLAttributes, ReactNode } from 'react';
 
 export interface SidebarNavItem {
   /** Optional count/dot rendered on the right (or over the icon when collapsed). */
@@ -67,11 +67,17 @@ export interface SidebarFooterProps {
   onClick?: () => void;
 }
 
-export interface SidebarLayoutProps {
+export interface SidebarLayoutProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
   className?: string;
   /** Must mirror the `Sidebar` value: it drives the content offset. */
   isCollapsed?: boolean;
+  /**
+   * The shell is where a runtime theme lands: a tenant's colours are CSS custom properties computed
+   * per request, so they cannot come from a static stylesheet. Meant for `--*` declarations, not for
+   * inline styling.
+   */
+  style?: CSSProperties;
 }
 
 export interface IsNavItemActiveOptions {

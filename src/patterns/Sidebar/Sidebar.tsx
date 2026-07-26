@@ -59,8 +59,10 @@ Sidebar.Footer = SidebarFooter;
 Sidebar.Header = SidebarHeader;
 Sidebar.Nav = SidebarNav;
 
-const SidebarLayoutRoot = ({ children, className }: SidebarLayoutProps) => (
-  <LayoutShell className={className}>{children}</LayoutShell>
+const SidebarLayoutRoot = ({ children, className, style, ...rest }: SidebarLayoutProps) => (
+  <LayoutShell className={className} style={style} {...rest}>
+    {children}
+  </LayoutShell>
 );
 
 const SidebarLayoutContent = ({ children, className, isCollapsed = false }: SidebarLayoutProps) => (
