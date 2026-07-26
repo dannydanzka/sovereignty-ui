@@ -59,7 +59,12 @@ export * from './patterns/AuthLayout';
 export * from './patterns/AvatarUpload';
 export * from './patterns/ActionsCell';
 export * from './patterns/DataTable';
-/** Web-only patterns: they are CSS-grid layouts, and React Native has no grid. */
+/**
+ * Web-only patterns. Most are CSS-grid layouts and React Native has no grid; `Sidebar` and
+ * `BackLink` are web-only for a different reason — `position: fixed` + hover + media queries, and
+ * an `<a href>`, have no honest RN equivalent.
+ */
+export * from './patterns/BackLink';
 export * from './patterns/DescriptionList';
 export * from './patterns/FileUploader';
 export * from './patterns/FormField';
@@ -71,6 +76,7 @@ export * from './patterns/ImageUploader';
 export * from './patterns/NotificationContainer';
 export * from './patterns/FiltersBar';
 export * from './patterns/Pagination';
+export * from './patterns/Sidebar';
 export * from './patterns/StatusBadge';
 export * from './patterns/TableFooter';
 
