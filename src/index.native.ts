@@ -42,6 +42,7 @@ export * from './components/NotificationToast';
 export * from './components/ProgressBar';
 export * from './components/SearchInput';
 export * from './components/Spacer';
+export * from './components/Stack';
 export * from './components/StatsCard';
 export * from './components/Textarea';
 export * from './components/Toggle';

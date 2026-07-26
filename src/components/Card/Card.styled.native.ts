@@ -10,9 +10,10 @@
 import styled from 'styled-components/native';
 
 import { c, el, s } from '../../tokens/css-variables';
+import type { CardPadding, StyledCardProps } from './Card.interfaces';
 import { Pressable } from '../../primitives';
 
-const getPaddingStyles = (padding: 'large' | 'medium' | 'none' | 'small') => {
+const getPaddingStyles = (padding: CardPadding) => {
   switch (padding) {
     case 'none':
       return '0px';
@@ -25,12 +26,16 @@ const getPaddingStyles = (padding: 'large' | 'medium' | 'none' | 'small') => {
   }
 };
 
-export const StyledCard = styled(Pressable)<{
-  $clickable?: boolean;
-  $padding: 'large' | 'medium' | 'none' | 'small';
-}>`
+export const StyledCard = styled(Pressable)<StyledCardProps>`
   background-color: ${c('white')};
   border-radius: 12px;
-  box-shadow: ${el('sm')};
   padding: ${({ $padding }) => getPaddingStyles($padding)};
+
+  ${({ $variant }) =>
+    $variant === 'outlined'
+      ? `border-color: ${c('neutral200')};
+         border-width: 1px;`
+      : `box-shadow: ${el('sm')};`}
+
+  ${({ $clipped }) => ($clipped ? 'overflow: hidden;' : '')}
 `;

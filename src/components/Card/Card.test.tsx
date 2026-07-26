@@ -16,4 +16,29 @@ describe('Card', () => {
     await userEvent.click(screen.getByText('Click'));
     expect(handleClick).toHaveBeenCalledOnce();
   });
+
+  it('is elevated by default and swaps the shadow for a border when outlined', () => {
+    const { rerender } = render(<Card>Contenido</Card>);
+    const shadowed = getComputedStyle(screen.getByText('Contenido'));
+    expect(shadowed.boxShadow).not.toBe('');
+    expect(shadowed.borderWidth).toBe('');
+
+    rerender(<Card variant='outlined'>Contenido</Card>);
+    // jsdom drops a `border` shorthand whose colour is a var(), so the assertable difference is the
+    // shadow: outlined must not float. The border itself is covered visually by the Storybook story.
+    const bordered = getComputedStyle(screen.getByText('Contenido'));
+    expect(bordered.boxShadow).toBe('');
+  });
+
+  it('clips content only when asked, so a table can sit flush against the border', () => {
+    const { rerender } = render(<Card variant='outlined'>Contenido</Card>);
+    expect(screen.getByText('Contenido')).not.toHaveStyle({ overflow: 'hidden' });
+
+    rerender(
+      <Card clipped variant='outlined'>
+        Contenido
+      </Card>
+    );
+    expect(screen.getByText('Contenido')).toHaveStyle({ overflow: 'hidden' });
+  });
 });

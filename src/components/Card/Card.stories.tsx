@@ -10,6 +10,7 @@ const meta = {
   argTypes: {
     onClick: { action: 'clicked' },
     padding: { control: 'radio', options: ['none', 'small', 'medium', 'large'] },
+    variant: { control: 'radio', options: ['elevated', 'outlined'] },
   },
   component: Card,
   parameters: { layout: 'centered' },
@@ -42,4 +43,22 @@ export const Default: Story = {
 
 export const Clickable: Story = {
   args: { children: 'Click me', onClick: () => alert('clicked') },
+};
+
+export const Outlined: Story = {
+  args: {
+    children:
+      'Flat bordered surface — for a table or a form section, where a shadow reads as a tile',
+    variant: 'outlined',
+  },
+};
+
+export const OutlinedClipped: Story = {
+  args: { children: 'Content clipped to the rounded corners', variant: 'outlined' },
+  render: () => (
+    <Card clipped padding='none' variant='outlined'>
+      <div style={{ background: '#EEF2F7', padding: '12px' }}>Full-bleed header row</div>
+      <div style={{ padding: '12px' }}>Rows sit flush against the border</div>
+    </Card>
+  ),
 };
