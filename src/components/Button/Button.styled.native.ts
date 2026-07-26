@@ -110,7 +110,7 @@ export const ButtonLabel = styled(Span)<StyledButtonProps>`
   color: ${({ $variant }) => VARIANT_COLORS[$variant].text};
   font-family: ${tf('body')};
   font-size: ${({ $size }) => (normalizeSize($size) === 'sm' ? ts('xs') : ts('sm'))};
-  font-weight: ${tw('medium')};
+  font-weight: ${tw('bold')};
 `;
 
 export const ButtonIcon = styled(Div)`

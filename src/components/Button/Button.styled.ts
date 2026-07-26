@@ -258,7 +258,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   cursor: pointer;
   display: inline-flex;
   font-family: ${tf('body')};
-  font-weight: ${tw('medium')};
+  font-weight: ${tw('bold')};
   gap: ${s('xs')};
   justify-content: center;
   outline: none;
