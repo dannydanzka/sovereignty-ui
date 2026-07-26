@@ -29,7 +29,7 @@ const getVariantStyles = (variant: ButtonVariant) => {
     accent: css`
       background: ${c('accent500')};
       border: none;
-      color: ${c('white')};
+      color: ${c('onAccent')};
 
       &:hover:not(:disabled) {
         background: ${c('accent600')};
@@ -42,7 +42,7 @@ const getVariantStyles = (variant: ButtonVariant) => {
     brand: css`
       background: ${c('accent500')};
       border: none;
-      color: ${c('white')};
+      color: ${c('onAccent')};
 
       &:hover:not(:disabled) {
         background: ${c('accent700')};
@@ -125,7 +125,7 @@ const getVariantStyles = (variant: ButtonVariant) => {
     primary: css`
       background: ${c('primary500')};
       border: none;
-      color: ${c('neutral900')};
+      color: ${c('onPrimary')};
 
       &:hover:not(:disabled) {
         background: ${c('primary400')};
