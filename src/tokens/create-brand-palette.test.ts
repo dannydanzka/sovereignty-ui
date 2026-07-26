@@ -18,7 +18,7 @@ describe('createBrandPalette', () => {
     expect(color?.primary700).not.toBe(color?.primary500);
   });
 
-  it('emits the accent subset (50,100,200,500,600,700) and no 800/900', () => {
+  it('emits the accent subset (50,100,200,500,600,700) plus onAccent, and no 800/900', () => {
     const { color } = createBrandPalette({ accent: '#123456' });
     expect(Object.keys(color ?? {}).sort()).toEqual([
       'accent100',
@@ -27,6 +27,7 @@ describe('createBrandPalette', () => {
       'accent500',
       'accent600',
       'accent700',
+      'onAccent',
     ]);
   });
 
@@ -52,5 +53,23 @@ describe('createBrandPalette', () => {
 
   it('throws on invalid hex', () => {
     expect(() => createBrandPalette({ accent: 'red' })).toThrow(/invalid hex/);
+  });
+
+  it('picks a readable foreground for a DARK brand (the CORF regression)', () => {
+    const { color } = createBrandPalette({ accent: '#8B0000', primary: '#8B0000' });
+    expect(color?.onPrimary).toBe('#FFFFFF');
+    expect(color?.onAccent).toBe('#FFFFFF');
+  });
+
+  it('picks a dark foreground for a LIGHT brand', () => {
+    const { color } = createBrandPalette({ accent: '#FFC107', primary: '#FFEB3B' });
+    expect(color?.onPrimary).toBe('#1E3A5F');
+    expect(color?.onAccent).toBe('#1E3A5F');
+  });
+
+  it('only emits the contrast token for the families it was given', () => {
+    const { color } = createBrandPalette({ primary: '#8B0000' });
+    expect(color?.onPrimary).toBe('#FFFFFF');
+    expect(color?.onAccent).toBeUndefined();
   });
 });

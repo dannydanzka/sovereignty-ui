@@ -17,3 +17,14 @@ export const SHADE_AMOUNT: Record<number, number> = {
 /** Which steps each family exposes in the default token set. */
 export const FULL_STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] as const;
 export const ACCENT_STEPS = [50, 100, 200, 500, 600, 700] as const;
+
+/**
+ * Foregrounds used ON a brand background, picked by relative luminance. A themed brand can be light
+ * or dark, so a hardcoded foreground is readable for exactly one of the two — which is how a dark
+ * brand ended up rendering near-black label text on a near-black-red button.
+ */
+export const ON_BRAND_LIGHT = '#FFFFFF';
+export const ON_BRAND_DARK = '#1E3A5F';
+
+/** Above this WCAG relative luminance the background counts as light → use the dark foreground. */
+export const ON_BRAND_LUMINANCE_THRESHOLD = 0.5;

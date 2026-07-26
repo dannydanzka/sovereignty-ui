@@ -17,7 +17,14 @@
  * ```
  */
 
-import { ACCENT_STEPS, FULL_STEPS, SHADE_AMOUNT } from './create-brand-palette.constants';
+import {
+  ACCENT_STEPS,
+  FULL_STEPS,
+  ON_BRAND_DARK,
+  ON_BRAND_LIGHT,
+  ON_BRAND_LUMINANCE_THRESHOLD,
+  SHADE_AMOUNT,
+} from './create-brand-palette.constants';
 import type { BrandPaletteInput } from './create-brand-palette.interfaces';
 import type { ColorToken, TokenOverrides } from './tokens.types';
 
@@ -69,6 +76,25 @@ const shadeForStep = (base: [number, number, number], step: number): string => {
   return rgbToHex(amount > 0 ? mix(base, WHITE, amount) : mix(base, BLACK, -amount));
 };
 
+/** sRGB channel → linear light (WCAG 2.x). */
+const toLinear = (channel: number): number => {
+  const ratio = channel / 255;
+  return ratio <= 0.03928 ? ratio / 12.92 : ((ratio + 0.055) / 1.055) ** 2.4;
+};
+
+/** WCAG relative luminance, 0 (black) … 1 (white). */
+const relativeLuminance = ([r, g, b]: [number, number, number]): number =>
+  0.2126 * toLinear(r) + 0.7152 * toLinear(g) + 0.0722 * toLinear(b);
+
+/**
+ * The readable foreground to place ON `baseHex`. Exported so consumers can label custom surfaces
+ * the same way the Button does, instead of guessing white vs dark per theme.
+ */
+export const onBrandForeground = (baseHex: string): string =>
+  relativeLuminance(hexToRgb(baseHex)) > ON_BRAND_LUMINANCE_THRESHOLD
+    ? ON_BRAND_DARK
+    : ON_BRAND_LIGHT;
+
 const familyScale = (
   prefix: string,
   baseHex: string,
@@ -89,11 +115,15 @@ const familyScale = (
 export const createBrandPalette = (input: BrandPaletteInput): TokenOverrides => {
   const color: Record<string, string> = {};
 
-  if (input.accent) Object.assign(color, familyScale('accent', input.accent, ACCENT_STEPS));
+  if (input.accent) {
+    Object.assign(color, familyScale('accent', input.accent, ACCENT_STEPS));
+    color['onAccent'] = onBrandForeground(input.accent);
+  }
   if (input.primary) {
     Object.assign(color, familyScale('primary', input.primary, FULL_STEPS));
     const [r, g, b] = hexToRgb(input.primary);
     color['primaryFocusShadow'] = `rgba(${r}, ${g}, ${b}, 0.1)`;
+    color['onPrimary'] = onBrandForeground(input.primary);
   }
   if (input.secondary) {
     Object.assign(color, familyScale('secondary', input.secondary, FULL_STEPS));

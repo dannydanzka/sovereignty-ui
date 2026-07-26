@@ -42,6 +42,8 @@ export const color = {
   accent200: '#F48FB1',
   accent50: '#FCE4EC',
   accent500: '#FF4081',
+  onAccent:
+    '#FFFFFF' /** readable foreground ON accent500; recomputed per brand by createBrandPalette */,
   accent600: '#D81B60',
   accent700: '#C2185B',
   background: '#FFFFFF',
@@ -91,6 +93,8 @@ export const color = {
   primary400: '#FDD835',
   primary50: '#FFFBEB',
   primary500: '#FFC107',
+  onPrimary:
+    '#1E3A5F' /** readable foreground ON primary500; recomputed per brand by createBrandPalette */,
   primary600: '#FFB300',
   primary700: '#FFA000',
   primary800: '#FF8F00',
