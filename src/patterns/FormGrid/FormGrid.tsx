@@ -10,7 +10,7 @@ import type { FormGridFullProps, FormGridProps } from './FormGrid.interfaces';
 
 import { FullRow, GridWrapper } from './FormGrid.styled';
 
-const Full = ({ children, className }: FormGridFullProps) => (
+export const FormGridFull = ({ children, className }: FormGridFullProps) => (
   <FullRow className={className} data-testid='form-grid-full'>
     {children}
   </FullRow>
@@ -22,4 +22,4 @@ export const FormGrid = ({ children, className, columns = 2 }: FormGridProps) =>
   </GridWrapper>
 );
 
-FormGrid.Full = Full;
+FormGrid.Full = FormGridFull;
