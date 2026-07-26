@@ -56,6 +56,7 @@ export * from './patterns/AppFooter';
 export * from './patterns/AppHeader';
 export * from './patterns/AuthLayout';
 export * from './patterns/AvatarUpload';
+export * from './patterns/ActionsCell';
 export * from './patterns/DataTable';
 export * from './patterns/FileUploader';
 export * from './patterns/FormField';
@@ -63,7 +64,10 @@ export * from './patterns/FloatingActions';
 export * from './patterns/FormFields';
 export * from './patterns/ImageUploader';
 export * from './patterns/NotificationContainer';
+export * from './patterns/FiltersBar';
 export * from './patterns/Pagination';
+export * from './patterns/StatusBadge';
+export * from './patterns/TableFooter';
 
 export * from './hooks';
 export * from './utils';
