@@ -31,6 +31,22 @@ describe('TotalsList', () => {
     expect(screen.queryByText('Descuento')).not.toBeInTheDocument();
   });
 
+  /* Line items are not subtotal/tax: two lines of the same asset for the same duration carry the same
+     label, so keying rows by label would collide. `id` is the escape hatch, and this asserts both rows
+     survive — a duplicate key would drop one of them and the buyer would be shown a wrong summary. */
+  it('renders every row when two lines share a label but differ by id', () => {
+    render(
+      <TotalsList
+        items={[
+          { id: 'line-1', label: 'Andamio ×2', value: '$600.00' },
+          { id: 'line-2', label: 'Andamio ×2', value: '$600.00' },
+        ]}
+      />
+    );
+    expect(screen.getAllByRole('term')).toHaveLength(2);
+    expect(screen.getAllByText('Andamio ×2')).toHaveLength(2);
+  });
+
   it('hides the total when the total itself is hidden', () => {
     render(<TotalsList items={items} total={{ ...total, hidden: true }} />);
     expect(screen.queryByTestId('totals-list-total')).not.toBeInTheDocument();
