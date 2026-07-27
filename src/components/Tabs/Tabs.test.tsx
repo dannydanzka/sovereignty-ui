@@ -37,6 +37,46 @@ describe('Tabs', () => {
     expect(handleChange).not.toHaveBeenCalled();
   });
 
+  it('links each tab to the panel it controls, so the panel is not an unlabelled region', () => {
+    render(<Tabs activeTabId='tab1' tabs={TABS} onTabChange={vi.fn()} />);
+
+    const activeTab = screen.getByRole('tab', { name: 'Tab 1' });
+    const panel = screen.getByRole('tabpanel');
+
+    expect(activeTab).toHaveAttribute('aria-controls', panel.id);
+    expect(panel).toHaveAttribute('aria-labelledby', activeTab.id);
+  });
+
+  it('is one tab stop — only the active tab is reachable with Tab', () => {
+    render(<Tabs activeTabId='tab1' tabs={TABS} onTabChange={vi.fn()} />);
+
+    expect(screen.getByRole('tab', { name: 'Tab 1' })).toHaveAttribute('tabindex', '0');
+    expect(screen.getByRole('tab', { name: 'Tab 2' })).toHaveAttribute('tabindex', '-1');
+  });
+
+  it('moves between tabs with the arrow keys, skipping the disabled one', async () => {
+    const handleChange = vi.fn();
+    render(<Tabs activeTabId='tab2' tabs={TABS} onTabChange={handleChange} />);
+
+    await userEvent.click(screen.getByRole('tab', { name: 'Tab 2' }));
+    handleChange.mockClear();
+    await userEvent.keyboard('{ArrowRight}');
+
+    /* tab3 is disabled, so Right from the last selectable tab wraps to the first. */
+    expect(handleChange).toHaveBeenCalledWith('tab1');
+  });
+
+  it('jumps to the first and last selectable tab with Home and End', async () => {
+    const handleChange = vi.fn();
+    render(<Tabs activeTabId='tab1' tabs={TABS} onTabChange={handleChange} />);
+
+    await userEvent.click(screen.getByRole('tab', { name: 'Tab 1' }));
+    handleChange.mockClear();
+    await userEvent.keyboard('{End}');
+
+    expect(handleChange).toHaveBeenCalledWith('tab2');
+  });
+
   it('renders badge when provided', () => {
     const tabs = [{ badge: 5, content: <p>C</p>, id: 't1', label: 'With Badge' }];
     render(<Tabs activeTabId='t1' tabs={tabs} onTabChange={vi.fn()} />);

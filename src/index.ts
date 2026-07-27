@@ -6,6 +6,7 @@ export * from './components/Button';
 export * from './components/Calendar';
 export * from './components/Card';
 export * from './components/Checkbox';
+export * from './components/Chip';
 export * from './components/Container';
 export * from './components/DetailLayout';
 export * from './components/Divider';
