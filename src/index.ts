@@ -66,6 +66,7 @@ export * from './patterns/DataTable';
  */
 export * from './patterns/BackLink';
 export * from './patterns/DescriptionList';
+export * from './patterns/TotalsList';
 export * from './patterns/FileUploader';
 export * from './patterns/Form';
 export * from './patterns/FormField';

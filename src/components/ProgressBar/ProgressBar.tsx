@@ -23,16 +23,20 @@ export const ProgressBar = ({
   showPercentage = true,
   size = 'medium',
   value,
+  valueLabel,
   variant = 'default',
 }: ProgressBarProps) => {
   const percentage = max > 0 ? Math.round((value / max) * 100) : 0;
 
+  /* An explicit `valueLabel` wins over the percentage: showing both is never what a caller wants. */
+  const readout = valueLabel ?? (showPercentage ? `${percentage}%` : null);
+
   return (
     <ProgressContainer className={className}>
-      {(label || showPercentage) && (
+      {(label || readout !== null) && (
         <ProgressHeader>
           {label && <ProgressLabel>{label}</ProgressLabel>}
-          {showPercentage && <ProgressPercentage>{percentage}%</ProgressPercentage>}
+          {readout !== null && <ProgressPercentage>{readout}</ProgressPercentage>}
         </ProgressHeader>
       )}
       <ProgressTrack $size={size}>

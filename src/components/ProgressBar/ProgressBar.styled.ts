@@ -41,7 +41,7 @@ export const ProgressPercentage = styled.span`
 `;
 
 export const ProgressTrack = styled.div<{ $size: 'large' | 'medium' | 'small' }>`
-  background: ${c('neutral200')};
+  background: var(--sui-progress-track, ${c('neutral200')});
   border-radius: ${sh('full')};
   height: ${({ $size }) => {
     switch ($size) {
@@ -57,6 +57,14 @@ export const ProgressTrack = styled.div<{ $size: 'large' | 'medium' | 'small' }>
   width: 100%;
 `;
 
+/**
+ * The fill.
+ *
+ * The `default` variant reads a variable so a branded product can point the bar at its own colour
+ * ONCE, instead of forking the bar per screen. The semantic variants stay fixed: `success` and
+ * `warning` MEAN something, and letting a brand repaint them would make a warning stop reading as a
+ * warning.
+ */
 export const ProgressFill = styled.div<{
   $percentage: number;
   $variant: 'default' | 'success' | 'warning';
@@ -69,7 +77,7 @@ export const ProgressFill = styled.div<{
       case 'warning':
         return c('warning');
       case 'default':
-        return `linear-gradient(90deg, ${c('accent500')}, ${c('tertiary300')})`;
+        return `var(--sui-progress-fill, linear-gradient(90deg, ${c('accent500')}, ${c('tertiary300')}))`;
     }
   }};
   border-radius: ${sh('full')};

@@ -10,28 +10,31 @@
 import { Image } from 'react-native';
 import styled from 'styled-components/native';
 
+import type { AvatarSize } from './Avatar.interfaces';
 import { c, tf, ts, tw } from '../../tokens/css-variables';
 import { Div, Span } from '../../primitives';
 
 const SIZE_MAP = {
+  '2xl': '96px',
   lg: '48px',
   md: '40px',
   sm: '32px',
   xl: '64px',
+  xs: '24px',
 } as const;
 
 const FONT_MAP = {
+  '2xl': ts('3xl'),
   lg: ts('lg'),
   md: ts('base'),
   sm: ts('xs'),
   xl: ts('2xl'),
+  xs: ts('xs'),
 } as const;
-
-type AvatarSize = 'lg' | 'md' | 'sm' | 'xl';
 
 export const AvatarContainer = styled(Div)<{ $size: AvatarSize }>`
   align-items: center;
-  background-color: ${c('primary200')};
+  background-color: var(--sui-avatar-bg, ${c('primary200')});
   border-radius: 9999px;
   flex-shrink: 0;
   height: ${({ $size }) => SIZE_MAP[$size]};
@@ -49,7 +52,7 @@ export const AvatarImage = styled(Image).attrs<{ alt?: string; src?: string }>((
 `;
 
 export const AvatarInitials = styled(Span)<{ $size?: AvatarSize }>`
-  color: ${c('textPrimary')};
+  color: var(--sui-avatar-fg, ${c('textPrimary')});
   font-family: ${tf('display')};
   font-size: ${({ $size }) => FONT_MAP[$size ?? 'md']};
   font-weight: ${tw('semibold')};
