@@ -1,5 +1,39 @@
 # @dannydanzka/sovereignty-ui
 
+## 0.26.0
+
+### Minor Changes
+
+- 567f0c0: `Alert`'s live-region role now follows its variant, and can be overridden with `role`.
+
+  `role="alert"` is an **assertive** live region: a screen reader interrupts whatever it is saying. That
+  is right for an error or a warning and wrong for a confirmation — "we sent your link" should wait its
+  turn (`role="status"`, polite). `Alert` hardcoded `alert` for all four variants, so any consumer that
+  had this distinction right lost it by adopting the component.
+
+  New mapping: `error`/`warning` → `alert`, `info`/`success` → `status`. Pass `role` to override when the
+  surrounding UI already announces the change.
+
+  Found while migrating a product whose own success banner used `role="status"` and whose error banner
+  used `role="alert"` — the library would have flattened both. The previous unit test asserted the
+  hardcoded role, so it encoded the defect rather than catching it; it has been replaced with a
+  per-variant table.
+
+- 567f0c0: New `Form` pattern: the `<form>` element as a stack of fields.
+
+  Three lines of CSS (`display: flex; flex-direction: column; gap: <token>`), which is exactly why it
+  gets retyped. The product that drove this had **ten copies** — `Form` in seven modals/screens,
+  `FormWrapper` in five admin forms — and they had already drifted: most at `gap: md`, one at `lg`, one
+  carrying its own `max-height`/scroll for a modal.
+
+  Not `Stack` with `as="form"`: `Stack` neither accepts `as` nor forwards props, so it cannot receive
+  `onSubmit`, `noValidate` or an `id` — the things that make a form a form. `Form` spreads every native
+  form attribute through, and a test covers submit specifically, because a wrapper that silently drops
+  `onSubmit` looks identical on screen and breaks every form in the product.
+
+  Scrolling inside a modal is `--sui-form-max-height` / `--sui-form-overflow-y`, so the one form that
+  needs it does not become a wrapper.
+
 ## 0.25.0
 
 ### Minor Changes
