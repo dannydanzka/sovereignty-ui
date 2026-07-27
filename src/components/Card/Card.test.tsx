@@ -30,6 +30,44 @@ describe('Card', () => {
     expect(bordered.boxShadow).toBe('');
   });
 
+  it('renders a div by default but takes the element the caller needs', () => {
+    const { rerender } = render(<Card>Contenido</Card>);
+    expect(screen.getByText('Contenido').tagName).toBe('DIV');
+
+    /* The case that matters: a card inside a `<ul>`. Rendering a div there is invalid markup and a
+       screen reader stops announcing the list — which is why consumers hand-rolled a bordered `li`
+       instead of adopting the card. */
+    rerender(<Card as='li'>Contenido</Card>);
+    expect(screen.getByText('Contenido').tagName).toBe('LI');
+
+    rerender(<Card as='article'>Contenido</Card>);
+    expect(screen.getByText('Contenido').tagName).toBe('ARTICLE');
+  });
+
+  it('keeps its surface styles when it changes element', () => {
+    render(
+      <Card as='li' variant='outlined'>
+        Contenido
+      </Card>
+    );
+
+    /* An `as` that dropped the styling would be worse than no `as` at all. */
+    expect(screen.getByText('Contenido')).toHaveStyle({
+      borderRadius: 'var(--sui-shape-lg, 0.75rem)',
+    });
+  });
+
+  it('takes its radius from the shape token, so a consumer can theme the corner', () => {
+    render(<Card variant='outlined'>Contenido</Card>);
+
+    /* jsdom cannot resolve custom properties, so assert the DECLARATION goes through the variable.
+       This used to be the literal `12px`: same value, but impossible to theme and impossible to
+       override without forking the card. */
+    expect(screen.getByText('Contenido')).toHaveStyle({
+      borderRadius: 'var(--sui-shape-lg, 0.75rem)',
+    });
+  });
+
   it('clips content only when asked, so a table can sit flush against the border', () => {
     const { rerender } = render(<Card variant='outlined'>Contenido</Card>);
     expect(screen.getByText('Contenido')).not.toHaveStyle({ overflow: 'hidden' });
