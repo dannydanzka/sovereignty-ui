@@ -27,13 +27,17 @@ export const ScreenContainer = styled.section`
  * Heading level is `as`: `<PageTitle as="h2">` when the page already owns its H1. Use it — a screen
  * with two H1s (or an H1 that is really a section) is a real navigation defect for a screen reader,
  * and picking the tag by how big the text should look is how that happens.
+ *
+ * Margin is a var for one specific reason: a heading dropped into a gap'd flex/grid container gets
+ * the gap AND this margin, so the spacing silently doubles. Setting `--sui-page-title-margin: 0` once
+ * is the fix; wrapping the heading per screen to zero it out is how the fork starts again.
  */
 export const PageTitle = styled.h1`
   color: var(--sui-page-title-color, ${c('textPrimary')});
   font-family: ${tf('display')};
   font-size: var(--sui-page-title-size, ${ts('4xl')});
   font-weight: ${tw('semibold')};
-  margin: 0 0 ${s('sm')};
+  margin: var(--sui-page-title-margin, 0 0 ${s('sm')});
 `;
 
 export const HeaderRow = styled.div`
@@ -51,5 +55,5 @@ export const SectionTitle = styled.h2`
   font-family: ${tf('display')};
   font-size: var(--sui-section-title-size, ${ts('xl')});
   font-weight: ${tw('semibold')};
-  margin: 0 0 ${s('sm')};
+  margin: var(--sui-section-title-margin, 0 0 ${s('sm')});
 `;

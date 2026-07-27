@@ -42,12 +42,15 @@ describe('title primitives', () => {
      ancestor wins. jsdom does not resolve custom properties, so no unit test here can prove the
      cascade; that part is verified in the browser. The assertion still has teeth: it fails the moment
      someone "simplifies" the declaration back to a literal token and closes the seam. */
-  it('declares its colour and size through the override variables', () => {
+  it('declares its colour, size and margin through the override variables', () => {
     render(<PageTitle>Cotización</PageTitle>);
 
     const style = getComputedStyle(screen.getByRole('heading', { name: 'Cotización' }));
     expect(style.color).toContain('--sui-page-title-color');
     expect(style.fontSize).toContain('--sui-page-title-size');
+    /* Margin is in the seam because a heading inside a gap'd container otherwise gets the gap AND the
+       margin, and the spacing doubles with nothing in the code saying so. */
+    expect(style.margin).toContain('--sui-page-title-margin');
   });
 
   it('renders the requested heading level, not the one implied by its size', () => {
