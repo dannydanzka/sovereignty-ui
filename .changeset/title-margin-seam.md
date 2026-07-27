@@ -12,3 +12,9 @@ nothing in the calling code says why. Every screen that hit this was going to wr
 zero the margin, which is the exact fork the colour seam had just removed.
 
 Same rule as colour and scale: the product decides it once.
+
+`BackLink` accepts `as` in its props type.
+
+It already forwarded `as` at runtime through `...rest`, and its own doc comment told consumers to use
+it — but `BackLinkProps` never declared it, so every router-driven consumer failed to type-check. The
+pattern had shipped since v0.22.0 and no product had been able to adopt it. A typed test now covers it.
