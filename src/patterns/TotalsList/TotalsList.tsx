@@ -29,7 +29,7 @@ export const TotalsList = ({ align = 'stretch', className, items, total }: Total
     {items
       .filter((item) => !item.hidden)
       .map((item) => (
-        <Line key={item.label}>
+        <Line key={item.id ?? item.label}>
           <Label>{item.label}</Label>
           <Value>{item.value}</Value>
         </Line>
