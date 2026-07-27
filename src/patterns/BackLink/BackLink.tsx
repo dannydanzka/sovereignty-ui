@@ -4,8 +4,12 @@
  * Trivial to write and therefore written once per detail screen, which is exactly why it drifts:
  * seven copies of it differed in weight, colour and whether they aligned to the start.
  *
- * It renders an `<a>`, so a router-driven product wraps it (`<Link legacyBehavior passHref>`) or
- * passes its own link component through `as`. Recolour via `--sui-back-link-color`.
+ * It renders an `<a>`. A router-driven product passes its own link component through `as`
+ * (`as={Link}`) or wraps it (`<Link legacyBehavior passHref>`). Recolour via `--sui-back-link-color`.
+ *
+ * `as` reached the styled anchor through `...rest` from the start, but `BackLinkProps` did not declare
+ * it, so every real consumer failed to type-check. Worth remembering as a shape of bug: the runtime was
+ * right, the doc comment was right, and the contract silently disagreed with both.
  */
 
 import { forwardRef } from 'react';
