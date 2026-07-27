@@ -30,6 +30,17 @@ describe('Card', () => {
     expect(bordered.boxShadow).toBe('');
   });
 
+  it('takes its radius from the shape token, so a consumer can theme the corner', () => {
+    render(<Card variant='outlined'>Contenido</Card>);
+
+    /* jsdom cannot resolve custom properties, so assert the DECLARATION goes through the variable.
+       This used to be the literal `12px`: same value, but impossible to theme and impossible to
+       override without forking the card. */
+    expect(screen.getByText('Contenido')).toHaveStyle({
+      borderRadius: 'var(--sui-shape-lg, 0.75rem)',
+    });
+  });
+
   it('clips content only when asked, so a table can sit flush against the border', () => {
     const { rerender } = render(<Card variant='outlined'>Contenido</Card>);
     expect(screen.getByText('Contenido')).not.toHaveStyle({ overflow: 'hidden' });
