@@ -4,8 +4,9 @@
  * Container with rounded corners: shadowed (`elevated`, the default) or bordered (`outlined`).
  * Supports clickable state with hover lift effect.
  *
- * Renders a `div` unless told otherwise. Pass `as` when the surrounding markup demands a specific
- * element — a card inside a `<ul>` must be an `li` or the list stops being a list.
+ * Renders a `div` unless told otherwise. Pass `element` when the surrounding markup demands a specific
+ * tag — a card inside a `<ul>` must be an `li` or the list stops being a list. The prop is NOT called
+ * `as`: styled-components consumes `as` on a `styled(Card)` wrapper and Card never runs.
  */
 
 import type { CardProps } from './Card.interfaces';
@@ -13,10 +14,10 @@ import type { CardProps } from './Card.interfaces';
 import { StyledCard } from './Card.styled';
 
 export const Card = ({
-  as = 'div',
   children,
   className,
   clipped,
+  element = 'div',
   onClick,
   padding = 'medium',
   variant = 'elevated',
@@ -26,7 +27,7 @@ export const Card = ({
     $clipped={clipped}
     $padding={padding}
     $variant={variant}
-    as={as}
+    as={element}
     className={className}
     onClick={onClick}
   >

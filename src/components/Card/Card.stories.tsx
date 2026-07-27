@@ -83,7 +83,7 @@ export const InAList: Story = {
       }}
     >
       {['COT-0001', 'COT-0002', 'COT-0003'].map((folio) => (
-        <Card as='li' key={folio} padding='medium' variant='outlined'>
+        <Card element='li' key={folio} padding='medium' variant='outlined'>
           {folio}
         </Card>
       ))}
