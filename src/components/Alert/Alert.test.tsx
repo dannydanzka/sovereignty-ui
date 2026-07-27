@@ -15,9 +15,27 @@ describe('Alert', () => {
     expect(screen.getByText('Warning')).toBeInTheDocument();
   });
 
-  it('has alert role', () => {
-    render(<Alert>Msg</Alert>);
-    expect(screen.getByRole('alert')).toBeInTheDocument();
+  /* The live-region role follows the variant. `role="alert"` is ASSERTIVE — a screen reader interrupts
+     itself — which is right for an error and wrong for a confirmation. This used to be hardcoded to
+     `alert` for all four variants, and the previous test asserted exactly that, so it encoded the bug. */
+  it.each([
+    ['error', 'alert'],
+    ['warning', 'alert'],
+    ['success', 'status'],
+    ['info', 'status'],
+  ] as const)('announces %s as role=%s', (variant, role) => {
+    render(<Alert variant={variant}>Msg</Alert>);
+    expect(screen.getByRole(role)).toBeInTheDocument();
+  });
+
+  it('lets a consumer override the role when the surrounding UI already announces the change', () => {
+    render(
+      <Alert role='status' variant='error'>
+        Msg
+      </Alert>
+    );
+    expect(screen.getByRole('status')).toBeInTheDocument();
+    expect(screen.queryByRole('alert')).toBeNull();
   });
 
   it('calls onDismiss when dismiss clicked', async () => {
