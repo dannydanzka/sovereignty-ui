@@ -21,6 +21,18 @@ export const TextareaLabel = styled.label`
   font-weight: var(--sui-font-weight-medium, 500);
 `;
 
+/**
+ * The `*` next to a required field's label.
+ *
+ * `Input` shipped this from the start and `Textarea`/`Select` did not, so a form with a required
+ * text field next to a required textarea marked only one of them — the label lied about which
+ * answers were mandatory. Keep the three in sync.
+ */
+export const TextareaRequired = styled.span`
+  color: ${c('error')};
+  margin-left: ${s('micro')};
+`;
+
 export const StyledTextarea = styled(TextField)<{ $hasError: boolean }>`
   border: 1px solid ${({ $hasError }) => ($hasError ? c('error') : c('border'))};
   border-radius: ${sh('md')};

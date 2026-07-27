@@ -17,6 +17,15 @@ describe('Textarea', () => {
     expect(handleChange).toHaveBeenCalledWith('a');
   });
 
+  /* The marker `Input` always had and this component did not: a form that marks one required field
+     and not its required neighbour is telling the user the wrong thing about which are mandatory. */
+  it('shows the required indicator, and only when required', () => {
+    const { rerender } = render(<Textarea label='Notes' name='notes' required />);
+    expect(screen.getByText('*')).toBeInTheDocument();
+    rerender(<Textarea label='Notes' name='notes' />);
+    expect(screen.queryByText('*')).not.toBeInTheDocument();
+  });
+
   it('shows error message', () => {
     render(<Textarea error='Too short' name='notes' />);
     expect(screen.getByText('Too short')).toBeInTheDocument();

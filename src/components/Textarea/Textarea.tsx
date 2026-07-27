@@ -12,6 +12,7 @@ import {
   TextareaError,
   TextareaFooter,
   TextareaLabel,
+  TextareaRequired,
   TextareaSpacer,
   TextareaWrapper,
 } from './Textarea.styled';
@@ -38,7 +39,12 @@ export const Textarea = ({
 
   return (
     <TextareaWrapper className={className}>
-      {label && <TextareaLabel htmlFor={textareaId}>{label}</TextareaLabel>}
+      {label && (
+        <TextareaLabel htmlFor={textareaId}>
+          {label}
+          {required && <TextareaRequired>*</TextareaRequired>}
+        </TextareaLabel>
+      )}
       <StyledTextarea
         $hasError={Boolean(error) || isOver}
         disabled={disabled}

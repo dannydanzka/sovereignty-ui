@@ -55,3 +55,9 @@ export const TextareaCount = styled(Span)<{ $isOver: boolean }>`
   font-size: ${ts('xs')};
   margin-left: auto;
 `;
+
+/** See the web `TextareaRequired`. */
+export const TextareaRequired = styled(Span)`
+  color: ${c('error')};
+  margin-left: ${s('micro')};
+`;
