@@ -1,5 +1,17 @@
 # @dannydanzka/sovereignty-ui
 
+## 0.27.1
+
+### Patch Changes
+
+- d43dd51: `TotalsList` rows accept an `id`, used as the React key when the label is not unique.
+
+  Rows were keyed by `label`, which is safe for subtotal/tax/total but not for a summary whose lines are
+  **order lines**: two lines of the same asset for the same duration carry the same label, so the keys
+  collided and one row was dropped — a buyer would be shown a summary missing a line they are paying for.
+
+  Found while adopting the pattern in a checkout summary, one release after shipping it.
+
 ## 0.27.0
 
 ### Minor Changes
