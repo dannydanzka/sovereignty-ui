@@ -38,6 +38,12 @@ export const SelectLabel = styled.label`
   font-weight: ${tw('medium')};
 `;
 
+/** See `TextareaRequired` — the same marker `Input` has always had. */
+export const SelectRequired = styled.span`
+  color: ${c('error')};
+  margin-left: ${s('micro')};
+`;
+
 export const StyledSelect = styled.select<{
   $hasError: boolean;
   $size: 'sm' | 'md' | 'lg';

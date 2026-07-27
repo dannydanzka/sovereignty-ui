@@ -15,6 +15,16 @@ describe('Select', () => {
     expect(screen.getByLabelText('Country')).toBeInTheDocument();
   });
 
+  /** See `Textarea` — the same marker, for the same reason. */
+  it('shows the required indicator, and only when required', () => {
+    const { rerender } = render(
+      <Select label='Country' name='country' options={OPTIONS} required />
+    );
+    expect(screen.getByText('*')).toBeInTheDocument();
+    rerender(<Select label='Country' name='country' options={OPTIONS} />);
+    expect(screen.queryByText('*')).not.toBeInTheDocument();
+  });
+
   it('renders options', () => {
     render(<Select name='sel' options={OPTIONS} />);
     expect(screen.getByText('Option A')).toBeInTheDocument();

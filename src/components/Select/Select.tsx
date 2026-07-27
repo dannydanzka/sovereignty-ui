@@ -12,6 +12,7 @@ import {
   SelectError,
   SelectLabel,
   SelectOption,
+  SelectRequired,
   SelectWrapper,
   StyledSelect,
 } from './Select.styled';
@@ -41,7 +42,12 @@ export const Select = ({
 
   return (
     <SelectWrapper className={className}>
-      {label && <SelectLabel htmlFor={selectId}>{label}</SelectLabel>}
+      {label && (
+        <SelectLabel htmlFor={selectId}>
+          {label}
+          {required && <SelectRequired>*</SelectRequired>}
+        </SelectLabel>
+      )}
       <StyledSelect
         $hasError={Boolean(error)}
         $size={size}
