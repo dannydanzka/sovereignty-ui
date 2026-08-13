@@ -68,13 +68,44 @@ src/
 ## Essential Commands
 
 ```bash
-npm run dev              # Storybook (port 6006)
+npm run dev              # Storybook (port 6006) — the WEB proving ground
 npm run lint             # ESLint — 0 warnings required
 npm run type-check       # tsc --noEmit
 npm run test             # Vitest + RTL
 npm run build            # tsup → dist/
 npm run build:storybook  # Static Storybook
 ```
+
+---
+
+## `example/` — the NATIVE proving ground
+
+Storybook demos the library on web; `example/` demos it on native. Bare React
+Native app, private, never published (`files: ["dist", "src"]` excludes it).
+
+It is a **separate package** with its own `package.json`, `node_modules` and
+React Native toolchain — that is what keeps `react-native` an OPTIONAL peer of
+the library instead of a real dependency. Run its commands from inside it:
+
+```bash
+cd example && npm install     # links the library as file:.. (symlink)
+npm start                     # Metro, watching the library root
+npm run ios | android         # simulator / emulator
+npm run type-check && npm run lint && npm test && npm run bundle:ios
+```
+
+**Rule**: a component may not claim React Native support until it is demoed in
+`example/Gallery.tsx` and those four checks pass. See `example/README.md`.
+
+Two boundaries to respect:
+
+- Its `package-lock.json` is deliberately pinned — the harness exists to
+  reproduce a known-good dependency set. Loosening it has already broken Jest
+  once (an ESM-only `lucide-react-native` minor).
+- Root `eslint.config.js` ignores `example/**`; the app lints itself with the
+  legacy `@react-native` config (hence `ESLINT_USE_FLAT_CONFIG=false` in its
+  lint script — ESLint 8 otherwise discovers the root flat config and ignores
+  every file).
 
 ---
 
