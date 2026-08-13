@@ -45,7 +45,7 @@ Skills are fully self-contained. Their internal `Cross-References` sections are 
 ### Option 2 — Symlink (sovereignty maintainers)
 
 ```bash
-ln -s ~/Documents/proyectos/sovereignty/soberania-del-codigo/skills/<skill-name> \
+ln -s ~/Documents/Soverum/doctrine/soberania-del-codigo/skills/<skill-name> \
       ~/.claude/skills/<skill-name>
 ```
 

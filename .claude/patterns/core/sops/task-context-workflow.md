@@ -387,7 +387,7 @@ Common transitions in PLUS:
 ### Dev starting a new sprint task
 
 ```
-1. cd ~/Documents/proyectos/TASK-IDXXXX
+1. cd ~/Documents/Soverum/products/TASK-IDXXXX
 2. claude
 3. "Lee TASK-IDXXXX con SCD fases 1-4 y crea el business context"
 4. [SCD produces .claude/business/ + .claude/status/]

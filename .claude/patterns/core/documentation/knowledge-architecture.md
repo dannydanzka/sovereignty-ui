@@ -188,9 +188,9 @@ Every project CLAUDE.md must include a `KNOWLEDGE SOURCES` section near the top:
 
 | What you need | Where to look |
 |---------------|---------------|
-| **Business domain** (WHAT/WHY) | `~/Documents/proyectos/sovereignty/soverum/products/{name}/domain/` |
+| **Business domain** (WHAT/WHY) | `~/Documents/Soverum/products/{name}/domain/` |
 | **Code patterns** (HOW — project-specific) | `.claude/patterns/business/` |
-| **Technical patterns** (HOW — agnostic) | `~/Documents/proyectos/sovereignty/soberania-del-codigo/` |
+| **Technical patterns** (HOW — agnostic) | `~/Documents/Soverum/doctrine/soberania-del-codigo/` |
 | **Current inventory** (what exists today) | `.claude/status/` |
 
 Domain files: `index.md` → `core-model.md` → `{context}.md`
