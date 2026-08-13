@@ -109,7 +109,7 @@ Document what the workspace aggregates, which inner repo is the current active t
 ### Step 4: First sync
 
 ```bash
-~/Documents/proyectos/sovereignty/soberania-del-codigo/sync-sovereignty.sh
+~/Documents/Soverum/doctrine/soberania-del-codigo/sync-sovereignty.sh
 ```
 
 Select the discipline (e.g., `your-fullstack` for web+mobile, or any per-platform discipline). The script auto-detects the workspace via `.claude/` + `CLAUDE.md` and runs in UMBRELLA mode when `.git` is absent; for governance repos (`.git` present, tracking only `.claude/`) the normal preflight passes.
@@ -182,7 +182,7 @@ Only do this when the distribution tradeoff has changed (team shrank, repo went 
 | Workspace | Pattern | Notes |
 |-----------|---------|-------|
 | `~/Documents/your-company/` | Workspace-governance | Wraps `web/audit`, `web/jf-frontend-web`, `mobile/audit`; discipline `your-fullstack` |
-| `~/Documents/proyectos/TASK-IDXXXX/` | Repo-local (worktree per ticket) | One branch = one worktree = one `.claude/`; team distribution |
+| `~/Documents/Soverum/products/TASK-IDXXXX/` | Repo-local (worktree per ticket) | One branch = one worktree = one `.claude/`; team distribution |
 
 ## 8. Related
 
