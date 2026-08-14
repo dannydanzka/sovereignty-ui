@@ -11,6 +11,8 @@ const path = require('path');
  *  - block the library's own node_modules (avoid duplicate react/styled-components)
  *  - force react/react-native/styled-components to resolve from THIS app
  *
+ * Pattern proven in betterware-ui (see its README metro snippet).
+ *
  * @type {import('@react-native/metro-config').MetroConfig}
  */
 const libPath = path.resolve(__dirname, '..');
