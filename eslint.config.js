@@ -101,6 +101,9 @@ export default [
       '**/coverage/**',
       'eslint.config.js',
       'scripts/**/*.js',
+      // The native example app is a separate package with its own React Native
+      // ESLint config (@react-native, flat-config-incompatible). Lint it there.
+      'example/**',
     ],
   },
   js.configs.recommended,

@@ -102,12 +102,12 @@ Work on **one project at a time**. Complete the full cycle before moving to anot
 
 **Step 1 — Enter the project root**
 ```bash
-cd ~/Documents/proyectos/my-project
+cd ~/Documents/Soverum/products/my-project
 ```
 
 **Step 2 — Sync sov→local**
 ```bash
-~/Documents/proyectos/sovereignty/soberania-del-codigo/sync-sovereignty.sh
+~/Documents/Soverum/doctrine/soberania-del-codigo/sync-sovereignty.sh
 ```
 The script detects the discipline from `.project-id`, wipes+replaces `.claude/patterns/{doctrine,core,<discipline>}/`, applies the project overlay from `projects/<name>/patterns/`, and pulls `rules/` from `projects/<name>/rules/`. Project-owned folders (`business/`, `plans/`, `status/`, `docs/`, `CLAUDE.md`) are never touched.
 
@@ -116,13 +116,13 @@ Edit code, write tests, update `.claude/business/<ticket>.md`, whatever the task
 
 **Step 4 — Backup if rules/business were touched**
 ```bash
-~/Documents/proyectos/sovereignty/soberania-del-codigo/backup-project.sh
+~/Documents/Soverum/doctrine/soberania-del-codigo/backup-project.sh
 ```
 The script shows a diff of what changed, a validation checklist, and asks for confirmation. Only `rules/`, `patterns/business/`, `docs/`, and `CLAUDE.md` are copied to sov. If nothing project-specific changed, the script reports "no changes" and exits.
 
 **Step 5-7 — Review and commit in sov**
 ```bash
-cd ~/Documents/proyectos/sovereignty/soberania-del-codigo
+cd ~/Documents/Soverum/doctrine/soberania-del-codigo
 git diff projects/<name>/
 git add projects/<name>/
 git commit -m "backup(<name>): <short description>"
@@ -141,7 +141,7 @@ When the change applies to ALL projects of a discipline or to all projects globa
 
 ```bash
 # 1. Edit in sov
-cd ~/Documents/proyectos/sovereignty/soberania-del-codigo
+cd ~/Documents/Soverum/doctrine/soberania-del-codigo
 vim core/sops/new-procedure.md
 
 # 2. Commit + push
@@ -150,9 +150,9 @@ git commit -m "docs(sops): add new-procedure"
 git push origin main
 
 # 3. Distribute to every affected project
-for project in ~/Documents/proyectos/my-project-*; do
+for project in ~/Documents/Soverum/products/my-project-*; do
   cd "$project"
-  ~/Documents/proyectos/sovereignty/soberania-del-codigo/sync-sovereignty.sh
+  ~/Documents/Soverum/doctrine/soberania-del-codigo/sync-sovereignty.sh
 done
 ```
 
@@ -204,10 +204,10 @@ Two worktrees of the same project (e.g., `feature-a` and `feature-b`, both from 
 When you want all branches of the same project to end up with identical sovereignty files (e.g., after a major sov update):
 
 ```bash
-SOV=~/Documents/proyectos/sovereignty/soberania-del-codigo
+SOV=~/Documents/Soverum/doctrine/soberania-del-codigo
 
 for dir in worktree-a worktree-b worktree-c; do
-  PROJECT=~/Documents/proyectos/my-project-$dir
+  PROJECT=~/Documents/Soverum/products/my-project-$dir
 
   # Restore ONLY sov-owned dirs to master's version
   cd "$PROJECT"

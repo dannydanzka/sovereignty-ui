@@ -27,7 +27,7 @@
 Before creating a changeset, verify everything compiles:
 
 ```bash
-cd ~/Documents/proyectos/sovereignty/sovereignty-ui
+cd ~/Documents/Soverum/platform/sovereignty-ui
 
 npm run lint          # 0 warnings required
 npm run type-check    # 0 errors required
