@@ -202,3 +202,12 @@ shared-`.tsx` refactor, gated by re-running the full web test suite.
 
 - `soberania-del-codigo/mobile/index.md` — ✅ pointer added (PR #36), plus lab registered in `projects/mobile/sovereignty-ui-lab/`.
 - betterware-ui `progress.md` — component-by-component shared/web/native classification methodology to imitate.
+
+> **Correction of record (2026-08-13)** — every mention of `sovereignty-ui-lab` above is kept as written:
+> it is what the harness was called while these phases ran, and a dated record is corrected by a note, not
+> by an edit. What changed since: the harness was absorbed into this repo as **`example/`** and the
+> separate repo was deleted. So the last cross-reference no longer holds —
+> `projects/mobile/sovereignty-ui-lab/` was retired, and the harness is now governed by this project's
+> `lib` overlay. History of the deleted repo: branch `archive/sovereignty-ui-lab` and tags
+> `archive/sovereignty-ui-lab/batch-*` in this same remote. Current canon: `example/README.md` and
+> `soberania-del-codigo/mobile/cross-platform-ui-library.md` §Local dev + validation.
