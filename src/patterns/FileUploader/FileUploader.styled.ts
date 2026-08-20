@@ -1,8 +1,10 @@
 /**
  * FileUploader Styled Components
+ *
+ * The drop zone itself is the `Dropzone` pattern — only the label and the file list live here.
  */
 
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import { c, s, sh, tf, ts, tw } from '../../tokens/css-variables';
 
@@ -18,68 +20,6 @@ export const FileUploaderLabel = styled.label`
   font-family: ${tf('body')};
   font-size: ${ts('sm')};
   font-weight: ${tw('medium')};
-`;
-
-export const FileUploaderDropzone = styled.div<{
-  $disabled: boolean;
-  $hasError: boolean;
-  $isDragOver: boolean;
-}>`
-  align-items: center;
-  border: 2px dashed ${({ $hasError }) => ($hasError ? c('error') : c('border'))};
-  border-radius: ${sh('lg')};
-  cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
-  display: flex;
-  flex-direction: column;
-  gap: ${s('xs')};
-  justify-content: center;
-  min-height: 8rem;
-  opacity: ${({ $disabled }) => ($disabled ? 0.5 : 1)};
-  padding: ${s('lg')};
-  transition: all 0.2s ease;
-
-  ${({ $hasError, $isDragOver }) =>
-    $isDragOver &&
-    css`
-      background-color: ${$hasError ? c('errorBackground') : c('primary50')};
-      border-color: ${$hasError ? c('error') : c('primary500')};
-    `}
-
-  &:hover {
-    border-color: ${({ $disabled, $hasError }) =>
-      $disabled ? undefined : $hasError ? c('error') : c('primary500')};
-  }
-`;
-
-export const FileUploaderIcon = styled.div`
-  color: ${c('textTertiary')};
-`;
-
-export const FileUploaderText = styled.span`
-  color: ${c('textSecondary')};
-  font-family: ${tf('body')};
-  font-size: ${ts('sm')};
-  text-align: center;
-`;
-
-export const FileUploaderBrowse = styled.span`
-  color: ${c('primary500')};
-  cursor: pointer;
-  font-weight: ${tw('medium')};
-  text-decoration: underline;
-`;
-
-export const FileUploaderDescription = styled.span`
-  color: ${c('textTertiary')};
-  font-family: ${tf('body')};
-  font-size: ${ts('xs')};
-  text-align: center;
-`;
-
-export const FileUploaderError = styled.span`
-  color: ${c('error')};
-  font-family: ${tf('body')};
-  font-size: ${ts('xs')};
 `;
 
 export const FileUploaderFileList = styled.div`
@@ -129,8 +69,4 @@ export const FileUploaderRemoveButton = styled.button`
   &:hover {
     color: ${c('error')};
   }
-`;
-
-export const FileUploaderHiddenInput = styled.input`
-  display: none;
 `;

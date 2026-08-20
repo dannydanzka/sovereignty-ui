@@ -13,6 +13,11 @@ export interface ImageUploaderProps {
   isUploading?: boolean;
   label?: string;
   onFileSelect: (file: File, previewUrl: string) => void;
+  /**
+   * Called when a DROPPED file does not satisfy `accept` (the native attribute only filters the
+   * picker). Surface it — a silent refusal is an affordance the user cannot see.
+   */
+  onRejectFile?: (fileName: string) => void;
   placeholder?: string;
 }
 
