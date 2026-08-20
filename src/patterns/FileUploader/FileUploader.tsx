@@ -1,30 +1,28 @@
 /**
  * FileUploader
  *
- * Drag-and-drop file upload zone with file list preview.
+ * A managed file list on top of `Dropzone`: the zone validates (type, size and count — on drop as
+ * well as on pick) and this pattern accumulates accepted files into `value`, with per-file remove.
  * UI-only — actual upload logic is handled via onChange callback.
+ *
+ * Copy flows through the `texts` prop (`DropzoneTexts`). The defaults are neutral English and every
+ * string is overridable — pass your product's copy.
  */
 
-import type { DragEvent } from 'react';
-import { Upload, X } from 'lucide-react';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback } from 'react';
+import { X } from 'lucide-react';
 
+import { Dropzone } from '../Dropzone';
+import { FILE_UPLOADER_DEFAULT_TEXTS } from './FileUploader.constants';
 import type { FileUploaderFile, FileUploaderProps } from './FileUploader.interfaces';
 
 import {
-  FileUploaderBrowse,
-  FileUploaderDescription,
-  FileUploaderDropzone,
-  FileUploaderError,
   FileUploaderFileItem,
   FileUploaderFileList,
   FileUploaderFileName,
   FileUploaderFileSize,
-  FileUploaderHiddenInput,
-  FileUploaderIcon,
   FileUploaderLabel,
   FileUploaderRemoveButton,
-  FileUploaderText,
   FileUploaderWrapper,
 } from './FileUploader.styled';
 
@@ -52,79 +50,21 @@ export const FileUploader = ({
   maxSizeMB = 10,
   multiple = false,
   onChange,
+  texts = FILE_UPLOADER_DEFAULT_TEXTS,
   value = [],
 }: FileUploaderProps) => {
-  const [isDragOver, setIsDragOver] = useState(false);
-  const [localError, setLocalError] = useState<string | null>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const remaining = Math.max(maxFiles - value.length, 0);
 
-  const maxSizeBytes = maxSizeMB * 1024 * 1024;
-
-  const processFiles = useCallback(
-    (fileList: FileList | null) => {
-      if (!fileList || disabled) return;
-
-      setLocalError(null);
-      const newFiles: FileUploaderFile[] = [];
-
-      for (const file of Array.from(fileList)) {
-        if (file.size > maxSizeBytes) {
-          setLocalError(`File "${file.name}" exceeds ${maxSizeMB}MB limit`);
-          return;
-        }
-
-        if (value.length + newFiles.length >= maxFiles) {
-          setLocalError(`Maximum ${maxFiles} files allowed`);
-          break;
-        }
-
-        const uploaderFile: FileUploaderFile = {
-          file,
-          id: generateFileId(),
-          preview: file.type.startsWith('image/') ? URL.createObjectURL(file) : undefined,
-        };
-        newFiles.push(uploaderFile);
-      }
-
-      if (newFiles.length > 0) {
-        onChange([...value, ...newFiles]);
-      }
+  const handleFiles = useCallback(
+    (files: File[]) => {
+      const newFiles: FileUploaderFile[] = files.map((file) => ({
+        file,
+        id: generateFileId(),
+        preview: file.type.startsWith('image/') ? URL.createObjectURL(file) : undefined,
+      }));
+      onChange([...value, ...newFiles]);
     },
-    [disabled, maxFiles, maxSizeBytes, maxSizeMB, onChange, value]
-  );
-
-  const handleDragOver = useCallback(
-    (e: DragEvent) => {
-      e.preventDefault();
-      if (!disabled) setIsDragOver(true);
-    },
-    [disabled]
-  );
-
-  const handleDragLeave = useCallback((e: DragEvent) => {
-    e.preventDefault();
-    setIsDragOver(false);
-  }, []);
-
-  const handleDrop = useCallback(
-    (e: DragEvent) => {
-      e.preventDefault();
-      setIsDragOver(false);
-      processFiles(e.dataTransfer.files);
-    },
-    [processFiles]
-  );
-
-  const handleClick = useCallback(() => {
-    if (!disabled) inputRef.current?.click();
-  }, [disabled]);
-
-  const handleInputChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      processFiles(e.target.files);
-      if (inputRef.current) inputRef.current.value = '';
-    },
-    [processFiles]
+    [onChange, value]
   );
 
   const handleRemoveClick = useCallback(
@@ -135,44 +75,24 @@ export const FileUploader = ({
       const fileToRemove = value.find((f) => f.id === fileId);
       if (fileToRemove?.preview) URL.revokeObjectURL(fileToRemove.preview);
       onChange(value.filter((f) => f.id !== fileId));
-      setLocalError(null);
     },
     [onChange, value]
   );
-
-  const displayError = error ?? localError;
 
   return (
     <FileUploaderWrapper className={className}>
       {label && <FileUploaderLabel>{label}</FileUploaderLabel>}
 
-      <FileUploaderDropzone
-        $disabled={disabled}
-        $hasError={Boolean(displayError)}
-        $isDragOver={isDragOver}
-        onClick={handleClick}
-        onDragLeave={handleDragLeave}
-        onDragOver={handleDragOver}
-        onDrop={handleDrop}
-      >
-        <FileUploaderIcon>
-          <Upload size={24} />
-        </FileUploaderIcon>
-        <FileUploaderText>
-          Drag files here or <FileUploaderBrowse>browse</FileUploaderBrowse>
-        </FileUploaderText>
-        {description && <FileUploaderDescription>{description}</FileUploaderDescription>}
-      </FileUploaderDropzone>
-
-      <FileUploaderHiddenInput
+      <Dropzone
         accept={accept}
-        multiple={multiple}
-        ref={inputRef}
-        type='file'
-        onChange={handleInputChange}
+        disabled={disabled || remaining === 0}
+        error={error}
+        hint={description}
+        maxFiles={multiple ? remaining : 1}
+        maxSizeMB={maxSizeMB}
+        texts={texts}
+        onFiles={handleFiles}
       />
-
-      {displayError && <FileUploaderError>{displayError}</FileUploaderError>}
 
       {value.length > 0 && (
         <FileUploaderFileList>
@@ -181,7 +101,7 @@ export const FileUploader = ({
               <FileUploaderFileName>{uploaderFile.file.name}</FileUploaderFileName>
               <FileUploaderFileSize>{formatFileSize(uploaderFile.file.size)}</FileUploaderFileSize>
               <FileUploaderRemoveButton
-                aria-label={`Remove ${uploaderFile.file.name}`}
+                aria-label={texts.removeFile(uploaderFile.file.name)}
                 data-file-id={uploaderFile.id}
                 type='button'
                 onClick={handleRemoveClick}

@@ -68,6 +68,11 @@ export * from './patterns/DataTable';
 export * from './patterns/BackLink';
 export * from './patterns/DescriptionList';
 export * from './patterns/TotalsList';
+/**
+ * Web-only: drag-and-drop (`DragEvent`, `dataTransfer`) and the hidden `<input type="file">` have
+ * no honest React Native equivalent — a native file affordance is a system picker, not a zone.
+ */
+export * from './patterns/Dropzone';
 export * from './patterns/FileUploader';
 export * from './patterns/Form';
 export * from './patterns/FormField';
