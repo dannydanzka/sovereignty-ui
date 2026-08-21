@@ -74,6 +74,8 @@ export * from './patterns/TotalsList';
  */
 export * from './patterns/Dropzone';
 export * from './patterns/FileUploader';
+export * from './patterns/ImageGalleryField';
+export * from './patterns/QuantityStepper';
 export * from './patterns/Form';
 export * from './patterns/FormField';
 export * from './patterns/FloatingActions';
