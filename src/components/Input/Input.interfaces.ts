@@ -2,7 +2,11 @@
  * Input Component Interfaces
  */
 
+import type { FormControlSize } from '../../internal/form-control';
+
 export type InputType = 'date' | 'email' | 'number' | 'password' | 'tel' | 'text';
+
+export type { FormControlSize };
 
 export interface InputProps {
   autoComplete?: string;
@@ -27,6 +31,8 @@ export interface InputProps {
   required?: boolean;
   /** Render a `current/max` counter under the field. Requires `maxLength`. */
   showCount?: boolean;
+  /** Shares the scale with `Select` and `Textarea`, so a mixed row aligns. Default `md`. */
+  size?: FormControlSize;
   showPasswordLabel?: string;
   /** Granularity for `number` (e.g. `0.01` for money) / `date`. Web-only. */
   step?: number | string;
@@ -41,4 +47,5 @@ export interface StyledInputWrapperProps {
 export interface StyledInputProps {
   $hasError?: boolean;
   $hasToggle?: boolean;
+  $size?: FormControlSize;
 }

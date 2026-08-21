@@ -5,6 +5,8 @@
 import styled, { css, keyframes } from 'styled-components';
 
 import { c, s, sh, tf, ts, tt, tw } from '../../tokens/css-variables';
+import type { DataTableHideBelow } from './DataTable.interfaces';
+import { layout } from '../../tokens';
 
 export const DataTableWrapper = styled.div`
   display: flex;
@@ -62,9 +64,39 @@ export const TableHeadRow = styled.tr`
   border-bottom: 1px solid ${c('border')};
 `;
 
+/**
+ * Hide a cell below a breakpoint. `display: none` rather than a width of zero: a collapsed cell
+ * still takes its borders and padding, which is how "hidden" columns keep squeezing the visible ones.
+ */
+const hiddenBelow = ($hideBelow?: DataTableHideBelow) =>
+  $hideBelow
+    ? css`
+        @media (max-width: ${layout.breakpoint[$hideBelow]}) {
+          display: none;
+        }
+      `
+    : null;
+
+/**
+ * Pinned while the container scrolls sideways. The background is not decoration — without it the
+ * scrolling cells show through the pinned one, and the `z-index` keeps it above them.
+ */
+const pinnedLeft = ($stickyLeft: number | undefined, background: string) =>
+  $stickyLeft === undefined
+    ? null
+    : css`
+        background-color: ${background};
+        left: ${$stickyLeft}px;
+        position: sticky;
+        z-index: 1;
+      `;
+
 export const TableHeadCell = styled.th<{
   $align: 'center' | 'left' | 'right';
+  $hideBelow?: DataTableHideBelow;
+  $minWidth?: string;
   $sortable: boolean;
+  $stickyLeft?: number;
   $width?: string;
 }>`
   color: ${c('textSecondary')};
@@ -73,12 +105,17 @@ export const TableHeadCell = styled.th<{
   font-size: ${ts('xs')};
   font-weight: ${tw('semibold')};
   letter-spacing: ${tt('wide')};
+  min-width: ${({ $minWidth }) => $minWidth ?? 'auto'};
   padding: ${s('xs')} ${s('sm')};
   text-align: ${({ $align }) => $align};
   text-transform: uppercase;
   user-select: none;
   white-space: nowrap;
   width: ${({ $width }) => $width ?? 'auto'};
+
+  /* The head is the one place the sticky background must match the head's own fill, not the row's. */
+  ${({ $stickyLeft }) => pinnedLeft($stickyLeft, c('neutral50'))}
+  ${({ $hideBelow }) => hiddenBelow($hideBelow)}
 
   ${({ $sortable }) =>
     $sortable &&
@@ -115,12 +152,34 @@ export const TableRow = styled.tr`
   }
 `;
 
-export const TableCell = styled.td<{ $align: 'center' | 'left' | 'right' }>`
+export const TableCell = styled.td<{
+  $align: 'center' | 'left' | 'right';
+  $hideBelow?: DataTableHideBelow;
+  $minWidth?: string;
+  $stickyLeft?: number;
+}>`
   color: ${c('textPrimary')};
   font-family: ${tf('body')};
   font-size: ${ts('sm')};
+  min-width: ${({ $minWidth }) => $minWidth ?? 'auto'};
   padding: ${s('xs')} ${s('sm')};
   text-align: ${({ $align }) => $align};
+
+  /*
+   * The pinned cell needs an opaque fill of its own: the row's hover colour is painted on the tr,
+   * so a transparent pinned cell would let the scrolled cells slide visibly underneath it.
+   */
+  ${({ $stickyLeft }) => pinnedLeft($stickyLeft, c('white'))}
+  ${({ $hideBelow }) => hiddenBelow($hideBelow)}
+
+  /* An opaque pinned cell would otherwise be the one cell that ignores the row's hover. */
+  ${({ $stickyLeft }) =>
+    $stickyLeft !== undefined &&
+    css`
+      ${TableRow}:hover & {
+        background-color: ${c('neutral50')};
+      }
+    `}
 `;
 
 export const TableEmptyRow = styled.tr``;

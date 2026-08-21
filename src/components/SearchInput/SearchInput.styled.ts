@@ -4,7 +4,8 @@
 
 import styled from 'styled-components';
 
-import { c, s, sh, tf, ts } from '../../tokens/css-variables';
+import { FORM_CONTROL_SIZES, formControlFrame } from '../../internal/form-control';
+import { s, tf } from '../../tokens/css-variables';
 import { TextField } from '../../primitives';
 
 export const FilterBar = styled.div`
@@ -15,23 +16,11 @@ export const FilterBar = styled.div`
   margin-bottom: ${s('md')};
 `;
 
-export const StyledSearchInput = styled(TextField)`
-  background: ${c('white')};
-  border: 1px solid ${c('border')};
-  border-radius: ${sh('md')};
+/** `$hasError` comes with the shared frame; the search field has no error state of its own yet. */
+export const StyledSearchInput = styled(TextField)<{ $hasError?: boolean }>`
+  ${formControlFrame}
+  ${FORM_CONTROL_SIZES.md}
   flex: 1;
   font-family: ${tf('body')};
-  font-size: ${ts('sm')};
   min-width: 200px;
-  padding: ${s('xs')} ${s('sm')};
-  transition: border-color 0.2s ease;
-
-  &:focus {
-    border-color: ${c('primary500')};
-    outline: none;
-  }
-
-  &::placeholder {
-    color: ${c('textTertiary')};
-  }
 `;

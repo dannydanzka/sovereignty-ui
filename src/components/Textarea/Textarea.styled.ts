@@ -4,7 +4,8 @@
 
 import styled from 'styled-components';
 
-import { c, s, sh, tf, tl, ts } from '../../tokens/css-variables';
+import { c, s, tf, tl, ts } from '../../tokens/css-variables';
+import { FORM_CONTROL_SIZES, formControlFrame } from '../../internal/form-control';
 import { TextField } from '../../primitives';
 
 export const TextareaWrapper = styled.div`
@@ -34,35 +35,13 @@ export const TextareaRequired = styled.span`
 `;
 
 export const StyledTextarea = styled(TextField)<{ $hasError: boolean }>`
-  border: 1px solid ${({ $hasError }) => ($hasError ? c('error') : c('border'))};
-  border-radius: ${sh('md')};
-  color: ${c('textPrimary')};
+  ${formControlFrame}
+  ${FORM_CONTROL_SIZES.md}
   font-family: ${tf('body')};
-  font-size: ${ts('sm')};
+  /* A textarea grows by lines, so the scale's min-height is a floor rather than the height. */
   line-height: ${tl('relaxed')};
-  outline: none;
-  padding: ${s('xs')} ${s('sm')};
   resize: vertical;
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
   width: 100%;
-
-  &::placeholder {
-    color: ${c('textDisabled')};
-  }
-
-  &:focus {
-    border-color: ${({ $hasError }) => ($hasError ? c('error') : c('primary500'))};
-    box-shadow: 0 0 0 3px
-      ${({ $hasError }) => ($hasError ? c('errorFocusShadow') : c('primaryFocusShadow'))};
-  }
-
-  &:disabled {
-    background-color: ${c('backgroundDark')};
-    cursor: not-allowed;
-    opacity: 0.6;
-  }
 `;
 
 export const TextareaFooter = styled.div`
