@@ -8,7 +8,7 @@
 
 import { ArrowDown, ArrowUp, ArrowUpDown } from 'lucide-react';
 import type { MouseEvent } from 'react';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { ActionButton } from '../../components/ActionButton';
 import type { DataTableColumn, DataTableProps, DataTableRowAction } from './DataTable.interfaces';
@@ -38,6 +38,16 @@ import {
 } from './DataTable.styled';
 
 const LOADING_ROWS = 5;
+
+/** Matches the checkbox column's declared width below; they must move together. */
+const SELECTION_COLUMN_WIDTH = 40;
+
+/** Px only — see `DataTableColumn.sticky`. Anything else contributes nothing to the offset. */
+const parsePxWidth = (value: string | undefined): number => {
+  if (value === undefined) return 0;
+  const match = /^(\d+(?:\.\d+)?)px$/.exec(value.trim());
+  return match?.[1] === undefined ? 0 : Number(match[1]);
+};
 const loadingRowKeys = Array.from({ length: LOADING_ROWS }, (value, index) => {
   void value;
   return `loading-${index}`;
@@ -69,6 +79,26 @@ export const DataTable = <T,>({
   const hasSelection = selectable && onSelectionChange !== undefined;
   const hasActions = rowActions !== undefined && rowActions.length > 0;
   const totalColumns = columns.length + (hasSelection ? 1 : 0) + (hasActions ? 1 : 0);
+
+  /**
+   * Where each pinned column sits, in px from the container's left edge — the sum of the pinned
+   * columns before it. A `%` width cannot be summed, which is why a sticky column is documented as
+   * needing a px `minWidth`/`width`; one that gives neither pins at the offset accumulated so far
+   * (correct for the first, and visibly wrong for a second, which is the honest failure).
+   */
+  const stickyOffsets = useMemo(() => {
+    const offsets = new Map<string, number>();
+    let cursor = hasSelection ? SELECTION_COLUMN_WIDTH : 0;
+    for (const column of columns) {
+      if (!column.sticky) continue;
+      offsets.set(column.key, cursor);
+      cursor += parsePxWidth(column.minWidth ?? column.width);
+    }
+    return offsets;
+  }, [columns, hasSelection]);
+
+  /** The checkbox column pins whenever anything else does, or the pinned column slides under it. */
+  const selectionStickyLeft = stickyOffsets.size > 0 ? 0 : undefined;
 
   const handleSort = useCallback(
     (e: MouseEvent<HTMLTableCellElement>) => {
@@ -188,7 +218,7 @@ export const DataTable = <T,>({
       return (
         <TableRow key={key}>
           {hasSelection && (
-            <TableCell $align='center'>
+            <TableCell $align='center' $stickyLeft={selectionStickyLeft}>
               <SelectionCheckbox
                 aria-label={selectRowLabel}
                 checked={selectedKeys.includes(key)}
@@ -199,7 +229,13 @@ export const DataTable = <T,>({
             </TableCell>
           )}
           {columns.map((col) => (
-            <TableCell $align={col.align ?? 'left'} key={col.key}>
+            <TableCell
+              $align={col.align ?? 'left'}
+              $hideBelow={col.hideBelow}
+              $minWidth={col.minWidth}
+              $stickyLeft={stickyOffsets.get(col.key)}
+              key={col.key}
+            >
               {renderCell(col, row, index)}
             </TableCell>
           ))}
@@ -217,7 +253,12 @@ export const DataTable = <T,>({
     <TableHead>
       <TableHeadRow>
         {hasSelection && (
-          <TableHeadCell $align='center' $sortable={false} $width='40px'>
+          <TableHeadCell
+            $align='center'
+            $sortable={false}
+            $stickyLeft={selectionStickyLeft}
+            $width={`${SELECTION_COLUMN_WIDTH}px`}
+          >
             <SelectionCheckbox
               aria-label={selectAllLabel}
               checked={allSelected}
@@ -229,7 +270,10 @@ export const DataTable = <T,>({
         {columns.map((col) => (
           <TableHeadCell
             $align={col.align ?? 'left'}
+            $hideBelow={col.hideBelow}
+            $minWidth={col.minWidth}
             $sortable={Boolean(col.sortable)}
+            $stickyLeft={stickyOffsets.get(col.key)}
             $width={col.width}
             data-col-key={col.key}
             key={col.key}

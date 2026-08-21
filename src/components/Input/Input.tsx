@@ -51,6 +51,7 @@ export const Input = ({
   required = false,
   showCount = false,
   showPasswordLabel = 'Show password',
+  size = 'md',
   step,
   type = 'text',
   value,
@@ -90,6 +91,7 @@ export const Input = ({
         <StyledInput
           $hasError={Boolean(error) || isOver}
           $hasToggle={isPassword}
+          $size={size}
           autoComplete={autoComplete}
           disabled={disabled}
           id={id}

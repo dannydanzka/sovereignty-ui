@@ -4,7 +4,8 @@
 
 import styled from 'styled-components';
 
-import { c, s, sh, tf, ts, tw } from '../../tokens/css-variables';
+import { c, s, tf, ts, tw } from '../../tokens/css-variables';
+import { FORM_CONTROL_SIZES, formControlFrame } from '../../internal/form-control';
 import type { StyledInputProps, StyledInputWrapperProps } from './Input.interfaces';
 import { TextField } from '../../primitives';
 
@@ -28,38 +29,13 @@ export const InputContainer = styled.div`
 `;
 
 export const StyledInput = styled(TextField)<StyledInputProps>`
-  background-color: ${c('white')};
-  border: 2px solid ${({ $hasError }) => ($hasError ? c('error') : c('neutral200'))};
-  border-radius: ${sh('md')};
-  color: ${c('textPrimary')};
+  ${formControlFrame}
+  ${({ $size = 'md' }) => FORM_CONTROL_SIZES[$size]}
   font-family: ${tf('body')};
-  font-size: ${ts('base')};
-  min-height: ${s('xl')};
-  padding: ${s('sm')};
-  padding-right: ${({ $hasToggle }) => ($hasToggle ? '48px' : s('sm'))};
-  transition: all 0.2s ease-in-out;
   width: 100%;
 
-  &::placeholder {
-    color: ${c('textTertiary')};
-  }
-
-  &:hover:not(:disabled) {
-    border-color: ${({ $hasError }) => ($hasError ? c('errorDark') : c('neutral300'))};
-  }
-
-  &:focus {
-    border-color: ${({ $hasError }) => ($hasError ? c('error') : c('primary500'))};
-    box-shadow: 0 0 0 3px
-      ${({ $hasError }) => ($hasError ? c('errorFocusShadow') : c('primaryFocusShadow'))};
-    outline: none;
-  }
-
-  &:disabled {
-    background-color: ${c('neutral50')};
-    color: ${c('textDisabled')};
-    cursor: not-allowed;
-  }
+  /* The toggle sits inside the frame, so the text must stop before it. */
+  ${({ $hasToggle }) => $hasToggle && 'padding-right: 48px;'}
 `;
 
 export const PasswordToggle = styled.button`

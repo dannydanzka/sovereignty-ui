@@ -57,23 +57,37 @@ export const ModalOverlay = styled.div<StyledModalOverlayProps>`
   z-index: 1100;
 `;
 
+/**
+ * Each size is `min(ceiling, viewport fraction)`, which is two rules in one line:
+ *
+ * - **below the ceiling** the fraction wins, so the dialog grows with the window instead of sitting
+ *   at a pixel width chosen for a screen nobody has;
+ * - **above it** the ceiling wins, because past a certain width a form's fields become absurdly long
+ *   lines and a paragraph becomes unreadable. A dialog that filled a 27" monitor would be worse, not
+ *   better.
+ *
+ * The ladder was a fixed pixel ladder until 0.33.0 (`sm` 360 · `md` 480 · `lg` 600 · `xl` 700), and
+ * the consequence was measured in a consumer's admin: a `lg` form rendered **568px wide at 1512px,
+ * leaving 944px of screen unused — and identical at 1280**, i.e. it did not adjust to anything.
+ */
 const sizeStyles: Record<'full' | 'lg' | 'md' | 'sm' | 'xl', ReturnType<typeof css>> = {
   full: css`
     max-height: 90vh;
-    max-width: 90vw;
-    width: 90vw;
+    max-width: min(1600px, 96vw);
+    width: 96vw;
   `,
   lg: css`
-    max-width: 600px;
+    max-width: min(880px, 90vw);
   `,
   md: css`
-    max-width: 480px;
+    max-width: min(640px, 92vw);
   `,
   sm: css`
-    max-width: 360px;
+    /* A confirmation stays small on purpose: this size means "few words", not "narrow screen". */
+    max-width: min(420px, 92vw);
   `,
   xl: css`
-    max-width: 700px;
+    max-width: min(1120px, 92vw);
   `,
 };
 
