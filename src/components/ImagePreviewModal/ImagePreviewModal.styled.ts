@@ -9,7 +9,7 @@ import styled from 'styled-components';
 
 import { c, mo, s, sh, tf, tl, ts, tw } from '../../tokens/css-variables';
 import { layout } from '../../tokens';
-import type { StyledOverlayProps } from './ImagePreviewModal.interfaces';
+import type { StyledNavButtonProps, StyledOverlayProps } from './ImagePreviewModal.interfaces';
 
 export const ModalOverlay = styled.div<StyledOverlayProps>`
   align-items: center;
@@ -37,6 +37,41 @@ export const PreviewImage = styled.img`
   max-height: 80vh;
   max-width: 85vw;
   object-fit: contain;
+`;
+
+export const PreviewVideo = styled.video`
+  border-radius: ${sh('lg')};
+  display: block;
+  max-height: 80vh;
+  max-width: 85vw;
+`;
+
+export const NavButton = styled.button<StyledNavButtonProps>`
+  align-items: center;
+  background: rgb(${c('blackRgb')} / 0.4);
+  border: none;
+  border-radius: ${sh('full')};
+  color: ${c('white')};
+  cursor: pointer;
+  display: flex;
+  height: ${s('xl')};
+  justify-content: center;
+  ${({ $side }) => ($side === 'left' ? `left: ${s('md')};` : `right: ${s('md')};`)}
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: background ${mo('fast')};
+  width: ${s('xl')};
+
+  &:hover {
+    background: rgb(${c('blackRgb')} / 0.6);
+  }
+`;
+
+export const HeaderActions = styled.div`
+  display: flex;
+  flex-shrink: 0;
+  gap: ${s('xs')};
 `;
 
 export const ImageOverlay = styled.div`
