@@ -193,11 +193,13 @@ setSuiTokens({ color: { primary500: '#FFC107' }, typography: { family: { body: '
 
 - **Primitives**: `Div` (div ↔ View, flex-column by default) and `Span` (span ↔ Text). Build custom
   UI with them and it works on both platforms.
-- **RN-ready today**: tokens, utils, hooks (useDebounce/useLoading/useModal/useNotifications/
-  usePagination/useTableSort), Avatar, Badge, Divider, EmptyState, InlineIcon, Spacer, StatsCard.
-- **Web-only for now**: everything else (DataTable, Modal, forms, layout patterns).
+- **RN-ready**: tokens, utils, the RN-safe hooks, and every component with a native file
+  (`find src -name '*.native.ts*'`); the rest is web-only.
+- **Deferred**: PasswordInput, Switch and RadioGroup (their `onChange` is a DOM event: a value-based API needs a
+  coordinated major), Select (native picker), DataTable's sort header, Pagination footer and FlatList virtualization.
 - Dual-platform component convention: shared `Component.tsx` + `Component.styled.native.ts`
-  (Div/Span-based, flexbox-only CSS). See `.claude/plans/react-native-support.md`.
+  (Div/Span-based, flexbox-only CSS); `Component.native.tsx` only for the sanctioned cases. Canon:
+  `soberania-del-codigo/disciplines/mobile/cross-platform-ui-library.md` · harness: `example/README.md`.
 
 ---
 
