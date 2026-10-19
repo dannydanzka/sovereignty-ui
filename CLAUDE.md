@@ -128,6 +128,5 @@ See `rules/sop/release-via-ci.md` and sovereignty `core/sops/sovereignty-ui-publ
 .claude/
 ├── patterns/     # Synced from sovereignty (discipline: lib) — on-demand
 ├── rules/        # Project-specific (autoloaded): _global.md, reference/, sop/
-├── docs/         # Heavy references (component inventories, audits)
-└── plans/        # Active implementation plans (e.g., react-native-support.md)
+└── plans/        # OPEN implementation plans only; a finished plan is distilled and deleted
 ```
