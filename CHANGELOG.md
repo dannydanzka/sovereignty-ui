@@ -1,5 +1,12 @@
 # @dannydanzka/sovereignty-ui
 
+## 0.34.1
+
+### Patch Changes
+
+- b8455e7: `AppHeader` accepts `collapseAt='xl'`, for a menu too long to fit beside the logo and the actions between 1024px and 1280px.
+- 38bf42e: `media.below(bp)` / `media.atLeast(bp)`: breakpoint queries that never overlap. At exactly a breakpoint width (1024px, an iPad in landscape) `AppHeader` hid both its nav and its menu button, because both edges were inclusive. `AppHeader`, `Sidebar`, `DataTable` (`hideBelow`), `AuthLayout`, `AppFooter`, `FloatingActions` and `FormGrid` now end their "below" rules at `bp - 0.02px`.
+
 ## 0.34.0
 
 ### Minor Changes
