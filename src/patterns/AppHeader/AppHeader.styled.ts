@@ -78,10 +78,12 @@ export const HeaderContent = styled.div`
   padding: ${s('sm')} ${s('md')};
 `;
 
+/** Yields width before the menu button does: a wide logo pushed the button off a 320px bar. */
 export const LogoSlot = styled.div`
   align-items: center;
   display: flex;
-  flex-shrink: 0;
+  flex-shrink: 1;
+  min-width: 0;
 `;
 
 export const NavSlot = styled.nav<StyledHeaderSlotProps>`

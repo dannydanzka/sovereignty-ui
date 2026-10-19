@@ -127,4 +127,10 @@ describe('AppHeader — onMenuToggle purity', () => {
     const css = document.head.innerHTML;
     expect(css).toContain(`max-width: ${Number.parseFloat(layout.breakpoint.xl) - 0.02}px`);
   });
+
+  it('lets the logo slot shrink, so a wide logo never pushes the menu button off a narrow bar', () => {
+    render(<AppHeader logoSlot={<span>ACME</span>} mobileMenuContent={<a href='/m'>M</a>} />);
+    const css = document.head.innerHTML.replace(/\s+/g, '');
+    expect(css).toMatch(/flex-shrink:1;min-width:0;/);
+  });
 });
