@@ -4,6 +4,7 @@ import { StrictMode, useState } from 'react';
 import userEvent from '@testing-library/user-event';
 
 import { AppHeader } from './AppHeader';
+import { layout } from '../../tokens';
 
 describe('AppHeader', () => {
   it('renders logo, nav, and actions slots', () => {
@@ -119,5 +120,11 @@ describe('AppHeader — onMenuToggle purity', () => {
     expect(screen.getByText('open')).toBeInTheDocument();
     expect(consoleError).not.toHaveBeenCalled();
     consoleError.mockRestore();
+  });
+
+  it('collapses at xl when asked, for a menu that does not fit beside the logo at 1024px', () => {
+    render(<AppHeader collapseAt='xl' logoSlot={<span>ACME</span>} navSlot={<a href='/a'>A</a>} />);
+    const css = document.head.innerHTML;
+    expect(css).toContain(`max-width: ${Number.parseFloat(layout.breakpoint.xl) - 0.02}px`);
   });
 });

@@ -4,7 +4,8 @@
 
 import type { ReactNode } from 'react';
 
-export type AppHeaderBreakpoint = 'lg' | 'md';
+/** `xl` is for a menu too long to share a 1024px bar with the logo and the actions. */
+export type AppHeaderBreakpoint = 'lg' | 'md' | 'xl';
 
 export interface AppHeaderProps {
   /**
