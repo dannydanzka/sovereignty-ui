@@ -14,6 +14,7 @@ import styled, { css } from 'styled-components';
 
 import { c, el, mo, s, sh, tf, ts, tw } from '../../tokens/css-variables';
 import { layout } from '../../tokens/tokens';
+import { media } from '../../tokens/media';
 import type {
   StyledSidebarCollapsibleProps,
   StyledSidebarNavLinkProps,
@@ -33,7 +34,7 @@ const ACTIVE_FG = `var(--sui-sidebar-active-fg, ${c('white')})`;
 const ACTIVE_MARKER = `var(--sui-sidebar-active-marker, ${c('primary500')})`;
 const AVATAR_BG = `var(--sui-sidebar-avatar-bg, ${c('primary500')})`;
 
-const MOBILE = `@media (max-width: ${layout.breakpoint.lg})`;
+const MOBILE = media.below('lg');
 
 export const SidebarContainer = styled.aside<StyledSidebarProps>`
   background: ${BG};

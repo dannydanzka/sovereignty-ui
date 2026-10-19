@@ -22,7 +22,7 @@ import type {
   StyledMobileMenuProps,
 } from './AppHeader.interfaces';
 import { c, el, mo, s } from '../../tokens/css-variables';
-import { layout } from '../../tokens';
+import { layout, media } from '../../tokens';
 
 const BG = `var(--sui-app-header-bg, ${c('surface')})`;
 const FG = `var(--sui-app-header-fg, ${c('textPrimary')})`;
@@ -32,8 +32,8 @@ const SHADOW = 'var(--sui-app-header-shadow, none)';
 const MAX_WIDTH = `var(--sui-app-header-max-width, ${layout.container.lg})`;
 const BLUR = 'var(--sui-app-header-blur, none)';
 
-const below = (bp: AppHeaderBreakpoint) => `@media (max-width: ${layout.breakpoint[bp]})`;
-const atLeast = (bp: AppHeaderBreakpoint) => `@media (min-width: ${layout.breakpoint[bp]})`;
+const below = (bp: AppHeaderBreakpoint) => media.below(bp);
+const atLeast = (bp: AppHeaderBreakpoint) => media.atLeast(bp);
 
 export const HeaderBar = styled.header<StyledHeaderProps>`
   inset: 0 0 auto 0;

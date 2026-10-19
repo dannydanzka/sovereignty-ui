@@ -6,7 +6,7 @@ import styled, { css, keyframes } from 'styled-components';
 
 import { c, s, sh, tf, ts, tt, tw } from '../../tokens/css-variables';
 import type { DataTableHideBelow } from './DataTable.interfaces';
-import { layout } from '../../tokens';
+import { media } from '../../tokens';
 
 export const DataTableWrapper = styled.div`
   display: flex;
@@ -71,7 +71,7 @@ export const TableHeadRow = styled.tr`
 const hiddenBelow = ($hideBelow?: DataTableHideBelow) =>
   $hideBelow
     ? css`
-        @media (max-width: ${layout.breakpoint[$hideBelow]}) {
+        ${media.below($hideBelow)} {
           display: none;
         }
       `

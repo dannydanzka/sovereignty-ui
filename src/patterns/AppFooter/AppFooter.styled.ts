@@ -7,7 +7,7 @@
 import styled from 'styled-components';
 
 import { c, mo, s, tf, ts, tw } from '../../tokens/css-variables';
-import { layout } from '../../tokens';
+import { layout, media } from '../../tokens';
 
 export const FooterContainer = styled.footer`
   background: ${c('backgroundDark')};
@@ -57,7 +57,7 @@ export const FooterBottom = styled.div`
   max-width: ${layout.container.lg};
   padding: ${s('sm')} ${s('md')};
 
-  @media (max-width: ${layout.breakpoint.md}) {
+  ${media.below('md')} {
     flex-direction: column;
     text-align: center;
   }
