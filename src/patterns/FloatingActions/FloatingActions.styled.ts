@@ -8,7 +8,7 @@
 import styled, { css, keyframes } from 'styled-components';
 
 import { c, mo, s } from '../../tokens/css-variables';
-import { layout } from '../../tokens';
+import { layout, media } from '../../tokens';
 import type {
   StyledFloatingButtonProps,
   StyledFloatingContainerProps,
@@ -51,7 +51,7 @@ export const Container = styled.div<StyledFloatingContainerProps>`
           right: ${s('md')};
         `}
 
-  @media (max-width: ${layout.breakpoint.md}) {
+  ${media.below('md')} {
     gap: ${s('xs')};
     ${({ $side }) =>
       $side === 'left'

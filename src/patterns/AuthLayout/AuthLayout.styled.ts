@@ -8,7 +8,7 @@
 import styled from 'styled-components';
 
 import { c, el, s, sh, tf, ts, tw } from '../../tokens/css-variables';
-import { layout } from '../../tokens';
+import { layout, media } from '../../tokens';
 
 export const AuthPageWrapper = styled.div`
   display: flex;
@@ -26,7 +26,7 @@ export const AuthSection = styled.section`
   padding: ${s('lg')} ${s('sm')};
   position: relative;
 
-  @media (max-width: ${layout.breakpoint.md}) {
+  ${media.below('md')} {
     align-items: flex-start;
     padding: ${s('md')} ${s('sm')};
   }
@@ -41,7 +41,7 @@ export const AuthContent = styled.div`
   position: relative;
   width: 100%;
 
-  @media (max-width: ${layout.breakpoint.lg}) {
+  ${media.below('lg')} {
     flex-direction: column;
   }
 `;
@@ -52,7 +52,7 @@ export const AuthSideSlot = styled.div`
   flex: 1;
   justify-content: center;
 
-  @media (max-width: ${layout.breakpoint.lg}) {
+  ${media.below('lg')} {
     display: none;
   }
 
@@ -71,7 +71,7 @@ export const AuthCardWrapper = styled.div`
   max-width: 480px;
   width: 100%;
 
-  @media (max-width: ${layout.breakpoint.md}) {
+  ${media.below('md')} {
     max-width: 100%;
   }
 `;
@@ -87,7 +87,7 @@ export const AuthTitle = styled.h1`
   font-weight: ${tw('bold')};
   margin: 0;
 
-  @media (max-width: ${layout.breakpoint.md}) {
+  ${media.below('md')} {
     font-size: ${ts('4xl')};
   }
 `;
@@ -99,7 +99,7 @@ export const AuthSubtitle = styled.p`
   font-weight: ${tw('semibold')};
   margin: ${s('xs')} 0 0;
 
-  @media (max-width: ${layout.breakpoint.md}) {
+  ${media.below('md')} {
     font-size: ${ts('xl')};
   }
 `;
@@ -110,7 +110,7 @@ export const StyledAuthCard = styled.div`
   box-shadow: ${el('md')};
   padding: ${s('lg')};
 
-  @media (max-width: ${layout.breakpoint.md}) {
+  ${media.below('md')} {
     padding: ${s('md')};
   }
 `;

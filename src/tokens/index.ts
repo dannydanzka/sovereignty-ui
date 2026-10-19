@@ -1,4 +1,5 @@
 export * from './tokens';
+export * from './media';
 export * from './presets';
 export * from './create-tokens';
 export * from './create-brand-palette';

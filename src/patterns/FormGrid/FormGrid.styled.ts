@@ -2,7 +2,7 @@
 
 import styled from 'styled-components';
 
-import { layout } from '../../tokens';
+import { media } from '../../tokens';
 import { s } from '../../tokens/css-variables';
 import type { StyledFormGridProps } from './FormGrid.interfaces';
 
@@ -11,7 +11,7 @@ export const GridWrapper = styled.div<StyledFormGridProps>`
   gap: ${s('sm')};
   grid-template-columns: ${({ $columns }) => `repeat(${$columns}, minmax(0, 1fr))`};
 
-  @media (max-width: ${layout.breakpoint.sm}) {
+  ${media.below('sm')} {
     grid-template-columns: 1fr;
   }
 `;
