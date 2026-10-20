@@ -4,7 +4,7 @@
  * Styled dropdown select with label and error support.
  */
 
-import { useCallback } from 'react';
+import { useCallback, useId } from 'react';
 
 import type { SelectProps } from './Select.interfaces';
 
@@ -38,7 +38,8 @@ export const Select = ({
     [onChange]
   );
 
-  const selectId = id ?? name;
+  const generatedId = useId();
+  const selectId = id ?? name ?? generatedId;
 
   return (
     <SelectWrapper className={className}>
