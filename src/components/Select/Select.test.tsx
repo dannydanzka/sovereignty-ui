@@ -15,6 +15,11 @@ describe('Select', () => {
     expect(screen.getByLabelText('Country')).toBeInTheDocument();
   });
 
+  it('names its control through the label even without id or name', () => {
+    render(<Select label='Talla' options={OPTIONS} />);
+    expect(screen.getByRole('combobox', { name: 'Talla' })).toBeInTheDocument();
+  });
+
   /** See `Textarea` — the same marker, for the same reason. */
   it('shows the required indicator, and only when required', () => {
     const { rerender } = render(
