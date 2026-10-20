@@ -1,5 +1,11 @@
 # @dannydanzka/sovereignty-ui
 
+## 0.34.3
+
+### Patch Changes
+
+- cbae7a5: `Select` names its control through its `label` even without `id` or `name`: it falls back to `useId`.
+
 ## 0.34.2
 
 ### Patch Changes
