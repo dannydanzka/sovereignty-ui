@@ -15,6 +15,7 @@
     "src/stories",
     "src/components/Calendar/Calendar.tsx",
     "src/components/Calendar/CalendarDay.tsx",
+    "src/components/Card/Card.tsx",
     "src/components/Checkbox/Checkbox.tsx",
     "src/components/Toggle/Toggle.tsx",
     "src/components/Modal/Modal.tsx",
