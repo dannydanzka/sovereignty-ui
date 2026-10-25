@@ -21,11 +21,11 @@ import {
 export const ErrorFallback = ({
   actions = [],
   className,
-  description = 'An unexpected error occurred. Please try again.',
+  description = 'Ocurrió un error inesperado. Intenta de nuevo.',
   icon,
   onRetry,
-  retryLabel = 'Try Again',
-  title = 'Something went wrong',
+  retryLabel = 'Reintentar',
+  title = 'Algo salió mal',
 }: ErrorFallbackProps) => (
   <ErrorContainer className={className} data-testid='error-fallback'>
     <ErrorIconWrapper>{icon ?? <AlertTriangle size={48} />}</ErrorIconWrapper>

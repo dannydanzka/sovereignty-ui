@@ -10,7 +10,7 @@ export const SearchInput = ({
   children,
   className,
   onChange,
-  placeholder = 'Search...',
+  placeholder = 'Buscar...',
   value,
 }: SearchInputProps) => (
   <FilterBar className={className}>

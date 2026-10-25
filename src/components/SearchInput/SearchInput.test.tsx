@@ -7,13 +7,13 @@ import { SearchInput } from './SearchInput';
 describe('SearchInput', () => {
   it('renders with placeholder', () => {
     render(<SearchInput value='' onChange={vi.fn()} />);
-    expect(screen.getByPlaceholderText('Search...')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Buscar...')).toBeInTheDocument();
   });
 
   it('calls onChange when typing', async () => {
     const handleChange = vi.fn();
     render(<SearchInput value='' onChange={handleChange} />);
-    await userEvent.type(screen.getByPlaceholderText('Search...'), 'a');
+    await userEvent.type(screen.getByPlaceholderText('Buscar...'), 'a');
     expect(handleChange).toHaveBeenCalledWith('a');
   });
 

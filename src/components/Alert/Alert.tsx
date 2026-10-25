@@ -59,7 +59,7 @@ export const Alert = ({
       <AlertMessage>{children}</AlertMessage>
     </AlertBody>
     {onDismiss && (
-      <AlertDismiss aria-label='Dismiss' onClick={onDismiss}>
+      <AlertDismiss aria-label='Descartar' onClick={onDismiss}>
         <X size={16} />
       </AlertDismiss>
     )}

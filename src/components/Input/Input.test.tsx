@@ -40,7 +40,7 @@ describe('Input', () => {
     const input = screen.getByLabelText('Password');
     expect(input).toHaveAttribute('type', 'password');
 
-    await userEvent.click(screen.getByLabelText('Show password'));
+    await userEvent.click(screen.getByLabelText('Mostrar contraseña'));
     expect(input).toHaveAttribute('type', 'text');
   });
 

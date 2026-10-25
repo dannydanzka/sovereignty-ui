@@ -35,7 +35,7 @@ describe('DataTable', () => {
 
   it('renders empty message when no data', () => {
     render(<DataTable columns={COLUMNS} data={[]} rowKey={(r) => String(r.id)} />);
-    expect(screen.getByText('No data available')).toBeInTheDocument();
+    expect(screen.getByText('No hay datos')).toBeInTheDocument();
   });
 
   it('renders custom empty message', () => {
@@ -54,7 +54,7 @@ describe('DataTable', () => {
     render(
       <DataTable columns={COLUMNS} data={DATA} rowKey={(r) => String(r.id)} onSearch={vi.fn()} />
     );
-    expect(screen.getByPlaceholderText('Search...')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Buscar...')).toBeInTheDocument();
   });
 });
 
@@ -72,7 +72,7 @@ describe('DataTable selection and row actions', () => {
       />
     );
 
-    const rowCheckboxes = screen.getAllByRole('checkbox', { name: 'Select row' });
+    const rowCheckboxes = screen.getAllByRole('checkbox', { name: 'Seleccionar fila' });
     const [firstRow] = rowCheckboxes;
     expect(firstRow).toBeDefined();
     if (firstRow) {
@@ -80,7 +80,7 @@ describe('DataTable selection and row actions', () => {
     }
     expect(onSelectionChange).toHaveBeenCalledWith(['1']);
 
-    await user.click(screen.getByRole('checkbox', { name: 'Select all rows' }));
+    await user.click(screen.getByRole('checkbox', { name: 'Seleccionar todas' }));
     expect(onSelectionChange).toHaveBeenCalledWith(['1', '2']);
   });
 

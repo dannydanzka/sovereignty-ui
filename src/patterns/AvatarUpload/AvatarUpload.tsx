@@ -27,7 +27,7 @@ const DEFAULT_ACCEPT = 'image/jpeg,image/png,image/webp';
 
 export const AvatarUpload = ({
   accept = DEFAULT_ACCEPT,
-  changeLabel = 'Change photo',
+  changeLabel = 'Cambiar foto',
   className,
   currentPhotoUrl,
   disabled = false,

@@ -25,11 +25,11 @@ describe('Pagination', () => {
 
   it('disables previous button on first page', () => {
     render(<Pagination currentPage={1} totalPages={5} onPageChange={vi.fn()} />);
-    expect(screen.getByLabelText('Previous page')).toBeDisabled();
+    expect(screen.getByLabelText('Página anterior')).toBeDisabled();
   });
 
   it('disables next button on last page', () => {
     render(<Pagination currentPage={5} totalPages={5} onPageChange={vi.fn()} />);
-    expect(screen.getByLabelText('Next page')).toBeDisabled();
+    expect(screen.getByLabelText('Página siguiente')).toBeDisabled();
   });
 });

@@ -10,9 +10,9 @@ import { Badge } from '../../components/Badge';
 import type { StatusBadgeProps } from './StatusBadge.interfaces';
 
 export const StatusBadge = ({
-  activeLabel = 'Active',
+  activeLabel = 'Activo',
   className,
-  inactiveLabel = 'Inactive',
+  inactiveLabel = 'Inactivo',
   isActive,
 }: StatusBadgeProps) => (
   <Badge className={className} size='sm' variant={isActive ? 'success' : 'warning'}>

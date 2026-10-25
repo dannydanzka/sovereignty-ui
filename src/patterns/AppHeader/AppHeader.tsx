@@ -33,7 +33,7 @@ export const AppHeader = ({
   actionsCollapse = true,
   actionsSlot,
   className,
-  closeMenuLabel = 'Close menu',
+  closeMenuLabel = 'Cerrar menú',
   collapseAt = 'md',
   floating = false,
   hidden = false,
@@ -41,7 +41,7 @@ export const AppHeader = ({
   mobileMenuContent,
   navSlot,
   onMenuToggle,
-  openMenuLabel = 'Open menu',
+  openMenuLabel = 'Abrir menú',
   sticky = true,
   transparent = false,
 }: AppHeaderProps) => {

@@ -15,7 +15,7 @@ export const Dropdown = ({
   icon,
   onChange,
   options,
-  placeholder = 'Select',
+  placeholder = 'Selecciona',
   position = 'bottom',
   value,
 }: DropdownProps) => {

@@ -7,8 +7,8 @@ import { ErrorFallback } from './ErrorFallback';
 describe('ErrorFallback', () => {
   it('renders default title and description', () => {
     render(<ErrorFallback />);
-    expect(screen.getByText('Something went wrong')).toBeInTheDocument();
-    expect(screen.getByText('An unexpected error occurred. Please try again.')).toBeInTheDocument();
+    expect(screen.getByText('Algo salió mal')).toBeInTheDocument();
+    expect(screen.getByText('Ocurrió un error inesperado. Intenta de nuevo.')).toBeInTheDocument();
   });
 
   it('renders custom title and description', () => {
@@ -20,7 +20,7 @@ describe('ErrorFallback', () => {
   it('renders retry button and calls onRetry', async () => {
     const handleRetry = vi.fn();
     render(<ErrorFallback onRetry={handleRetry} />);
-    await userEvent.click(screen.getByText('Try Again'));
+    await userEvent.click(screen.getByText('Reintentar'));
     expect(handleRetry).toHaveBeenCalledOnce();
   });
 

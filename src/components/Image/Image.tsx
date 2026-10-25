@@ -21,7 +21,7 @@ export const Image = ({
   alt,
   className,
   fallbackIcon,
-  fallbackText = 'No image',
+  fallbackText = 'Sin imagen',
   height,
   loading = 'lazy',
   objectFit = 'cover',

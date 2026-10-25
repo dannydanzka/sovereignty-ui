@@ -31,7 +31,7 @@ const DEFAULT_ACCEPT = 'image/jpeg,image/png,image/webp';
 
 export const ImageUploader = ({
   accept = DEFAULT_ACCEPT,
-  changeLabel = 'Change image',
+  changeLabel = 'Cambiar imagen',
   className,
   currentImageUrl,
   disabled = false,
@@ -41,7 +41,7 @@ export const ImageUploader = ({
   label,
   onFileSelect,
   onRejectFile,
-  placeholder = 'Click to upload an image',
+  placeholder = 'Sube una imagen',
 }: ImageUploaderProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);

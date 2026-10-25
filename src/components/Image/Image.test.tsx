@@ -6,7 +6,7 @@ import { Image } from './Image';
 describe('Image', () => {
   it('renders fallback when src is missing', () => {
     render(<Image alt='Test' />);
-    expect(screen.getByText('No image')).toBeInTheDocument();
+    expect(screen.getByText('Sin imagen')).toBeInTheDocument();
   });
 
   it('renders custom fallback text', () => {

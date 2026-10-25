@@ -38,7 +38,7 @@ export const TableFooter = ({
   onPageChange,
   onPageSizeChange,
   pageSize,
-  pageSizeLabel = 'Show',
+  pageSizeLabel = 'Mostrar',
   pageSizeOptions = DEFAULT_PAGE_SIZE_OPTIONS,
   perPageLabel = 'per page',
   rangeLabel = defaultRangeLabel,
