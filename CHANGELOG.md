@@ -1,5 +1,16 @@
 # @dannydanzka/sovereignty-ui
 
+## 0.35.0
+
+### Minor Changes
+
+- 9f8ecfb: feat: default UI copy in Spanish (web and native) — StatusBadge, DataTable, Pagination, Modal, Input, SearchInput, Dropdown, Alert, ErrorFallback, Image, ImagePreviewModal, AppHeader, AvatarUpload, ImageUploader, TableFooter. Every string is still a prop; a consumer that relied on the English default passes it explicitly.
+
+### Patch Changes
+
+- 9f8ecfb: fix(Card): native resolution without `element` — a host tag (`div`, `li`) passed as `as` broke the native Card and the consumers' type-check
+- 9f8ecfb: fix(native): Button dims only when disabled or loading (the Pressable primitive also disabled every button without onClick, so display buttons rendered faded) and its primary/brand/accent label uses onPrimary/onAccent like web; Avatar drops `var()`, which React Native discards, so its circle and initials color render
+
 ## 0.34.3
 
 ### Patch Changes
