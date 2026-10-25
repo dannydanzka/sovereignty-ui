@@ -80,6 +80,7 @@ export const Button = ({
 
   return (
     <StyledButton
+      $disabled={disabled || loading}
       $fullWidth={fullWidth}
       $iconOnly={iconOnly}
       $shape={shape}

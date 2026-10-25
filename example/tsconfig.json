@@ -1,9 +1,15 @@
 {
   "extends": "@react-native/typescript-config",
   "compilerOptions": {
-    "moduleSuffixes": [".native", ""],
-    "types": ["jest"]
+    "moduleSuffixes": [".ios", ".native", ""],
+    "noUncheckedIndexedAccess": true,
+    "paths": {
+      "@app/*": ["./src/app/*"],
+      "@apps/*": ["./src/apps/*"],
+      "@testing": ["./src/libs/testing"]
+    },
+    "types": ["jest", "@testing-library/react-native/matchers"]
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "jest.setup.ts"],
   "exclude": ["**/node_modules", "**/Pods"]
 }

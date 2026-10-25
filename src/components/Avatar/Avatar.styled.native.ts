@@ -34,7 +34,7 @@ const FONT_MAP = {
 
 export const AvatarContainer = styled(Div)<{ $size: AvatarSize }>`
   align-items: center;
-  background-color: var(--sui-avatar-bg, ${c('primary200')});
+  background-color: ${c('primary200')};
   border-radius: 9999px;
   flex-shrink: 0;
   height: ${({ $size }) => SIZE_MAP[$size]};
@@ -52,7 +52,7 @@ export const AvatarImage = styled(Image).attrs<{ alt?: string; src?: string }>((
 `;
 
 export const AvatarInitials = styled(Span)<{ $size?: AvatarSize }>`
-  color: var(--sui-avatar-fg, ${c('textPrimary')});
+  color: ${c('textPrimary')};
   font-family: ${tf('display')};
   font-size: ${({ $size }) => FONT_MAP[$size ?? 'md']};
   font-weight: ${tw('semibold')};

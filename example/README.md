@@ -9,7 +9,7 @@ It is the native counterpart of Storybook: web components are demoed with
 ## What this is (and is not)
 
 - **IS**: the local proving ground for React Native support. Every RN-ready
-  component gets demoed in `Gallery.tsx` and validated with `type-check`, Metro
+  component gets a demo in `src/apps/mod-catalog/demos/` and is validated with `type-check`, Metro
   and Jest here BEFORE claiming RN support in the library.
 - **IS NOT**: an app with users, business logic, backend, i18n, or releases. No
   domain code enters this folder. It is never published — the library's
@@ -34,17 +34,33 @@ example/node_modules/@dannydanzka/sovereignty-ui -> ../../..
 
 ## Layout
 
-Flat on purpose — a harness has no layers to separate.
+The same layers as a Soverum mobile app (`dearadry-mobile`), so the harness is also the reference for them.
 
 ```
 example/
-├── App.tsx            app shell (SafeArea + StatusBar)
-├── Gallery.tsx        every RN-ready component, one section each
-├── Gallery.styled.ts  layout via Div/Span + token helpers
-├── brand.ts           setSuiTokens() — also the multi-tenant theming test
-├── android/  ios/     native projects (app id: com.example)
-└── package.json       private, name "example"
+├── index.js                     registers src/app/App
+├── src/app/                     App (brand → navigation), navigation (public entry @app/navigation), linking
+├── src/apps/mod-catalog/
+│   ├── navigation/              Catalog + Demo routes, lazy screens
+│   ├── presentation/screens/    CatalogScreen (every demo, grouped) · DemoScreen (one demo)
+│   └── demos/                   one folder per native export + DEMOS registry (demos.constants.ts)
+├── src/libs/testing/            renderApp
+├── scripts/eslint-rules/        the mobile rules (navigation, module boundaries, primitives); the rest come from ../scripts
+├── android/  ios/               native projects (module name `example`, URL scheme `sui`)
+└── package.json                 private, RN 0.88, npm (the `file:..` link is npm's)
 ```
+
+A new native export gets a folder in `demos/` and a `DEMOS` entry; `demos.test.tsx` renders every entry.
+
+## Opening a demo without tapping
+
+```bash
+xcrun simctl launch <udid> com.example -demo button     # iOS launch argument, no confirmation dialog
+xcrun simctl openurl <udid> sui://demo/button           # deep link; iOS asks "Open in…?" once
+```
+
+Metro on another port than 8081: `npx react-native start --port 8095`, then point the simulator at it once with
+`xcrun simctl spawn <udid> defaults write com.example RCT_jsLocation "localhost:8095"`.
 
 ## Commands
 
@@ -56,8 +72,9 @@ npm run ios              # iOS simulator (npm run pods once first)
 npm run android          # Android emulator
 npm run pods             # bundle install + pod install (ios/)
 npm run type-check       # tsc --noEmit (native resolution via moduleSuffixes)
-npm run lint             # eslint
-npm test                 # Jest
+npm run lint             # eslint (--max-warnings 0)
+npm test                 # Jest: every demo renders + the lint rules
+npm run validate         # type-check + lint + format + test
 npm run bundle:ios       # headless validation: release bundle to build/
 npm run bundle:android   # same for Android
 ```
@@ -66,9 +83,10 @@ npm run bundle:android   # same for Android
 
 1. In the library: add `Component.styled.native.ts`, export from
    `src/index.native.ts`, `npm run type-check:native` green.
-2. Here: add a `Section` to `Gallery.tsx` using it, covering all variants.
-3. `npm run type-check && npm run lint && npm test && npm run bundle:ios`.
-4. Visual check in a simulator when possible.
+2. Here: add `src/apps/mod-catalog/demos/<Component>Demo/` covering every variant and state, and its
+   entry in `DEMOS`.
+3. `npm run validate && npm run bundle:ios`.
+4. Visual check on a simulator: `xcrun simctl launch <udid> com.example -demo <id>` + a screenshot.
 
 ## Rules
 
