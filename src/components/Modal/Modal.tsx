@@ -44,7 +44,7 @@ const normalizeSize = (size: ModalSize): 'full' | 'lg' | 'md' | 'sm' | 'xl' => {
 export const Modal = ({
   cancelText,
   children,
-  closeLabel = 'Close',
+  closeLabel = 'Cerrar',
   confirmText,
   confirmVariant = 'danger',
   disableClose = false,
@@ -123,14 +123,14 @@ export const Modal = ({
       {children && <ModalConfirmChildren>{children}</ModalConfirmChildren>}
       <ModalActions>
         <Button disabled={loading} variant='secondary' onClick={handleCancel}>
-          {cancelText ?? 'Cancel'}
+          {cancelText ?? 'Cancelar'}
         </Button>
         <Button
           loading={loading}
           variant={confirmVariant === CONFIRM_VARIANTS.INFO ? 'primary' : confirmVariant}
           onClick={handleConfirm}
         >
-          {confirmText ?? 'Confirm'}
+          {confirmText ?? 'Confirmar'}
         </Button>
       </ModalActions>
     </ModalContent>

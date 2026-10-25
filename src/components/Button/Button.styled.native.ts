@@ -21,14 +21,14 @@ import { Div, Pressable, Span } from '../../primitives';
 
 const VARIANT_COLORS: Record<ButtonVariant, { background: string; border?: string; text: string }> =
   {
-    accent: { background: c('accent500'), text: c('white') },
-    brand: { background: c('accent500'), text: c('white') },
+    accent: { background: c('accent500'), text: c('onAccent') },
+    brand: { background: c('accent500'), text: c('onAccent') },
     'brand-ghost': { background: 'transparent', text: c('accent500') },
     'brand-outline': { background: c('white'), border: c('accent500'), text: c('accent500') },
     danger: { background: c('error'), text: c('white') },
     ghost: { background: c('neutral100'), text: c('textSecondary') },
     outline: { background: c('white'), border: c('neutral300'), text: c('textPrimary') },
-    primary: { background: c('primary500'), text: c('neutral900') },
+    primary: { background: c('primary500'), text: c('onPrimary') },
     secondary: { background: c('white'), border: c('neutral300'), text: c('textPrimary') },
     success: { background: c('success'), text: c('white') },
     warning: { background: c('warning'), text: c('neutral900') },
@@ -99,7 +99,7 @@ export const StyledButton = styled(Pressable)<StyledButtonProps>`
   flex-direction: row;
   gap: ${s('xs')};
   justify-content: center;
-  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
+  opacity: ${({ $disabled }) => ($disabled ? 0.5 : 1)};
 
   ${({ $variant }) => getVariantStyles($variant)}
   ${({ $iconOnly, $size }) => getSizeStyles($size, $iconOnly ?? false)}

@@ -30,18 +30,18 @@ import {
 
 export const ImagePreviewModal = ({
   badge,
-  closeLabel = 'Close',
+  closeLabel = 'Cerrar',
   description,
-  downloadLabel = 'Download',
+  downloadLabel = 'Descargar',
   imageUrl,
   isOpen,
   mediaType = 'image',
-  nextLabel = 'Next',
+  nextLabel = 'Siguiente',
   onClose,
   onDownload,
   onNext,
   onPrevious,
-  previousLabel = 'Previous',
+  previousLabel = 'Anterior',
   title,
 }: ImagePreviewModalProps) => {
   const handleKeyDown = useCallback(

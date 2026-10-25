@@ -44,7 +44,7 @@ describe('Modal', () => {
   it('calls onConfirm when confirm button clicked', async () => {
     const handleConfirm = vi.fn();
     render(<Modal isOpen variant='confirm' onClose={vi.fn()} onConfirm={handleConfirm} />);
-    await userEvent.click(screen.getByText('Confirm'));
+    await userEvent.click(screen.getByRole('button', { name: 'Confirmar' }));
     expect(handleConfirm).toHaveBeenCalledOnce();
   });
 

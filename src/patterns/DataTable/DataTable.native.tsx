@@ -35,16 +35,16 @@ export const DataTable = <T,>({
   className,
   columns,
   data,
-  emptyMessage = 'No data available',
+  emptyMessage = 'No hay datos',
   loading = false,
   onSearch,
   onSelectionChange,
   rowActions,
   rowKey,
-  searchPlaceholder = 'Search...',
+  searchPlaceholder = 'Buscar...',
   searchValue,
   selectable = false,
-  selectAllLabel = 'Select all rows',
+  selectAllLabel = 'Seleccionar todas',
   selectedKeys = [],
 }: DataTableProps<T>) => {
   const hasSelection = selectable && onSelectionChange !== undefined;
@@ -142,7 +142,7 @@ export const DataTable = <T,>({
         </SelectAllRow>
       ) : null}
 
-      {loading ? <StateText>Loading…</StateText> : null}
+      {loading ? <StateText>Cargando…</StateText> : null}
       {!loading && data.length === 0 ? <StateText>{emptyMessage}</StateText> : null}
 
       {!loading ? data.map((row, index) => renderCard(row, index)) : null}

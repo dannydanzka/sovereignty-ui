@@ -117,10 +117,10 @@ export const Pagination = ({
   if (totalPages <= 1) return null;
 
   return (
-    <PaginationWrapper aria-label='Pagination' className={className}>
+    <PaginationWrapper aria-label='Paginación' className={className}>
       {showFirstLast && (
         <PaginationButton
-          aria-label='First page'
+          aria-label='Primera página'
           disabled={currentPage === 1}
           onClick={handleFirst}
         >
@@ -128,7 +128,7 @@ export const Pagination = ({
         </PaginationButton>
       )}
       <PaginationButton
-        aria-label={previousLabel ?? 'Previous page'}
+        aria-label={previousLabel ?? 'Página anterior'}
         disabled={currentPage === 1}
         onClick={handlePrev}
       >
@@ -136,7 +136,7 @@ export const Pagination = ({
       </PaginationButton>
       {renderPages()}
       <PaginationButton
-        aria-label={nextLabel ?? 'Next page'}
+        aria-label={nextLabel ?? 'Página siguiente'}
         disabled={currentPage === totalPages}
         onClick={handleNext}
       >
@@ -144,7 +144,7 @@ export const Pagination = ({
       </PaginationButton>
       {showFirstLast && (
         <PaginationButton
-          aria-label='Last page'
+          aria-label='Última página'
           disabled={currentPage === totalPages}
           onClick={handleLast}
         >

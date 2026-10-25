@@ -41,12 +41,12 @@ describe('Alert', () => {
   it('calls onDismiss when dismiss clicked', async () => {
     const handleDismiss = vi.fn();
     render(<Alert onDismiss={handleDismiss}>Msg</Alert>);
-    await userEvent.click(screen.getByLabelText('Dismiss'));
+    await userEvent.click(screen.getByLabelText('Descartar'));
     expect(handleDismiss).toHaveBeenCalledOnce();
   });
 
   it('does not render dismiss button without onDismiss', () => {
     render(<Alert>Msg</Alert>);
-    expect(screen.queryByLabelText('Dismiss')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Descartar')).not.toBeInTheDocument();
   });
 });

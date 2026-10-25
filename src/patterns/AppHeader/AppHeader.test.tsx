@@ -29,11 +29,11 @@ describe('AppHeader', () => {
       />
     );
 
-    const toggle = screen.getByRole('button', { name: 'Open menu' });
+    const toggle = screen.getByRole('button', { name: 'Abrir menú' });
     expect(toggle).toHaveAttribute('aria-expanded', 'false');
 
     await user.click(toggle);
-    expect(screen.getByRole('button', { name: 'Close menu' })).toHaveAttribute(
+    expect(screen.getByRole('button', { name: 'Cerrar menú' })).toHaveAttribute(
       'aria-expanded',
       'true'
     );
@@ -50,9 +50,9 @@ describe('AppHeader', () => {
       />
     );
 
-    await user.click(screen.getByRole('button', { name: 'Open menu' }));
+    await user.click(screen.getByRole('button', { name: 'Abrir menú' }));
     expect(onMenuToggle).toHaveBeenLastCalledWith(true);
-    await user.click(screen.getByRole('button', { name: 'Close menu' }));
+    await user.click(screen.getByRole('button', { name: 'Cerrar menú' }));
     expect(onMenuToggle).toHaveBeenLastCalledWith(false);
   });
 
@@ -115,7 +115,7 @@ describe('AppHeader — onMenuToggle purity', () => {
         <Consumer />
       </StrictMode>
     );
-    await user.click(screen.getByRole('button', { name: 'Open menu' }));
+    await user.click(screen.getByRole('button', { name: 'Abrir menú' }));
 
     expect(screen.getByText('open')).toBeInTheDocument();
     expect(consoleError).not.toHaveBeenCalled();

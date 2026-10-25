@@ -27,7 +27,7 @@ import {
 
 export const ImagePreviewModal = ({
   badge,
-  closeLabel = 'Close',
+  closeLabel = 'Cerrar',
   description,
   imageUrl,
   isOpen,

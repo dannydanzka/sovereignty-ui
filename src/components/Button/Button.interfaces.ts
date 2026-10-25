@@ -45,6 +45,8 @@ export interface ButtonProps {
 }
 
 export interface StyledButtonProps {
+  /** Native dims only on this: the Pressable primitive also disables a button that has no onClick. */
+  $disabled?: boolean;
   $fullWidth?: boolean;
   $iconOnly?: boolean;
   $shape?: ButtonShape;
