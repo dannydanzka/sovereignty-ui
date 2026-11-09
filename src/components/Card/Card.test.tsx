@@ -16,6 +16,11 @@ describe('Card', () => {
     expect(screen.getByText('Content')).toBeInTheDocument();
   });
 
+  it('exposes the testId as a stable selector', () => {
+    render(<Card testId='reto-1'>Content</Card>);
+    expect(screen.getByTestId('reto-1')).toHaveTextContent('Content');
+  });
+
   it('calls onClick when clickable', async () => {
     const handleClick = vi.fn();
     render(<Card onClick={handleClick}>Click</Card>);

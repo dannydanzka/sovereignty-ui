@@ -20,6 +20,7 @@ export const Card = ({
   element = 'div',
   onClick,
   padding = 'medium',
+  testId,
   variant = 'elevated',
 }: CardProps) => (
   <StyledCard
@@ -29,6 +30,7 @@ export const Card = ({
     $variant={variant}
     as={element}
     className={className}
+    data-testid={testId}
     onClick={onClick}
   >
     {children}

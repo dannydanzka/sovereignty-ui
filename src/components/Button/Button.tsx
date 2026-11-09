@@ -31,6 +31,7 @@ export const Button = ({
   onClick,
   shape,
   size = 'md',
+  testId,
   title,
   type = 'button',
   variant = 'primary',
@@ -88,6 +89,7 @@ export const Button = ({
       $variant={variant}
       aria-label={ariaLabel}
       className={className}
+      data-testid={testId}
       disabled={disabled || loading}
       title={title}
       type={type}

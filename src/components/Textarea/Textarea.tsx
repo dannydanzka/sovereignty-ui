@@ -30,6 +30,7 @@ export const Textarea = ({
   required = false,
   rows = 4,
   showCount = false,
+  testId,
   value = '',
 }: TextareaProps) => {
   const textareaId = id ?? name;
@@ -47,6 +48,7 @@ export const Textarea = ({
       )}
       <StyledTextarea
         $hasError={Boolean(error) || isOver}
+        data-testid={testId}
         disabled={disabled}
         id={textareaId}
         maxLength={maxLength}

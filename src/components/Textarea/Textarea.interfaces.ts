@@ -12,5 +12,7 @@ export interface TextareaProps {
   required?: boolean;
   rows?: number;
   showCount?: boolean;
+  /** Stable selector for tests: `data-testid` on web, `testID` (accessibility identifier) on native. */
+  testId?: string;
   value?: string;
 }

@@ -8,7 +8,8 @@
  * Pressable maps the web `onClick`/`disabled` props to TouchableOpacity's
  * `onPress`/`disabled`, so shared component files keep passing `onClick`
  * unchanged. WebCompatProps lets shared files keep passing className and
- * data-testid; React Native simply ignores them at runtime.
+ * data-testid: className is ignored, and data-testid becomes `testID`, the iOS accessibility identifier and
+ * Android resource-id that E2E drivers (Maestro, Detox) select by.
  *
  * TextField keyboard: an explicit `inputMode` wins over the `type` mapping, so a
  * text field can ask for a numeric keypad without pretending to be a number
@@ -47,9 +48,11 @@ const INPUT_MODE_KEYBOARD_TYPE = {
 /** Web-only DOM attributes with no TextInput equivalent — dropped on native. */
 const WEB_ONLY_PROPS = ['max', 'min', 'step'];
 
-export const Div = styled.View<WebCompatProps>``;
+const testIdAttrs = (props: WebCompatProps) => ({ testID: props['data-testid'] });
 
-export const Span = styled.Text<WebCompatProps>``;
+export const Div = styled.View.attrs<WebCompatProps>(testIdAttrs)<WebCompatProps>``;
+
+export const Span = styled.Text.attrs<WebCompatProps>(testIdAttrs)<WebCompatProps>``;
 
 export const Pressable = styled(TouchableOpacity).attrs<PressablePrimitiveProps>((props) => ({
   accessibilityLabel: props['aria-label'],
@@ -57,6 +60,7 @@ export const Pressable = styled(TouchableOpacity).attrs<PressablePrimitiveProps>
   activeOpacity: props.onClick ? 0.7 : 1,
   disabled: props.disabled || !props.onClick,
   onPress: props.onClick ? () => props.onClick?.() : undefined,
+  testID: props['data-testid'],
 }))<PressablePrimitiveProps>``;
 
 export const TextField = styled(TextInput)
@@ -74,4 +78,5 @@ export const TextField = styled(TextInput)
     numberOfLines: props.rows,
     onChangeText: props.onValueChange,
     secureTextEntry: props.secureTextEntry,
+    testID: props['data-testid'],
   }))<TextFieldPrimitiveProps>``;

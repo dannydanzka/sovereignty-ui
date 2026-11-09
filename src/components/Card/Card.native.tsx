@@ -12,6 +12,7 @@ export const Card = ({
   clipped,
   onClick,
   padding = 'medium',
+  testId,
   variant = 'elevated',
 }: CardProps) => (
   <StyledCard
@@ -20,6 +21,7 @@ export const Card = ({
     $padding={padding}
     $variant={variant}
     className={className}
+    data-testid={testId}
     onClick={onClick}
   >
     {children}

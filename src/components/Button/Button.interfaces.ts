@@ -39,6 +39,8 @@ export interface ButtonProps {
   onClick?: (event?: MouseEvent<HTMLButtonElement>) => void;
   shape?: ButtonShape;
   size?: ButtonSize;
+  /** Stable selector for tests: `data-testid` on web, `testID` (accessibility identifier) on native. */
+  testId?: string;
   title?: string;
   type?: 'button' | 'submit' | 'reset';
   variant?: ButtonVariant;
