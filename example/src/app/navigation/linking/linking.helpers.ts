@@ -10,5 +10,5 @@ import { LAUNCH_DEMO_KEY } from './launch.constants';
 export const getLaunchUrl = async (): Promise<string | null> => {
   const launchDemo: unknown = Platform.OS === 'ios' ? Settings.get(LAUNCH_DEMO_KEY) : null;
   if (typeof launchDemo === 'string' && launchDemo.length > 0) return `sui://demo/${launchDemo}`;
-  return Linking.getInitialURL();
+  return (await Linking.getInitialURL()) ?? null;
 };

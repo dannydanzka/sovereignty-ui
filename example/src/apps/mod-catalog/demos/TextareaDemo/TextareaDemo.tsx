@@ -22,6 +22,7 @@ export const TextareaDemo = () => {
         onChange={setNotes}
         placeholder='Escribe algo…'
         showCount
+        testId='textarea-notes'
         value={notes}
       />
     </DemoSection>

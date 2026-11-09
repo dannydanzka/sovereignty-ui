@@ -1,0 +1,19 @@
+# A Card with onClick is a tap target on native; one without it is not.
+appId: com.example
+name: components/card
+tags:
+  - component
+---
+- launchApp:
+    arguments:
+      demo: card
+- extendedWaitUntil:
+    visible:
+      id: 'card-pressable'
+    timeout: 30000
+- tapOn:
+    id: 'card-pressable'
+- tapOn:
+    id: 'card-pressable'
+- assertVisible: 'Presionable: 2 toques'
+- takeScreenshot: step-01-card

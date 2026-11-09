@@ -102,3 +102,34 @@ npm run bundle:android   # same for Android
   hot-reload through Metro `watchFolders`.
 - No business/domain logic, backends, i18n, auth, or analytics.
 - Don't commit `build/` bundles or `ios/Pods`.
+
+## E2E on the simulator (Maestro)
+
+The library proves its components on a device here, once, so a product's suite tests its flows and not
+whether a `Button` taps. Maestro drives the app through the accessibility tree; components are selected by
+the `testId` they take (`testID` on native).
+
+```bash
+npm run ios                                  # Debug build on a booted simulator, Metro running
+npm run e2e                                  # every flow
+FLOW=components/button npm run e2e           # one flow
+TAGS=component npm run e2e                   # by tag
+```
+
+```
+e2e/
+├── config.yaml
+├── scripts/run.sh            simulator + app checks, evidence in e2e/runs/ (git-ignored; a pass keeps result.xml)
+└── flows/
+    ├── catalog/every-demo-listed.yaml     every DEMOS row reaches the accessibility tree (smoke)
+    └── components/<name>.yaml             one interactive component's native contract (component)
+```
+
+A flow opens its demo with the launch argument the harness already reads (`launchApp: arguments: { demo: <id> }`),
+so no flow walks the catalog to reach it. `src/apps/mod-catalog/demos/native-test-ids.test.tsx` is the jest
+twin: it proves in CI that a `testId` reaches the native node and that a consumer's own `testID` survives.
+
+Rules: select by `id`, text only when the copy is the assertion, coordinates never (a needed coordinate is a
+missing `testId`, fixed in the component) · a new interactive component gets `testId`s in its demo and a flow
+in `flows/components/` · nothing leaves the machine (no `maestro cloud`, no AI assertions). Every flow is a
+draft until it has run once on a simulator.

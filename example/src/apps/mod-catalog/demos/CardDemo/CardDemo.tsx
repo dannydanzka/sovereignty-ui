@@ -19,7 +19,7 @@ export const CardDemo = () => {
       <Card padding='medium' variant='outlined'>
         <DemoCaption>Con borde</DemoCaption>
       </Card>
-      <Card onClick={() => setTaps((count) => count + 1)} padding='medium'>
+      <Card onClick={() => setTaps((count) => count + 1)} padding='medium' testId='card-pressable'>
         <DemoCaption>{`Presionable: ${taps} toques`}</DemoCaption>
       </Card>
     </DemoSection>
