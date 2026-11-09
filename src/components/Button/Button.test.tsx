@@ -10,6 +10,11 @@ describe('Button', () => {
     expect(screen.getByRole('button', { name: 'Click me' })).toBeInTheDocument();
   });
 
+  it('exposes the testId as a stable selector', () => {
+    render(<Button testId='enviar-evidencia'>Enviar</Button>);
+    expect(screen.getByTestId('enviar-evidencia')).toHaveTextContent('Enviar');
+  });
+
   it('calls onClick when clicked', async () => {
     const handleClick = vi.fn();
     render(<Button onClick={handleClick}>Click</Button>);

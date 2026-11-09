@@ -54,6 +54,8 @@ export interface CardProps {
    */
   element?: CardElement;
   padding?: CardPadding;
+  /** Stable selector for tests: `data-testid` on web, `testID` (accessibility identifier) on native. */
+  testId?: string;
   variant?: CardVariant;
   onClick?: () => void;
 }

@@ -10,6 +10,11 @@ describe('Input', () => {
     expect(screen.getByLabelText('Email')).toBeInTheDocument();
   });
 
+  it('puts the testId on the field itself, the node a test types into', () => {
+    render(<Input id='email' label='Email' name='email' testId='login-email' />);
+    expect(screen.getByTestId('login-email')).toBe(screen.getByLabelText('Email'));
+  });
+
   it('calls onChange with value', async () => {
     const handleChange = vi.fn();
     render(<Input id='name' label='Name' name='name' onChange={handleChange} />);

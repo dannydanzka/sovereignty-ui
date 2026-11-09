@@ -10,6 +10,11 @@ describe('Textarea', () => {
     expect(screen.getByLabelText('Notes')).toBeInTheDocument();
   });
 
+  it('puts the testId on the field itself, the node a test types into', () => {
+    render(<Textarea label='Notes' name='notes' testId='respuesta' />);
+    expect(screen.getByTestId('respuesta')).toBe(screen.getByLabelText('Notes'));
+  });
+
   it('calls onChange with value', async () => {
     const handleChange = vi.fn();
     render(<Textarea label='Notes' name='notes' onChange={handleChange} />);

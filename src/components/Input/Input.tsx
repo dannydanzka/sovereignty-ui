@@ -53,6 +53,7 @@ export const Input = ({
   showPasswordLabel = 'Mostrar contraseña',
   size = 'md',
   step,
+  testId,
   type = 'text',
   value,
 }: InputProps) => {
@@ -93,6 +94,7 @@ export const Input = ({
           $hasToggle={isPassword}
           $size={size}
           autoComplete={autoComplete}
+          data-testid={testId}
           disabled={disabled}
           id={id}
           inputMode={inputMode}

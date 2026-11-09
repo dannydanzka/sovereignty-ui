@@ -36,6 +36,8 @@ export interface InputProps {
   showPasswordLabel?: string;
   /** Granularity for `number` (e.g. `0.01` for money) / `date`. Web-only. */
   step?: number | string;
+  /** Stable selector for tests: `data-testid` on web, `testID` (accessibility identifier) on native. */
+  testId?: string;
   type?: InputType;
   value?: string;
 }
