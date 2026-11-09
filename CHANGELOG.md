@@ -1,5 +1,13 @@
 # @dannydanzka/sovereignty-ui
 
+## 0.36.0
+
+### Minor Changes
+
+- 4f6fdb4: `Button`, `Card`, `Input` and `Textarea` take `testId`: it renders as `data-testid` on web and as `testID` on React
+  Native, so E2E drivers that read the accessibility tree (Maestro, Detox) can select them. The native primitives now map
+  any `data-testid` to `testID`.
+
 ## 0.35.0
 
 ### Minor Changes
