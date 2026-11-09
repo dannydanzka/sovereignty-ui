@@ -14,7 +14,12 @@ export const CatalogScreen = () => {
       {sections.map(({ data, title }) => [
         <SectionHeader key={title}>{title}</SectionHeader>,
         ...data.map((demo) => (
-          <DemoItem aria-label={demo.name} key={demo.id} onClick={() => openDemo(demo.id)}>
+          <DemoItem
+            aria-label={demo.name}
+            data-testid={`demo-${demo.id}`}
+            key={demo.id}
+            onClick={() => openDemo(demo.id)}
+          >
             <DemoName>{demo.name}</DemoName>
           </DemoItem>
         )),

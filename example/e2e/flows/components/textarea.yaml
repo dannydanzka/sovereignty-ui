@@ -1,0 +1,20 @@
+# Textarea on native: multiline typing lands in the value and the counter follows it.
+appId: com.example
+name: components/textarea
+tags:
+  - component
+---
+- launchApp:
+    arguments:
+      demo: textarea
+- extendedWaitUntil:
+    visible:
+      id: 'textarea-notes'
+    timeout: 30000
+- tapOn:
+    id: 'textarea-notes'
+- eraseText: 130
+- inputText: 'Caminata en familia'
+- assertVisible: 'Caminata en familia'
+- assertVisible: '19/120'
+- takeScreenshot: step-01-textarea

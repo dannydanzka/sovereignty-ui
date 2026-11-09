@@ -21,6 +21,7 @@ export const InputDemo = () => {
           name='email'
           onChange={setEmail}
           placeholder='tu@correo.com'
+          testId='input-email'
           type='email'
           value={email}
         />
@@ -30,6 +31,7 @@ export const InputDemo = () => {
           name='password'
           onChange={setPassword}
           placeholder='Tu contraseña'
+          testId='input-password'
           type='password'
           value={password}
         />

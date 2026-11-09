@@ -13,7 +13,7 @@ export const DemoScreen = () => {
   return (
     <Scroll>
       <Content>
-        <DemoTitle>{name}</DemoTitle>
+        <DemoTitle data-testid='demo-title'>{name}</DemoTitle>
         {Demo ? <Demo /> : <Missing>{DEMO_NOT_FOUND}</Missing>}
       </Content>
     </Scroll>

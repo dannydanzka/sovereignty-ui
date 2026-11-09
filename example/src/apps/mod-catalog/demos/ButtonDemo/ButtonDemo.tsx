@@ -33,8 +33,16 @@ export const ButtonDemo = () => {
         </DemoRow>
       </DemoSection>
       <DemoSection title='Estados (useLoading)'>
-        <Button disabled>Deshabilitado</Button>
-        <Button fullWidth loading={isLoading} onClick={runTask} variant='brand'>
+        <Button disabled testId='button-disabled'>
+          Deshabilitado
+        </Button>
+        <Button
+          fullWidth
+          loading={isLoading}
+          onClick={runTask}
+          testId='button-save'
+          variant='brand'
+        >
           Guardar
         </Button>
       </DemoSection>

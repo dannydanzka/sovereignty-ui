@@ -1,0 +1,28 @@
+# Button on native: a disabled button is not enabled, and an enabled one runs its action and
+# stays disabled (spinner + label) until the work ends (useLoading, 1.5 s).
+appId: com.example
+name: components/button
+tags:
+  - component
+---
+- launchApp:
+    arguments:
+      demo: button
+- extendedWaitUntil:
+    visible:
+      id: 'button-save'
+    timeout: 30000
+- assertVisible:
+    id: 'button-disabled'
+    enabled: false
+- tapOn:
+    id: 'button-save'
+- assertVisible:
+    id: 'button-save'
+    enabled: false
+- extendedWaitUntil:
+    visible:
+      id: 'button-save'
+      enabled: true
+    timeout: 5000
+- takeScreenshot: step-01-button

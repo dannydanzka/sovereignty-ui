@@ -1,0 +1,25 @@
+# Input on native: the id reaches the TextInput, typing lands in the value, and a password
+# field does not show what was typed.
+appId: com.example
+name: components/input
+tags:
+  - component
+---
+- launchApp:
+    arguments:
+      demo: input
+- extendedWaitUntil:
+    visible:
+      id: 'input-email'
+    timeout: 30000
+- tapOn:
+    id: 'input-email'
+- eraseText: 40
+- inputText: 'maria@test.com'
+- assertVisible: 'maria@test.com'
+- tapOn:
+    id: 'input-password'
+- eraseText: 40
+- inputText: 'secreta123'
+- assertNotVisible: 'secreta123'
+- takeScreenshot: step-01-input
