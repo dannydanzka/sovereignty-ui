@@ -1,5 +1,12 @@
 # @dannydanzka/sovereignty-ui
 
+## 0.36.1
+
+### Patch Changes
+
+- 3370f0c: Native primitives keep a consumer's own `testID`: 0.36.0 mapped `data-testid` to `testID` through `.attrs`, which
+  erased a `testID` passed directly to a styled `Div`, `Span`, `Pressable` or `TextField` when no `data-testid` came.
+
 ## 0.36.0
 
 ### Minor Changes
