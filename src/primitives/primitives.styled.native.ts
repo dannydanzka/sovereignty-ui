@@ -48,7 +48,13 @@ const INPUT_MODE_KEYBOARD_TYPE = {
 /** Web-only DOM attributes with no TextInput equivalent — dropped on native. */
 const WEB_ONLY_PROPS = ['max', 'min', 'step'];
 
-const testIdAttrs = (props: WebCompatProps) => ({ testID: props['data-testid'] });
+/** A consumer's own `testID` wins: `.attrs` overrides props, and an absent `data-testid` would erase it. */
+const resolveTestId = (props: WebCompatProps & { testID?: string }) =>
+  props['data-testid'] ?? props.testID;
+
+const testIdAttrs = (props: WebCompatProps & { testID?: string }) => ({
+  testID: resolveTestId(props),
+});
 
 export const Div = styled.View.attrs<WebCompatProps>(testIdAttrs)<WebCompatProps>``;
 
@@ -60,7 +66,7 @@ export const Pressable = styled(TouchableOpacity).attrs<PressablePrimitiveProps>
   activeOpacity: props.onClick ? 0.7 : 1,
   disabled: props.disabled || !props.onClick,
   onPress: props.onClick ? () => props.onClick?.() : undefined,
-  testID: props['data-testid'],
+  testID: resolveTestId(props),
 }))<PressablePrimitiveProps>``;
 
 export const TextField = styled(TextInput)
@@ -78,5 +84,5 @@ export const TextField = styled(TextInput)
     numberOfLines: props.rows,
     onChangeText: props.onValueChange,
     secureTextEntry: props.secureTextEntry,
-    testID: props['data-testid'],
+    testID: resolveTestId(props),
   }))<TextFieldPrimitiveProps>``;
