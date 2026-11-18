@@ -5,3 +5,6 @@ storybook-static/
 *.local
 .env
 .claude/settings.local.json
+
+# Governance lives in the Soverum SGE at the workspace root (2026-11-18): no .claude/ in this repo.
+/.claude/

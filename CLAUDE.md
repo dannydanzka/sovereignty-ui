@@ -1,5 +1,7 @@
 # sovereignty-ui
 
+> **`.claude/` retired 2026-11-18.** Governance lives in the Soverum SGE, `~/Documents/Soverum/.claude/` (loaded from the root `CLAUDE.md`). A `.claude/patterns/<layer>/` path below resolves to the SGE's same path; this project's former `.claude/` is in this repo's history at `47ae53c`.
+
 > **Architecture**: Publishable component library (`lib` discipline) — NOT an app. No routes, no backend, no framework runtime.
 > **Stack**: React 19 (peer >=18) + styled-components 6 + TypeScript strict + tsup + Vitest/RTL + Storybook 8
 > **Package**: `@dannydanzka/sovereignty-ui` on GitHub Packages
