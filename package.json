@@ -42,7 +42,7 @@
   "sideEffects": false,
   "scripts": {
     "build": "tsup && tsup --config tsup.config.server.ts && node scripts/add-use-client.mjs",
-    "prepare": "npm run build",
+    "prepare": "yarn build",
     "build:watch": "tsup --watch",
     "dev": "storybook dev -p 6006",
     "storybook": "storybook dev -p 6006",
@@ -52,7 +52,8 @@
     "lint": "eslint src --max-warnings=0",
     "type-check": "tsc --noEmit",
     "release": "changeset publish",
-    "type-check:native": "tsc --project tsconfig.native.json"
+    "type-check:native": "tsc --project tsconfig.native.json",
+    "verify": "yarn lint && yarn type-check && yarn type-check:native && yarn test && yarn build"
   },
   "peerDependencies": {
     "react": ">=18",

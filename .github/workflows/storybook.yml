@@ -24,13 +24,13 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
-          cache: npm
+          node-version-file: .nvmrc
+          cache: yarn
 
-      - run: npm ci
+      - run: yarn install --frozen-lockfile
 
       - name: Build Storybook
-        run: npm run build:storybook
+        run: yarn build:storybook
 
       - uses: actions/upload-pages-artifact@v3
         with:
