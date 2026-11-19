@@ -39,10 +39,10 @@ BEFORE writing code:
 
 AFTER writing code:
 
-- TypeScript: `npm run type-check` (web) + `npm run type-check:native` (React Native resolution)
-- Lint: `npm run lint` (0 warnings, 22 custom rules)
-- Tests: `npm run test`
-- Build: `npm run build` (tsup — ESM + CJS + d.ts must succeed)
+- TypeScript: `yarn type-check` (web) + `yarn type-check:native` (React Native resolution)
+- Lint: `yarn lint` (0 warnings, 22 custom rules)
+- Tests: `yarn test`
+- Build: `yarn build` (tsup — ESM + CJS + d.ts must succeed)
 
 ---
 
@@ -70,12 +70,12 @@ src/
 ## Essential Commands
 
 ```bash
-npm run dev              # Storybook (port 6006) — the WEB proving ground
-npm run lint             # ESLint — 0 warnings required
-npm run type-check       # tsc --noEmit
-npm run test             # Vitest + RTL
-npm run build            # tsup → dist/
-npm run build:storybook  # Static Storybook
+yarn dev              # Storybook (port 6006) — the WEB proving ground
+yarn lint             # ESLint — 0 warnings required
+yarn type-check       # tsc --noEmit
+yarn test             # Vitest + RTL
+yarn build            # tsup → dist/
+yarn build:storybook  # Static Storybook
 ```
 
 ---
@@ -115,7 +115,7 @@ Two boundaries to respect:
 
 `npm publish` from local ALWAYS fails (local tokens are read-only). Flow:
 
-1. `npx changeset` → branch → commit → push branch
+1. `yarn changeset` → branch → commit → push branch
 2. `gh pr create` → `gh pr merge --squash --admin` (main is protected)
 3. Merge to `main` triggers `release.yml` (changesets version + publish)
 4. Verify: `npm view @dannydanzka/sovereignty-ui versions`

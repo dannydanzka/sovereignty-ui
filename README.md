@@ -9,7 +9,7 @@ Agnostic React component library — Code Sovereignty UI System.
 ### Install
 
 ```bash
-npm install @dannydanzka/sovereignty-ui
+yarn add @dannydanzka/sovereignty-ui
 ```
 
 ### Use Components
@@ -206,19 +206,19 @@ setSuiTokens({ color: { primary500: '#FFC107' }, typography: { family: { body: '
 ## Development
 
 ```bash
-npm run dev              # Storybook (port 6006)
-npm run build            # Build library (ESM + CJS + types)
-npm run lint             # ESLint (0 warnings required, 22 custom rules)
-npm run type-check       # TypeScript strict
-npm run test             # Vitest (229 tests)
-npm run build:storybook  # Build static Storybook
+yarn dev              # Storybook (port 6006)
+yarn build            # Build library (ESM + CJS + types)
+yarn lint             # ESLint (0 warnings required, 22 custom rules)
+yarn type-check       # TypeScript strict
+yarn test             # Vitest (229 tests)
+yarn build:storybook  # Build static Storybook
 ```
 
 ### Creating a Release
 
 ```bash
-npx changeset            # Describe changes
-npx changeset version    # Bump version + changelog
+yarn changeset            # Describe changes
+yarn changeset version    # Bump version + changelog
 git push                 # CI publishes to GitHub Packages
 ```
 

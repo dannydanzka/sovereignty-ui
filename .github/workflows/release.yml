@@ -22,20 +22,21 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
-          cache: npm
+          node-version-file: .nvmrc
+          cache: yarn
           registry-url: https://npm.pkg.github.com
 
-      - run: npm ci
+      - run: yarn install --frozen-lockfile
 
-      - name: Build
-        run: npm run build
+      # The gate: nothing reaches the registry that has not linted, type-checked (web and native), tested and built.
+      - name: Verify
+        run: yarn verify
 
       - name: Create Release PR or Publish
         id: changesets
         uses: changesets/action@v1
         with:
-          publish: npm run release
+          publish: yarn release
           title: 'chore: version packages'
           commit: 'chore: version packages'
         env:
