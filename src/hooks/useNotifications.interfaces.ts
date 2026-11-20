@@ -5,6 +5,8 @@
 import type { NotificationType } from '../components/NotificationToast';
 
 export interface QueuedNotification {
+  /** Milliseconds before NotificationContainer closes it; overrides the container's `autoDismissMs`. */
+  displayDuration?: number;
   id: string;
   message: string;
   title?: string;

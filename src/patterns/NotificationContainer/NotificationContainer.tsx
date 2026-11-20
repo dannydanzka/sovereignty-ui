@@ -9,15 +9,18 @@ import { useCallback } from 'react';
 
 import type { NotificationContainerProps } from './NotificationContainer.interfaces';
 import { NotificationToast } from '../../components/NotificationToast';
+import { useAutoDismiss } from './useAutoDismiss';
 
 import { Container } from './NotificationContainer.styled';
 
 export const NotificationContainer = ({
+  autoDismissMs,
   notifications,
   onClose,
   position = 'top-right',
 }: NotificationContainerProps) => {
   const handleClose = useCallback((id: string) => () => onClose(id), [onClose]);
+  useAutoDismiss(notifications, onClose, autoDismissMs);
 
   if (notifications.length === 0) {
     return null;
