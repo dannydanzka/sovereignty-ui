@@ -1,4 +1,5 @@
 export * from './tokens';
+export * from './geometry';
 export * from './media';
 export * from './presets';
 export * from './create-tokens';
