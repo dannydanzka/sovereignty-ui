@@ -1,5 +1,12 @@
 # @dannydanzka/sovereignty-ui
 
+## 0.37.0
+
+### Minor Changes
+
+- a5dc641: Geometry scales graduate into the library: `shadowShape`, `stroke`, `offset`, `blur`, `size`, `measure` (and `geometry` with all six), from the product that measured them. Additive; each product swaps its local `geometry-tokens.ts` for these.
+- a5dc641: `NotificationContainer` takes `autoDismissMs`, and a notification may carry its own `displayDuration`: a queue kept in an app store (the managed runner's notification channel) is dismissed by the always-mounted container. Off by default; `useNotifications` keeps its own timers.
+
 ## 0.36.1
 
 ### Patch Changes
