@@ -12,7 +12,7 @@
 
 import styled, { css } from 'styled-components';
 
-import { c, el, mo, s, sh, tf, ts, tw } from '../../tokens/css-variables';
+import { c, el, mo, s, sh, tf, ts, tt, tw } from '../../tokens/css-variables';
 import { layout } from '../../tokens/tokens';
 import { media } from '../../tokens/media';
 import type {
@@ -221,6 +221,38 @@ export const NavList = styled.ul<StyledSidebarCollapsibleProps>`
 `;
 
 export const NavItem = styled.li``;
+
+/** The outer list when the nav is sectioned: each item is one section. */
+export const NavGroups = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: ${s('sm')};
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`;
+
+export const NavGroup = styled.li``;
+
+export const NavGroupLabel = styled.span`
+  color: ${FG_MUTED};
+  display: block;
+  font-family: ${tf('body')};
+  font-size: ${ts('xs')};
+  font-weight: ${tw('semibold')};
+  letter-spacing: ${tt('wide')};
+  overflow: hidden;
+  padding: ${s('xs')} ${s('md')};
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+`;
+
+export const NavGroupDivider = styled.hr`
+  border: none;
+  border-top: 1px solid ${BORDER};
+  margin: 0 ${s('sm')} ${s('xs')};
+`;
 
 export const NavTooltip = styled.span`
   background-color: ${c('neutral800')};

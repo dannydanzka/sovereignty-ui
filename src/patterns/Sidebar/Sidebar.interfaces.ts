@@ -38,14 +38,21 @@ export interface SidebarHeaderProps {
   onToggleCollapse?: () => void;
 }
 
-export interface SidebarNavProps {
+/** A run of entries under one heading: the job they share (operations, settings). */
+export interface SidebarNavSection {
+  id: string;
+  /** Visible heading; also the list's accessible name. Omit for an unheaded run (the home entry). */
+  label?: string;
+  items: SidebarNavItem[];
+}
+
+interface SidebarNavBaseProps {
   className?: string;
   /** Current location, supplied by the product's router (the library owns no router). */
   currentPath: string;
   /** The one entry matched exactly instead of by prefix — otherwise it is always active. */
   homeHref?: string;
   isCollapsed?: boolean;
-  items: SidebarNavItem[];
   /**
    * Link component to render each entry with (e.g. Next's `Link`). Defaults to a plain anchor,
    * so the pattern works without a router at all.
@@ -56,6 +63,16 @@ export interface SidebarNavProps {
   /** Fires on every entry click — used to close the mobile drawer. */
   onNavigate?: () => void;
 }
+
+/**
+ * A flat list, or the same entries grouped into sections. Both render inside ONE scrolling `nav`:
+ * stacking several `Sidebar.Nav` to fake groups gives each its own scroll area and its own landmark.
+ */
+export type SidebarNavProps = SidebarNavBaseProps &
+  (
+    | { items: SidebarNavItem[]; sections?: never }
+    | { items?: never; sections: SidebarNavSection[] }
+  );
 
 export interface SidebarFooterProps {
   children?: ReactNode;
