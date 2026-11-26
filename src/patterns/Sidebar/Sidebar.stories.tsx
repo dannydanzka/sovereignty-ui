@@ -16,6 +16,27 @@ const ITEMS = [
   { badge: 3, href: '/admin/messages', id: 'messages', label: 'Messages' },
 ];
 
+const SECTIONS = [
+  { id: 'home', items: [{ href: '/admin', id: 'home', label: 'Dashboard' }] },
+  {
+    id: 'operation',
+    items: [
+      { href: '/admin/quotes', id: 'quotes', label: 'Quotes' },
+      { badge: 15, href: '/admin/rentals', id: 'rentals', label: 'Rentals' },
+      { href: '/admin/clients', id: 'clients', label: 'Clients' },
+    ],
+    label: 'Operation',
+  },
+  {
+    id: 'settings',
+    items: [
+      { href: '/admin/users', id: 'users', label: 'Users' },
+      { href: '/admin/roles', id: 'roles', label: 'Roles' },
+    ],
+    label: 'Settings',
+  },
+];
+
 const meta = {
   component: Sidebar,
   parameters: { layout: 'fullscreen' },
@@ -34,7 +55,7 @@ const BRAND_VARS = {
   '--sui-sidebar-header-bg': '#111A5C',
 } as CSSProperties;
 
-const Demo = ({ brand = false }: { brand?: boolean }) => {
+const Demo = ({ brand = false, sectioned = false }: { brand?: boolean; sectioned?: boolean }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
@@ -51,12 +72,21 @@ const Demo = ({ brand = false }: { brand?: boolean }) => {
           name='María García'
           onToggleCollapse={() => setIsCollapsed((v) => !v)}
         />
-        <Sidebar.Nav
-          currentPath='/admin/inventory'
-          homeHref='/admin'
-          isCollapsed={isCollapsed}
-          items={ITEMS}
-        />
+        {sectioned ? (
+          <Sidebar.Nav
+            currentPath='/admin/rentals'
+            homeHref='/admin'
+            isCollapsed={isCollapsed}
+            sections={SECTIONS}
+          />
+        ) : (
+          <Sidebar.Nav
+            currentPath='/admin/inventory'
+            homeHref='/admin'
+            isCollapsed={isCollapsed}
+            items={ITEMS}
+          />
+        )}
         <Sidebar.Footer isCollapsed={isCollapsed} label='Sign out' />
       </Sidebar>
     </div>
@@ -68,3 +98,9 @@ export const Default: Story = { args: { children: null }, render: () => <Demo />
 
 /** Re-skinned entirely through `--sui-sidebar-*` custom properties — no forked structure. */
 export const Branded: Story = { args: { children: null }, render: () => <Demo brand /> };
+
+/** Entries grouped by the job they serve, in one scrolling nav; collapsed, headings become rules. */
+export const Sectioned: Story = {
+  args: { children: null },
+  render: () => <Demo sectioned />,
+};

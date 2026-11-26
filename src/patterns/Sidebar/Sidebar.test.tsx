@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react';
 import { describe, expect, it, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { isNavItemActive } from './Sidebar.helpers';
@@ -64,6 +64,54 @@ describe('Sidebar.Nav', () => {
   it('renders a badge only for the entries that carry one', () => {
     render(<Sidebar.Nav currentPath='/admin' items={ITEMS} />);
     expect(screen.getByText('3')).toBeInTheDocument();
+  });
+});
+
+const SECTIONS = [
+  { id: 'home', items: [{ href: '/admin', id: 'home', label: 'Inicio' }] },
+  {
+    id: 'operation',
+    items: [
+      { href: '/admin/cotizaciones', id: 'quotes', label: 'Cotizaciones' },
+      { badge: 15, href: '/admin/rentas', id: 'rentals', label: 'Rentas' },
+    ],
+    label: 'Operación',
+  },
+  {
+    id: 'settings',
+    items: [{ href: '/admin/usuarios', id: 'users', label: 'Usuarios' }],
+    label: 'Configuración',
+  },
+];
+
+describe('Sidebar.Nav sections', () => {
+  it('groups entries under their heading, as one named list per section', () => {
+    render(<Sidebar.Nav currentPath='/admin' sections={SECTIONS} />);
+    const operation = screen.getByRole('list', { name: 'Operación' });
+    expect(
+      within(operation)
+        .getAllByRole('link')
+        .map((link) => link.textContent)
+    ).toEqual(['Cotizaciones', 'Rentas15']);
+    expect(screen.getByRole('list', { name: 'Configuración' })).toBeInTheDocument();
+  });
+
+  it('keeps every section inside ONE navigation landmark, so the rail scrolls as one', () => {
+    render(<Sidebar.Nav currentPath='/admin' sections={SECTIONS} />);
+    expect(screen.getAllByRole('navigation')).toHaveLength(1);
+    expect(screen.getAllByRole('link')).toHaveLength(4);
+  });
+
+  it('drops the visible headings when collapsed but keeps the lists named', () => {
+    render(<Sidebar.Nav currentPath='/admin' isCollapsed sections={SECTIONS} />);
+    expect(screen.queryByText('Operación')).toBeNull();
+    expect(screen.getByRole('list', { name: 'Operación' })).toBeInTheDocument();
+  });
+
+  it('marks the current entry across sections', () => {
+    render(<Sidebar.Nav currentPath='/admin/rentas/7' homeHref='/admin' sections={SECTIONS} />);
+    expect(screen.getByRole('link', { name: 'Rentas' })).toHaveAttribute('aria-current', 'page');
+    expect(screen.getByRole('link', { name: 'Inicio' })).not.toHaveAttribute('aria-current');
   });
 });
 
